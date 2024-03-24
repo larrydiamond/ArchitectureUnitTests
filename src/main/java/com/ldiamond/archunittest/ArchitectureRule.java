@@ -1,4 +1,4 @@
-package com.ldiamond.archcommon;
+package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.lang.ArchRule;
 

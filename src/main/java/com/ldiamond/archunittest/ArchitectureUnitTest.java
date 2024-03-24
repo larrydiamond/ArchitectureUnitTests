@@ -1,14 +1,16 @@
-package com.ldiamond.archcommon;
+package com.ldiamond.archunittest;
 
 import java.util.Collection;
 import java.util.ArrayList;
 
-import com.ldiamond.archcommon.ArchitectureRule;
+import com.ldiamond.archunittest.ArchitectureRule;
 
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.domain.JavaClasses;
 
 public class ArchitectureUnitTest {
+
+    private ArchitectureUnitTest() { }
 
     public static void testArchitecture (final Collection<ArchitectureRule> exclusions, final String... packagesToImport) {
         JavaClasses classes = new ClassFileImporter().importPackages(packagesToImport);

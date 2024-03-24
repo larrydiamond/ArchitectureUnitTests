@@ -1,18 +1,18 @@
-package com.ldiamond.archcommon;
+package com.ldiamond.archunittest;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import com.ldiamond.archcommon.ArchitectureRule;
-import com.ldiamond.archcommon.ArchitectureUnitTest;
+import com.ldiamond.archunittest.ArchitectureRule;
+import com.ldiamond.archunittest.ArchitectureUnitTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
     @Test void testpackageFailsRuleset () {
         assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archcommon.testpackage");
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.testpackage");
         });
     }
 

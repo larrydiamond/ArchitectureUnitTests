@@ -1,4 +1,4 @@
-package com.ldiamond.archcommon.testpackage;
+package com.ldiamond.archunittest.testpackage;
 
 import java.util.Vector;
 import java.util.Hashtable;
