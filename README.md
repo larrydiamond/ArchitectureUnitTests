@@ -82,8 +82,25 @@ mvn test
 ```
 
 ## What architecture tests do we have today?
-This section will be getting expanded greatly
 
+| How to Exclude  | What this rule does |
+| ------------- | ------------- |
+| ARCHUNIT_ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE | A rule that checks that all AssertionErrors have a detail message  |
+| ARCHUNIT_DEPRECATED_API_SHOULD_NOT_BE_USED | A rule checking that no class accesses Deprecated members |
+| ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION | A rule that checks that none of the given classes uses field injection |
+| ARCHUNIT_NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING | A rule that checks that none of the given classes access Java Util Logging |
+| ARCHUNIT_NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS | A rule that checks that none of the given classes throw generic exceptions like Exception, RuntimeException, or Throwable |
+| ARCHUNIT_NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS | A rule that checks that none of the given classes access the standard streams System.out and System.err |
+| ARCHUNIT_NO_CLASSES_SHOULD_USE_JODATIME | A rule that checks that none of the given classes access JodaTime  |
+| USE_ARRAYLIST_INSTEAD_OF_VECTOR  | A rule that checks that none of the given classes access Vector  |
+| USE_HASHMAP_INSTEAD_OF_HASHTABLE  | A rule that checks that none of the given classes access HashTable |
+| USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER  | A rule that checks that none of the given classes access StringBuffer |
+| USE_CONCURRENTSKIPLISTSET_INSTEAD_OF_TREESET  | A rule that checks that none of the given classes access TreeSet  |
+| USE_CONCURRENTSKIPLISTMAP_INSTEAD_OF_TREEMAP  | A rule that checks that none of the given classes access TreeMap |
+| USE_EXECUTORSERVICE_INSTEAD_OF_THREADGROUP  | A rule that checks that none of the given classes access ThreadGroup  |
+| SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Services do not access Spring Boot Controllers  |
+| SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Repositories do not access Spring Boot Controllers  |
+| SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
 
 ## Contributing
 
@@ -100,7 +117,5 @@ This library is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE
 For any inquiries or support, feel free to contact us at ldiamond AT ldiamond DOT com.   
 
 This project is not owned by ArchUnit nor do we own ArchUnit.   They don't yet know we exist.   No ownership relationship or management relationship exists.
-
----
 
 Thank you again to the ArchUnit team for creating such a great tool.   My preference would be to integrate this work into ArchUnit directly rather than provide a separate library, email me - lets talk.
