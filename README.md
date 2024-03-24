@@ -2,6 +2,8 @@
 
 We love Archunit.   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of rules that we hope to expand upon in the future.
 
+By providing a call that applies each of our architecture rules, this provides the ability to add more rules later and projects will just apply them as they upgrade versions of this library.
+
 ## Features
 
 - **Opinionated Configuration**: Simplifies the setup process by providing a predefined collection of common architectural tests (we expect to add more over time).
