@@ -1,14 +1,12 @@
-# ArchUnit Easy Access Java Library
+# Architecture Unit Tests Easy Access Java Library
 
-Welcome to the ArchUnit Easy Access Java Library! This library aims to simplify the process of running architecture unit tests using ArchUnit by providing opinionated and easy-to-use utilities. With this library, you can quickly set up and run numerous ArchUnit tests for your projects, ensuring architectural integrity and adherence to predefined rules.
+We love Archunit.   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of rules that we hope to expand upon in the future.
 
 ## Features
 
-- **Opinionated Configuration**: Simplifies the setup process by providing predefined configurations for common architectural tests.
+- **Opinionated Configuration**: Simplifies the setup process by providing a predefined collection of common architectural tests (we expect to add more over time).
 - **Easy Integration**: Seamlessly integrates with your existing Java projects, allowing for quick adoption of architectural tests.
-- **Comprehensive Test Suite**: Offers a variety of prebuilt ArchUnit tests covering common architectural principles such as layering, package structure, and dependencies.
-- **Customization**: While opinionated, the library allows for customization to suit specific project requirements.
-- **Quick Start Guides**: Provides clear and concise documentation with examples to help you get started with running architectural tests.
+- **Exclusions**: Some projects are going to violate some of these rules, and we provide a quick and easy way to exclude rules that don't work for your project.
 
 ## Getting Started
 
@@ -18,18 +16,18 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 
 ```xml
 <dependency>
-    <groupId>com.example</groupId>
-    <artifactId>archunit-easy-access</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.ldiamond</groupId>
+    <artifactId>architectureunittests</artifactId>
+    <version>0.1.0</version>
 </dependency>
 ```
 
 ### Usage
 
-1. Import the necessary classes from the library into your test classes:
+1. Import the necessary class from the library into your test classes:
 
 ```java
-import com.example.archunit.easyaccess.ArchUnitTestRunner;
+import com.ldiamond.archunittest.ArchitectureUnitTest;
 ```
 
 2. Define your architectural rules and configurations:
@@ -38,36 +36,13 @@ import com.example.archunit.easyaccess.ArchUnitTestRunner;
 public class MyArchitectureTests {
 
     @Test
-    public void testLayeringRules() {
-        ArchUnitTestRunner.runLayeringTests("com.example.myproject");
+    public void runArchitectureTests() {
+        ArchitectureUnitTest.testArchitecture("com.example.myproject");
     }
-
-    @Test
-    public void testPackageStructure() {
-        ArchUnitTestRunner.runPackageStructureTests("com.example.myproject");
-    }
-
-    // Add more tests as needed
 }
 ```
 
-3. Run your tests using your preferred test runner (e.g., JUnit):
-
-```java
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
-    MyArchitectureTests.class,
-    // Add more test classes if necessary
-})
-public class ArchitectureTestSuite {
-    // This class can be empty
-}
-```
-
-4. Execute your test suite to ensure architectural compliance:
+3. Execute your test suite to ensure architectural compliance:
 
 ```
 mvn test
@@ -79,12 +54,12 @@ We welcome contributions from the community to enhance the functionality and usa
 
 ## License
 
-This library is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This library is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For any inquiries or support, feel free to contact us at [email@example.com](mailto:email@example.com).
+For any inquiries or support, feel free to contact us at ldiamond AT ldiamond DOT com.
 
 ---
 
-Thank you for choosing the ArchUnit Easy Access Java Library. We hope it helps streamline your architecture testing process and ensures the integrity of your projects' designs. Happy testing!
+Thank you again to the ArchUnit team for creating such a great tool.   My preference would be to integrate this work into ArchUnit directly rather than provide a separate library, email me - lets talk.
