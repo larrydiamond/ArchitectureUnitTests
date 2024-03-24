@@ -1,6 +1,6 @@
 # Architecture Unit Tests Easy Access Java Library
 
-We love Archunit.   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of rules that we hope to expand upon in the future.
+We love Archunit.   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
 
 By providing a call that applies each of our architecture rules, this provides the ability to add more rules later and projects will just apply them as they upgrade versions of this library.
 
@@ -49,6 +49,41 @@ public class MyArchitectureTests {
 ```
 mvn test
 ```
+
+## How to exclude some architecture tests when running
+
+This unit tests will fail if any of the architecture rules are violated.   These tests are reasonable and common sense, but valid exceptions to many of the rules will exist.   If the testArchitecture call fails and you decide that the failing test should be ignored, then modify your code to exclude the offending ArchRules from the test.
+
+1. Import the necessary classes from the library into your test classes:
+
+```java
+import com.ldiamond.archunittest.ArchitectureRule;
+import com.ldiamond.archunittest.ArchitectureUnitTest;
+```
+
+2. Define your architectural rules and configurations:
+
+```java
+public class MyArchitectureTests {
+
+    @Test
+    public void runArchitectureTests() {
+        ArchitectureUnitTest.testArchitecture(
+            Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
+            ("com.example.myproject"));
+    }
+}
+```
+
+3. Execute your test suite to ensure architectural compliance:
+
+```
+mvn test
+```
+
+## What architecture tests do we have today?
+This section will be getting expanded greatly
+
 
 ## Contributing
 
