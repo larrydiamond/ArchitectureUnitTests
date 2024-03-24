@@ -1,6 +1,6 @@
 # Architecture Unit Tests Easy Access Java Library
 
-We love Archunit.   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
+We love [Archunit](https://www.archunit.org).   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
 
 By providing a call that applies each of our architecture rules, this provides the ability to add more rules later and projects will just apply them as they upgrade versions of this library.
 
@@ -89,13 +89,17 @@ This section will be getting expanded greatly
 
 We welcome contributions from the community to enhance the functionality and usability of this library. If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on GitHub.
 
+No really **WE WANT YOUR GREAT ArchRules**.   This library provides value by preventing bad things from happening to good projects - you can do a lot of good to the Java community by contributing good rules that prevent projects from falling into chaos.
+
 ## License
 
 This library is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For any inquiries or support, feel free to contact us at ldiamond AT ldiamond DOT com.
+For any inquiries or support, feel free to contact us at ldiamond AT ldiamond DOT com.   
+
+This project is not owned by ArchUnit nor do we own ArchUnit.   They don't yet know we exist.   No ownership relationship or management relationship exists.
 
 ---
 
