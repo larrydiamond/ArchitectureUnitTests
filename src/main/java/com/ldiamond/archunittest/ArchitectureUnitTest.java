@@ -31,6 +31,12 @@ public class ArchitectureUnitTest {
 
     private ArchitectureUnitTest() { }
 
+    /**
+     * This method analyzes all the classes in the packages listed against all of the architecture rules in the ArchitectureRule enum except the explicitly excluded rules.
+     * 
+     * @param exclusions A Collection of rules to exclude from the test
+     * @param packagesToImport The series of packages to analyze
+     */
     public static void testArchitecture (final Collection<ArchitectureRule> exclusions, final String... packagesToImport) {
         JavaClasses classes = new ClassFileImporter().importPackages(packagesToImport);
 
@@ -56,6 +62,11 @@ public class ArchitectureUnitTest {
         }
     }
 
+    /**
+     * This method analyzes all the classes in the packages listed against all of the architecture rules in the ArchitectureRule enum
+     *
+     * @param packagesToImport The series of packages to analyze
+     */
     public static void testArchitecture (final String... packagesToImport) {
         testArchitecture (new ArrayList<>(), packagesToImport);
     }

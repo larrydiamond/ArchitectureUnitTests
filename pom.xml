@@ -9,7 +9,7 @@
     <version>0.1.0</version>
 
     <name>Standardized ArchUnit tests</name>
-    <description>Standardized ArchUnit tests safe to use on all projects that will expand over time to keep architecture healthy</description>
+    <description>Reasonable common sense ArchUnit tests safe to use on all projects to keep architecture healthy</description>
     <url>https://github.com/larrydiamond/ArchitectureUnitTests</url>
     <inceptionYear>2024</inceptionYear>
 
@@ -228,33 +228,21 @@
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
                         <executions>
                             <execution>
-                                <id>attach-javadocs</id>
+                                <id>attach-sources</id>
                                 <goals>
-                                    <goal>jar</goal>
+                                    <goal>jar-no-fork</goal>
                                 </goals>
-                                <configuration>
-                                    <attach>true</attach>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                                <configuration>
-                                    <attach>true</attach>
-                                </configuration>
-                            </execution>
-                        </executions>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.6.3</version>
                     </plugin>
                     <plugin>
                         <groupId>org.jreleaser</groupId>
@@ -286,6 +274,17 @@
             </build>
         </profile>
     </profiles>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <developers>
         <developer>
