@@ -22,8 +22,6 @@ package com.ldiamond.archunittest;
 import java.util.Collection;
 import java.util.ArrayList;
 
-import com.ldiamond.archunittest.ArchitectureRule;
-
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.domain.JavaClasses;
 

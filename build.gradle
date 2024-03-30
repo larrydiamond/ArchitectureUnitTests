@@ -1,0 +1,101 @@
+plugins {
+	id 'java'
+	id("org.sonarqube") version "5.0.0.4638"
+	id 'jacoco'
+	id "org.owasp.dependencycheck" version "8.3.1"
+    id 'maven-publish'
+}
+
+group = 'com.ldiamond.architectureunittests'
+version = '0.1.0'
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'com.tngtech.archunit:archunit-junit5:1.2.1'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.scm.disabled", "true"
+		property "sonar.sources", "src/main/java/com/ldiamond/archunittest"
+		property "sonar.tests", "src/test/java/com/ldiamond/archunittest"
+    }
+}
+
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'architectureunittests'
+            from components.java
+            pom {
+                name = 'architectureunittests'
+                description = 'An opinionated set of reasonable common sense ArchUnit tests safe to use on all projects to keep architecture healthy'
+                url = 'https://github.com/larrydiamond/architectureunittests'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'ldiamond'
+                        name = 'Larry Diamond'
+                        email = 'ldiamond@ldiamond.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/larrydiamond/architectureunittests.git'
+                    developerConnection = 'scm:git:ssh://github.com:larrydiamond/architectureunittests.git'
+                    url = 'https://github.com/larrydiamond/architectureunittests'
+                }
+            }
+        }
+    }
+}
+
