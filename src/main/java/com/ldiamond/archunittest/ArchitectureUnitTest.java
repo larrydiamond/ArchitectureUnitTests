@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import com.tngtech.archunit.core.domain.JavaClasses;
 
+/**
+ * This class is the main class for this library and only exposes static methods for projects to call.
+ */
 public class ArchitectureUnitTest {
 
     private ArchitectureUnitTest() { }
