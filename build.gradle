@@ -76,6 +76,7 @@ publishing {
             pom {
                 name = 'architectureunittests'
                 description = 'An opinionated set of reasonable common sense ArchUnit tests safe to use on all projects to keep architecture healthy'
+                inceptionYear='2024'
                 url = 'https://github.com/larrydiamond/architectureunittests'
                 licenses {
                     license {
