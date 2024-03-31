@@ -38,16 +38,13 @@ sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.scm.disabled", "true"
-		property "sonar.sources", "src/main/java/com/ldiamond/archunittest"
-		property "sonar.tests", "src/test/java/com/ldiamond/archunittest"
     }
 }
 
 
 jacoco {
-    toolVersion = "0.8.8"
+    toolVersion = "0.8.11"
 }
-
 test {
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
@@ -68,7 +65,27 @@ java {
     withSourcesJar()
 }
 
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
 publishing {
+
+    repositories {
+        maven {
+            def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            
+            name = "OSSRH"
+            url = isReleaseVersion ? releaseRepo : snapshotRepo
+
+            allowInsecureProtocol = false
+            
+            credentials {
+                username = findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
+            }
+        }
+    }
+
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'architectureunittests'
@@ -109,3 +126,5 @@ signing {
 }
 
 publishMavenJavaPublicationToMavenLocal.dependsOn signRuntimeElements
+publish.dependsOn signRuntimeElements
+publishMavenJavaPublicationToOSSRHRepository.dependsOn signRuntimeElements

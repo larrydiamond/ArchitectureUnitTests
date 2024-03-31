@@ -92,6 +92,10 @@ public enum ArchitectureRule {
 
     private ArchitectureRule (ArchRule ruleInput) { this.rule = ruleInput; }
 
+    /**
+     * Obtains the Archrule being checked
+     * @return Archrule
+     */
     public ArchRule getRule () { return rule; }
 }
 
