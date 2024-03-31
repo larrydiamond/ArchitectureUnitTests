@@ -8,7 +8,7 @@ plugins {
 }
 
 group = 'com.ldiamond'
-version = '0.1.0-SNAPSHOT'
+version = '0.1.0'
 sourceCompatibility = '11'
 targetCompatibility = '11'
 
@@ -70,6 +70,12 @@ ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 publishing {
 
     repositories {
+
+        maven {
+            name = 'myRepo'
+            url = layout.buildDirectory.dir("repo")
+        }
+
         maven {
             def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
@@ -128,3 +134,4 @@ signing {
 publishMavenJavaPublicationToMavenLocal.dependsOn signRuntimeElements
 publish.dependsOn signRuntimeElements
 publishMavenJavaPublicationToOSSRHRepository.dependsOn signRuntimeElements
+publishMavenJavaPublicationToMyRepoRepository.dependsOn signRuntimeElements
