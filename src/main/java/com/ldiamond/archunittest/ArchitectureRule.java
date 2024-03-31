@@ -35,12 +35,39 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
  */
 public enum ArchitectureRule {
 
+    /**
+     * Archunit defined rule: A rule that checks that all AssertionErrors have a detail message.
+     */
     ARCHUNIT_ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE (ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE),
+
+    /**
+     * Archunit defined rule: A rule checking that no class accesses Deprecated members
+     */
     ARCHUNIT_DEPRECATED_API_SHOULD_NOT_BE_USED (DEPRECATED_API_SHOULD_NOT_BE_USED),
+
+    /**
+     * Archunit defined rule: A rule that checks that none of the given classes uses field injection.
+     */
     ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION (NO_CLASSES_SHOULD_USE_FIELD_INJECTION),
+
+    /**
+     * Archunit defined rule: A rule that checks that none of the given classes access Java Util Logging.
+     */
     ARCHUNIT_NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING (NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING),
+
+    /**
+     * Archunit defined rule: A rule that checks that none of the given classes throw generic exceptions like Exception, RuntimeException, or Throwable.
+     */
     ARCHUNIT_NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS (NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS),
+
+    /**
+     * Archunit defined rule: A rule that checks that none of the given classes access the standard streams System.out and System.err.
+     */
     ARCHUNIT_NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS (NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS),
+
+    /**
+     * Archunit defined rule: A rule that checks that none of the given classes access JodaTime.
+     */
     ARCHUNIT_NO_CLASSES_SHOULD_USE_JODATIME (NO_CLASSES_SHOULD_USE_JODATIME),
 
     /**
