@@ -113,7 +113,12 @@ public enum ArchitectureRule {
     /**
      * This rule prevents Spring Boot repository classes from calling service classes
      */
-    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true));
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true)),
+
+    /**
+     * This rule prevents interfaces being named *Impl 
+     */
+    INTERFACES_SHOULD_NOT_BE_CALLED_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true));
 
     private final ArchRule rule;
 
