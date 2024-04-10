@@ -24,6 +24,11 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 </dependency>
 ```
 
+https://central.sonatype.com/artifact/com.ldiamond/architectureunittests
+
+https://mvnrepository.com/artifact/com.ldiamond/architectureunittests/0.1.0
+
+
 ### Usage
 
 1. Import the necessary class from the library into your test classes:
