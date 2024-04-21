@@ -122,6 +122,8 @@ No really **WE WANT YOUR GREAT ArchRules**.   This library provides value by pre
 
 This library is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for details.
 
+This is intentionally the same license as ArchUnit to ease approving this library in your company.
+
 ## Contact
 
 For any inquiries or support, feel free to contact us at ldiamond AT ldiamond DOT com.   
