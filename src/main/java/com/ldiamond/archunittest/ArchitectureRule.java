@@ -118,7 +118,7 @@ public enum ArchitectureRule {
     /**
      * This rule prevents interfaces being named *Impl 
      */
-    INTERFACES_SHOULD_NOT_BE_CALLED_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true));
+    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true));
 
     private final ArchRule rule;
 
