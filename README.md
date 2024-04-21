@@ -64,6 +64,7 @@ This unit tests will fail if any of the architecture rules are violated.   These
 ```java
 import com.ldiamond.archunittest.ArchitectureRule;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
+import java.util.Arrays;
 ```
 
 2. Define your architectural rules and configurations:
@@ -75,7 +76,7 @@ public class MyArchitectureTests {
     public void runArchitectureTests() {
         ArchitectureUnitTest.testArchitecture(
             Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
-            ("com.example.myproject"));
+            "com.example.myproject");
     }
 }
 ```
@@ -106,6 +107,10 @@ mvn test
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Services do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Repositories do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
+
+## Why arent you just freezing rule violations?
+
+Your choice of how to handle violations is up to you.   You may elect to ignore the rule or to freeze violations, but that choice is something your team should discuss.
 
 ## Contributing
 
