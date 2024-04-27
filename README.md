@@ -11,6 +11,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/79803a703e0c4fcd95caa28c0ff1978a)](https://app.codacy.com/gh/larrydiamond/ArchitectureUnitTests/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 We love [Archunit](https://www.archunit.org).   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
 
