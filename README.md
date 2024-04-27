@@ -1,6 +1,7 @@
 # Architecture Unit Tests Easy Access Java Library
 
-![Maven Central Version](https://img.shields.io/maven-central/v/com.ldiamond/architectureunittests) ![GitHub Release](https://img.shields.io/github/v/release/larrydiamond/ArchitectureUnitTests)
+![Maven Central Version](https://img.shields.io/maven-central/v/com.ldiamond/architectureunittests?link=https%3A%2F%2Fcentral.sonatype.com%2Fartifact%2Fcom.ldiamond%2Farchitectureunittests)
+![GitHub Release](https://img.shields.io/github/v/release/larrydiamond/ArchitectureUnitTests?link=https%3A%2F%2Fgithub.com%2Flarrydiamond%2FArchitectureUnitTests%2Freleases%2Ftag%2Fv0.1.0)
 
 
 We love [Archunit](https://www.archunit.org).   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
