@@ -1,5 +1,18 @@
 # Architecture Unit Tests Easy Access Java Library
 
+[![Maven Central Version](https://img.shields.io/maven-central/v/com.ldiamond/architectureunittests)](https://central.sonatype.com/artifact/com.ldiamond/architectureunittests)
+[![GitHub Release](https://img.shields.io/github/v/release/larrydiamond/ArchitectureUnitTests)](https://github.com/larrydiamond/ArchitectureUnitTests/releases)
+[![GitHub License](https://img.shields.io/github/license/larrydiamond/architectureunittests)](https://github.com/larrydiamond/ArchitectureUnitTests/blob/main/LICENSE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=bugs)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=larrydiamond_ArchitectureUnitTests&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=larrydiamond_ArchitectureUnitTests)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/79803a703e0c4fcd95caa28c0ff1978a)](https://app.codacy.com/gh/larrydiamond/ArchitectureUnitTests/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 We love [Archunit](https://www.archunit.org).   They did a great job giving the rest of us the ability to unit test our architecture.   I use this on every project now.   What isn't in the archunit library right now is "the last mile" - they created the tooling to create great architecture unit tests and a number of great samples, but then it's up to all of us to actually figure out what tests we want to run.   This "last mile" is what this library hopes to solve by providing an easy way to execute a list of **reasonable common sense** rules that we hope to expand upon in the future.
 
 By providing a call that applies each of our architecture rules, this provides the ability to add more rules later and projects will just apply them as they upgrade versions of this library.
@@ -66,6 +79,7 @@ This unit tests will fail if any of the architecture rules are violated.   These
 ```java
 import com.ldiamond.archunittest.ArchitectureRule;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
+import java.util.Arrays;
 ```
 
 2. Define your architectural rules and configurations:
@@ -77,7 +91,7 @@ public class MyArchitectureTests {
     public void runArchitectureTests() {
         ArchitectureUnitTest.testArchitecture(
             Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
-            ("com.example.myproject"));
+            "com.example.myproject");
     }
 }
 ```
@@ -110,6 +124,10 @@ mvn test
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
 | INTERFACES_SHOULD_NOT_BE_CALLED_IMPL  | A rule that ensures that interfaces are not named Impl |
 
+## Why arent you just freezing rule violations?
+
+Your choice of how to handle violations is up to you.   You may elect to ignore the rule or to freeze violations, but that choice is something your team should discuss.
+
 ## Contributing
 
 We welcome contributions from the community to enhance the functionality and usability of this library. If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on GitHub.
@@ -119,6 +137,8 @@ No really **WE WANT YOUR GREAT ArchRules**.   This library provides value by pre
 ## License
 
 This library is licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for details.
+
+This is intentionally the same license as ArchUnit to ease approving this library in your company.
 
 ## Contact
 
