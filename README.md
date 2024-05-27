@@ -37,9 +37,11 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 </dependency>
 ```
 
-https://central.sonatype.com/artifact/com.ldiamond/architectureunittests
+or
 
-https://mvnrepository.com/artifact/com.ldiamond/architectureunittests/0.1.0
+[https://central.sonatype.com/artifact/com.ldiamond/architectureunittests](https://central.sonatype.com/artifact/com.ldiamond/architectureunittests)
+
+[https://mvnrepository.com/artifact/com.ldiamond/architectureunittests](https://mvnrepository.com/artifact/com.ldiamond/architectureunittests)
 
 
 ### Usage
@@ -120,6 +122,7 @@ mvn test
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Services do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Repositories do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
+| INTERFACES_SHOULD_NOT_BE_CALLED_IMPL  | A rule that ensures that interfaces are not named Impl |
 
 ## Why arent you just freezing rule violations?
 

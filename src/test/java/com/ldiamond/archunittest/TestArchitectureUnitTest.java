@@ -46,4 +46,18 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR, ArchitectureRule.USE_HASHMAP_INSTEAD_OF_HASHTABLE), 
         "com.ldiamond.archunittest.testpackage");
     }
+
+    @Test void testImplViolationFailsRuleset () {
+        assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.hasImplInterface");
+        });
+    }
+
+    @Test void testNoImplInterfacesDoesNotFailRuleset () {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveImplInterface");
+    }
+
+    @Test void testNoInterfacesDoesNotFailRuleset () {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveInterfaces");
+    }
 }
