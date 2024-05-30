@@ -20,8 +20,10 @@
 package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noMethods;
 import static com.tngtech.archunit.library.GeneralCodingRules.ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE;
 import static com.tngtech.archunit.library.GeneralCodingRules.DEPRECATED_API_SHOULD_NOT_BE_USED;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
@@ -48,7 +50,7 @@ public enum ArchitectureRule {
     /**
      * Archunit defined rule: A rule that checks that none of the given classes uses field injection.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION (NO_CLASSES_SHOULD_USE_FIELD_INJECTION),
+    ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION (NO_CLASSES_SHOULD_USE_FIELD_INJECTION.allowEmptyShould(true)),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes access Java Util Logging.
@@ -103,22 +105,28 @@ public enum ArchitectureRule {
     /**
      * This rule prevents Spring Boot service classes from calling controller classes
      */
-    SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..service..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true)),
+    SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..service..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Services should not call Controllers")),
 
     /**
      * This rule prevents Spring Boot repository classes from calling controller classes
      */
-    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true)),
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Repositories should not call Controllers")),
 
     /**
      * This rule prevents Spring Boot repository classes from calling service classes
      */
-    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true)),
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true).because("Spring Boot Repositories should not call Services")),
 
     /**
      * This rule prevents interfaces being named *Impl 
      */
-    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true));
+    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).allowEmptyShould(true).because("Interfaces should not be named Impl")),
+    
+    /**
+     * This rule prevents inappropriate cohesion by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
+     */
+
+    JPA_COHESION_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types"));
 
     private final ArchRule rule;
 

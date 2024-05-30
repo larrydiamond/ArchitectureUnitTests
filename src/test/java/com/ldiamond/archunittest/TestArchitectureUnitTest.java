@@ -23,9 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import com.ldiamond.archunittest.ArchitectureRule;
-import com.ldiamond.archunittest.ArchitectureUnitTest;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
@@ -59,5 +56,15 @@ class TestArchitectureUnitTest {
 
     @Test void testNoInterfacesDoesNotFailRuleset () {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveInterfaces");
+    }
+
+    @Test void testJpaCohesionViolationFailsRuleset () {
+        assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem");
+        });
+    }
+
+    @Test void testJpaCohesionViolationDoesNotFailRuleset () {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasNoProblem");
     }
 }
