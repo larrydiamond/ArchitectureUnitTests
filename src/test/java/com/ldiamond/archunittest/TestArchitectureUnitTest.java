@@ -67,4 +67,14 @@ class TestArchitectureUnitTest {
     @Test void testJpaCohesionViolationDoesNotFailRuleset () {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasNoProblem");
     }
+
+    @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () {
+        assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean");
+        });
+    }
+
+    @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesReturnBoolean");
+    }
 }

@@ -20,8 +20,10 @@
 package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noMethods;
 import static com.tngtech.archunit.library.GeneralCodingRules.ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE;
@@ -31,6 +33,8 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JODATIME;
+
+import com.tngtech.archunit.base.DescribedPredicate;
 
 /**
  * This enum contains all the arch rules that this library includes.   Please note that over time we expect this enum to expand as more good ideas are accepted.
@@ -125,8 +129,34 @@ public enum ArchitectureRule {
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-
-    JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types"));
+     JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    
+    /**
+     * This rule ensures isSomething methods return primitive boolean
+     */
+     IS_METHODS_RETURN_PRIMITIVE_BOOLEAN (methods().that().haveNameMatching("is[A-Z][a-zA-Z]+").should().haveRawReturnType(new DescribedPredicate<JavaClass>("primitive boolean") {
+        @Override
+        public boolean test(JavaClass input) {
+            if (input.isPrimitive() && ("boolean".equals(input.getName())))
+                return true;
+            return false;
+        }
+     }).because ("Is methods should return primitive boolean - Boolean could return null").allowEmptyShould(true)),
+     
+    /**
+     * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods 
+     */
+     RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true))
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    ;
 
     private final ArchRule rule;
 
