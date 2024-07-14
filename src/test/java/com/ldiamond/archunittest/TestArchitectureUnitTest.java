@@ -45,9 +45,12 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testImplViolationFailsRuleset () {
-        assertThrowsExactly (AssertionError.class, () -> {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.hasImplInterface");
         });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that have simple name ending with 'Impl' should be interfaces, because Interfaces should not be named Impl' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Class <com.ldiamond.archunittest.impl.hasImplInterface.BlahImpl> is an interface in (BlahImpl.java:0)"));
+        assertEquals(371, ae.toString().length());
     }
 
     @Test void testNoImplInterfacesDoesNotFailRuleset () {
