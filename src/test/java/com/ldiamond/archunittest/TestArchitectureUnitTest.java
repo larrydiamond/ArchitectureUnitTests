@@ -69,9 +69,12 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () {
-        assertThrowsExactly (AssertionError.class, () -> {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean");
-        });
+        });        
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that have name matching 'is[A-Z][a-zA-Z]+' should have raw return type primitive boolean, because Is methods should return primitive boolean - Boolean could return null' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean.Blah.isBad()> does not have raw return type primitive boolean in (Blah.java:4)"));
+        assertEquals(481, ae.toString().length());
     }
 
     @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () {
@@ -79,9 +82,12 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testRestateNegativeIsNotFailsRuleset () {
-        assertThrowsExactly (AssertionError.class, () -> {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasNegative");
         });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that have name matching 'isNot[A-Z][a-zA-Z]+' should have name starting with 'isNot', because isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.restatePositive.hasNegative.Blah.isNotBlah()> has name starting with 'isNot' in (Blah.java:4)"));
+        assertEquals(482, ae.toString().length());
     }
 
     @Test void testRestateNegativeIsNotDoesNotFailRuleset () {
