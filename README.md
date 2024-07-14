@@ -52,7 +52,7 @@ or
 import com.ldiamond.archunittest.ArchitectureUnitTest;
 ```
 
-2. Define your architectural rules and configurations:
+2. Test the rules on your classes:
 
 ```java
 public class MyArchitectureTests {
@@ -82,7 +82,7 @@ import com.ldiamond.archunittest.ArchitectureUnitTest;
 import java.util.Arrays;
 ```
 
-2. Define your architectural rules and configurations:
+2. List the architectural rules to exclude:
 
 ```java
 public class MyArchitectureTests {
@@ -123,6 +123,9 @@ mvn test
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Repositories do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
 | INTERFACES_SHOULD_NOT_BE_CALLED_IMPL  | A rule that ensures that interfaces are not named Impl |
+| JPA_COUPLING_RESTFUL_GET_MAPPINGS  |This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
+| IS_METHODS_RETURN_PRIMITIVE_BOOLEAN  | This rule ensures isSomething methods return primitive boolean  |
+| RESTATE_ISNOT_METHODS_AS_POSITIVE  | This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods  |
 
 ## Why arent you just freezing rule violations?
 
