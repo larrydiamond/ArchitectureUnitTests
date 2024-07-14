@@ -77,4 +77,14 @@ class TestArchitectureUnitTest {
     @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesReturnBoolean");
     }
+
+    @Test void testRestateNegativeIsNotFailsRuleset () {
+        assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasNegative");
+        });
+    }
+
+    @Test void testRestateNegativeIsNotDoesNotFailRuleset () {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
+    }
 }
