@@ -22,5 +22,6 @@ package com.ldiamond.archunittest.optionalNull.hasNull;
 import java.util.Optional;
 
 public class Blah {
-    public Optional<String> blah () { return null; }    
+    // @Nullable
+    public Optional<String> blah () { return null; }    // SonarSource if you're reading this should be warned against.   This method should return Optional.Empty() rather than null
 }
