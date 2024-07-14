@@ -27,16 +27,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
     @Test void testpackageFailsRuleset () {
-        assertThrowsExactly (AssertionError.class, () -> {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.testpackage");
         });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Vector.<init>(), because Use ArrayList instead of Vector because Arraylist is unsynchronized and faster' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Vector.<init>()> in (ClassWithViolationsUnderTest.java:26)"));
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
+        assertEquals(867, ae.toString().length());
     }
 
     @Test void testpackageFailsRulesetWithExclusionForVectorButNotHashtable () {
-        assertThrowsExactly (AssertionError.class, () -> {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
             "com.ldiamond.archunittest.testpackage");
         });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
+        assertEquals(473, ae.toString().length());
     }
 
     @Test void testpackageSucceedsRulesetWithExclusionForVectorAndHashtable () {

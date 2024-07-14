@@ -1,3 +1,5 @@
+package com.ldiamond.archunittest.impl.doesNotHaveImplInterface;
+
 /*
  * #%L
  * Standardized ArchUnit tests
@@ -17,7 +19,6 @@
  * limitations under the License.
  * #L%
  */
-package com.ldiamond.archunittest.impl.doesNotHaveImplInterface;
 
 public class BlahImpl implements Blah {
     public String blah () { return "blah"; }
