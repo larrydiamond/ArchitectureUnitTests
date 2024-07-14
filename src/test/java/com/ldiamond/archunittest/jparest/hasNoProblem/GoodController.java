@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class GoodController {
 	@GetMapping("/passmytest")
 	public DataTransferObject passmytest(String something) {
-		DataTransferObject owner = new DataTransferObject();
-		return owner;
+		return new DataTransferObject();
 	}
 }

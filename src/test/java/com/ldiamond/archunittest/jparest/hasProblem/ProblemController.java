@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProblemController {
 	@GetMapping("/failmytest")
 	public Jpatable failmytest(String something) {
-		Jpatable owner = new Jpatable();
-		return owner;
+		return new Jpatable();
 	}
 }
