@@ -1,5 +1,3 @@
-package com.ldiamond.archunittest.impl.doesNotHaveImplInterface;
-
 /*
  * #%L
  * Standardized ArchUnit tests
@@ -20,6 +18,8 @@ package com.ldiamond.archunittest.impl.doesNotHaveImplInterface;
  * #L%
  */
 
-public class BlahImpl implements Blah {
+ package com.ldiamond.archunittest.impl.doesNotHaveImplInterface;
+
+ public class BlahImpl implements Blah {
     public String blah () { return "blah"; }
 }
