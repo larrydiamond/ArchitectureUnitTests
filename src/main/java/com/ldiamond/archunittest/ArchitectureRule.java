@@ -129,7 +129,8 @@ public enum ArchitectureRule {
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-     JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
     
     /**
      * This rule ensures isSomething methods return primitive boolean
@@ -146,10 +147,14 @@ public enum ArchitectureRule {
     /**
      * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods 
      */
-     RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true))
+     RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true)),
      
-    
-    
+     /**
+      * Optional methods should return Empty and not be nullable...... SonarSource if you're reading please make a rule that warns if an Optional method returns null please thanks
+      */
+      OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null"))
     
     
     

@@ -123,9 +123,13 @@ mvn test
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS  | A rule that checks that Spring Boot Repositories do not access Spring Boot Controllers  |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES  | A rule that checks that Spring Boot Repositories do not access Spring Boot Services |
 | INTERFACES_SHOULD_NOT_BE_CALLED_IMPL  | A rule that ensures that interfaces are not named Impl |
-| JPA_COUPLING_RESTFUL_GET_MAPPINGS  |This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
+| JPA_COUPLING_RESTFUL_GET_MAPPINGS  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
+| JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints using the older javax annotation rather than the newer jakarta annotation.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
 | IS_METHODS_RETURN_PRIMITIVE_BOOLEAN  | This rule ensures isSomething methods return primitive boolean  |
 | RESTATE_ISNOT_METHODS_AS_POSITIVE  | This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods  |
+| OPTIONAL_NOT_NULLABLE  | This rule encourages returning Optional.empty() rather than NULL |
+| OPTIONAL_NOT_NULLABLE_JAVAX  | This rule encourages returning Optional.empty() rather than NULL using the older javax annotation rather than the newer jakarta annotation |
+| OPTIONAL_NOT_NULLABLE_JSPECIFY  | This rule encourages returning Optional.empty() rather than NULL using the jspecify nullable annotation because [standards](https://xkcd.com/927/) |
 
 ## Why arent you just freezing rule violations?
 
