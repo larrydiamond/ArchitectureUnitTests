@@ -150,11 +150,11 @@ public enum ArchitectureRule {
      RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true)),
      
      /**
-      * Optional methods should return Empty and not be nullable...... SonarSource if you're reading please make a rule that warns if an Optional method returns null please thanks
+      * Optional methods should return Empty and not be nullable......
       */
       OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
       OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
-      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null"))
+      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
     
     
     
