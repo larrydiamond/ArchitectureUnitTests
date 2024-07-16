@@ -154,7 +154,7 @@ public enum ArchitectureRule {
       */
       OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
       OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
-      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null"))
     
     
     
