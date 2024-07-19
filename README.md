@@ -33,8 +33,13 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 <dependency>
     <groupId>com.ldiamond</groupId>
     <artifactId>architectureunittests</artifactId>
-    <version>0.1.0</version>
+    <version>1.1.0</version>
 </dependency>
+```
+
+or in your `build.gradle`:
+```xml
+implementation 'com.ldiamond:architectureunittests:1.1.0'
 ```
 
 or
@@ -125,6 +130,8 @@ mvn test
 | INTERFACES_SHOULD_NOT_BE_CALLED_IMPL  | A rule that ensures that interfaces are not named Impl |
 | JPA_COUPLING_RESTFUL_GET_MAPPINGS  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
 | JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints using the older javax annotation rather than the newer jakarta annotation.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
+| JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from RequestMapping restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
+| JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX  | This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from RequestMapping restful endpoints using the older javax annotation rather than the newer jakarta annotation.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients  |
 | IS_METHODS_RETURN_PRIMITIVE_BOOLEAN  | This rule ensures isSomething methods return primitive boolean  |
 | RESTATE_ISNOT_METHODS_AS_POSITIVE  | This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods  |
 | OPTIONAL_NOT_NULLABLE  | This rule encourages returning Optional.empty() rather than NULL |
