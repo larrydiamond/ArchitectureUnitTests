@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id("org.sonarqube") version "5.0.0.4638"
 	id 'jacoco'
-	id "org.owasp.dependencycheck" version "8.3.1"
+	id "org.owasp.dependencycheck" version "8.4.3"
     id 'signing'
     id 'maven-publish'
 }
