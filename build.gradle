@@ -32,8 +32,8 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS - when Java 17 has a higher market share we will upgrade to Java 17 and upgrade the Spring Dependency to latest
-    testCompileOnly 'org.springframework:spring-context:5.3.36'
-    testCompileOnly 'org.springframework:spring-web:5.3.36'
+    testCompileOnly 'org.springframework:spring-context:5.3.37'
+    testCompileOnly 'org.springframework:spring-web:5.3.37'
     testCompileOnly 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 }
 
