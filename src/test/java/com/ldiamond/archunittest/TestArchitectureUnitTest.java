@@ -73,7 +73,6 @@ class TestArchitectureUnitTest {
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem");
         });
-        System.out.println (ae.toString());
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.jparest.hasProblem.ProblemController.failmytest(java.lang.String)> has raw return type annotated with @Entity in (ProblemController.java:29)"));
         assertEquals(515, ae.toString().length());
@@ -108,4 +107,19 @@ class TestArchitectureUnitTest {
     @Test void testRestateNegativeIsNotDoesNotFailRuleset () {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
     }
+
+    @Test void testControllerCallingServiceIsGood() {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.allgood");
+    }
+
+    @Test void testServiceCallingControllerIsBad () {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.servicedependsoncontroller");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Service should depend on classes that are annotated with @Controller, because Spring Boot Services should not call Controller methods' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadService.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadController.badIdea()> in (BadService.java:7)"));
+        assertEquals(561, ae.toString().length());
+    }
+
+
 }

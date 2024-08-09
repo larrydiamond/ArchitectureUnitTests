@@ -176,14 +176,17 @@ public enum ArchitectureRule {
      /**
       * Optional methods should return Empty and not be nullable.
       */
-      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null"))
+      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
 
-      
-    
-    
-    
-    
-    
+     /**
+      * This rule prevents Spring Boot service classes from calling controller methods
+      */
+     SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Service").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Services should not call Controller methods"))
+
+
+
+
+
     ;
 
     private final ArchRule rule;
