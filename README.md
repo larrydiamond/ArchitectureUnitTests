@@ -39,7 +39,7 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 
 or in your `build.gradle`:
 ```xml
-implementation 'com.ldiamond:architectureunittests:1.1.0'
+testImplementation 'com.ldiamond:architectureunittests:1.1.0'
 ```
 
 or
@@ -57,6 +57,8 @@ or
 import com.ldiamond.archunittest.ArchitectureUnitTest;
 ```
 
+This library creates no transitive dependencies for your consumers, and this library only has a transitive dependency on ArchUnit itself.
+
 2. Test the rules on your classes:
 
 ```java
@@ -73,6 +75,10 @@ public class MyArchitectureTests {
 
 ```
 mvn test
+```
+or
+```
+gradle test
 ```
 
 ## How to exclude some architecture tests when running
