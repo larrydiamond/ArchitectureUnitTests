@@ -121,5 +121,14 @@ class TestArchitectureUnitTest {
         assertEquals(561, ae.toString().length());
     }
 
+    @Test void testRepositoryCallingControllerIsBad () {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Controller, because Spring Boot Repositories should not call Controller methods' was violated (1 times)"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadController.badIdea()> in (BadRepository.java:7)"));
+        assertEquals(580, ae.toString().length());
+    }
+
 
 }

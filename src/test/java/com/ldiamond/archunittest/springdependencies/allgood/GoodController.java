@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class GoodController {
     GoodService goodService;
+    GoodRepository goodRepository;
 
-    public GoodController(GoodService goodService) {
+    public GoodController(GoodService goodService, GoodRepository goodRepository) {
         this.goodService = goodService;
+        this.goodRepository = goodRepository;
     }
 
     @GetMapping("/passmytest")
