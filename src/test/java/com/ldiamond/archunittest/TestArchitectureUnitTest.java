@@ -108,7 +108,7 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
     }
 
-    @Test void testControllerCallingServiceIsGood() {
+    @Test void testControllerCallingServiceCallingRepositoryIsGood() {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.allgood");
     }
 
@@ -128,6 +128,15 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Controller, because Spring Boot Repositories should not call Controller methods' was violated (1 times)"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadController.badIdea()> in (BadRepository.java:7)"));
         assertEquals(580, ae.toString().length());
+    }
+
+    @Test void testRepositoryCallingServiceIsBad () {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsonservice");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Service, because Spring Boot Repositories should not call Service methods' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadService.badIdea()> in (BadRepository.java:7)"));
+        assertEquals(565, ae.toString().length());
     }
 
 

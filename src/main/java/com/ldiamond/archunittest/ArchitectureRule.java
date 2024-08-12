@@ -186,8 +186,13 @@ public enum ArchitectureRule {
       /**
       * This rule prevents Spring Boot repository classes from calling controller methods
       */
-      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Repositories should not call Controller methods"))
-    ;
+      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Repositories should not call Controller methods")),
+
+      /**
+      * This rule prevents Spring Boot repository classes from calling service methods
+      */
+      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods"))
+      ;
 
     private final ArchRule rule;
 
