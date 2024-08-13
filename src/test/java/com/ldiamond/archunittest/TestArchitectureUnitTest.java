@@ -139,5 +139,17 @@ class TestArchitectureUnitTest {
         assertEquals(565, ae.toString().length());
     }
 
+    @Test void testFieldsThatArentIsBlahIsGood() {
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.good");
+    }
 
+    @Test void testFieldsThatAreIsBlahIsBad () {
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no fields should have name matching 'is[A-Z][a-zA-Z]+', because isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing' was violated (2 times):"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isAlsoNotAGoodChoice> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isNotAGoodIdea> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
+        assertEquals(594, ae.toString().length());
+    }
 }

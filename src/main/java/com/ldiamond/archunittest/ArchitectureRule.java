@@ -19,12 +19,14 @@
  */
 package com.ldiamond.archunittest;
 
+import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noFields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noMethods;
 import static com.tngtech.archunit.library.GeneralCodingRules.ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE;
 import static com.tngtech.archunit.library.GeneralCodingRules.DEPRECATED_API_SHOULD_NOT_BE_USED;
@@ -33,8 +35,6 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JODATIME;
-
-import com.tngtech.archunit.base.DescribedPredicate;
 
 /**
  * This enum contains all the arch rules that this library includes.   Please note that over time we expect this enum to expand as more good ideas are accepted.
@@ -157,7 +157,12 @@ public enum ArchitectureRule {
             return false;
         }
      }).because ("Is methods should return primitive boolean - Boolean could return null").allowEmptyShould(true)),
-     
+
+     /**
+      * This rule recommends against field named isBlah since they're confusing and should just be blah.   blah setter and getter would be setBlah and isBlah, isBlah setter and getter would be setIsBlah and isIsBlah which is confusing
+      */
+      RENAME_IS_FIELDS (noFields().should().haveNameMatching("is[A-Z][a-zA-Z]+").because("isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing").allowEmptyShould(true)),
+
     /**
      * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods 
      */
