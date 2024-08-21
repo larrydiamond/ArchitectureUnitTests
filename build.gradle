@@ -27,13 +27,13 @@ repositories {
 dependencies {
 	implementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.0'
 
     // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS - when Java 17 has a higher market share we will upgrade to Java 17 and upgrade the Spring Dependency to latest
-    testCompileOnly 'org.springframework:spring-context:5.3.37'
-    testCompileOnly 'org.springframework:spring-web:5.3.37'
+    testCompileOnly 'org.springframework:spring-context:5.3.39'
+    testCompileOnly 'org.springframework:spring-web:5.3.39'
     testCompileOnly 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 }
 
@@ -50,7 +50,6 @@ sonarqube {
         property "sonar.scm.disabled", "true"
     }
 }
-
 
 jacoco {
     toolVersion = "0.8.11"
