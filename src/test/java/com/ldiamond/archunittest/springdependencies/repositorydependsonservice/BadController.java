@@ -23,8 +23,8 @@ public class BadController {
     BadService badService;
     BadRepository badRepository;
 
-    public BadController(final BadService BadService, BadRepository badRepository) {
-        this.badService = badService;
+    public BadController(final BadService badServiceImpl, BadRepository badRepository) {
+        this.badService = badServiceImpl;
         this.badRepository = badRepository;
     }
 

@@ -73,9 +73,9 @@ class TestArchitectureUnitTest {
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem");
         });
-        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.jparest.hasProblem.ProblemController.failmytest(java.lang.String)> has raw return type annotated with @Entity in (ProblemController.java:29)"));
-        assertEquals(515, ae.toString().length());
+        assertEquals(549, ae.toString().length());
     }
 
     @Test void testJpaCohesionViolationDoesNotFailRuleset () {

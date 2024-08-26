@@ -129,22 +129,22 @@ public enum ArchitectureRule {
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
     
     /**
      * This rule ensures isSomething methods return primitive boolean

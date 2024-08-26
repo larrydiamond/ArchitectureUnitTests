@@ -32,5 +32,7 @@ public class BadController {
         return "blah";
     }
 
-    public static void badIdea() { ; }
+    public static void badIdea() { 
+        // This method is intentionally empty
+    }
 }
