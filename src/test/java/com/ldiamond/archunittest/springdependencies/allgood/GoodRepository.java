@@ -19,5 +19,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class GoodRepository {
-    public void doSomething() {}
+    public void doSomething() {
+        // This method is intentionally empty
+    }
 }

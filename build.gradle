@@ -51,9 +51,6 @@ sonarqube {
     }
 }
 
-jacoco {
-    toolVersion = "0.8.11"
-}
 test {
     finalizedBy jacocoTestReport // report is always generated after tests run
 }
@@ -134,6 +131,7 @@ publishing {
     }
 }
 
+/* only needed when building release version
 signing {
     useGpgCmd()
     sign configurations.runtimeElements
@@ -144,3 +142,4 @@ publishMavenJavaPublicationToMavenLocal.dependsOn signRuntimeElements
 publish.dependsOn signRuntimeElements
 publishMavenJavaPublicationToOSSRHRepository.dependsOn signRuntimeElements
 publishMavenJavaPublicationToMyRepoRepository.dependsOn signRuntimeElements
+*/
