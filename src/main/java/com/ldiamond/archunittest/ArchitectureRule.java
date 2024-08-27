@@ -171,17 +171,17 @@ public enum ArchitectureRule {
      /**
       * Optional methods should return Empty and not be nullable.
       */
-      OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE Optional methods should return Optional.empty not null")),
 
      /**
       * Optional methods should return Empty and not be nullable.
       */
-      OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JAVAX Optional methods should return Optional.empty not null")),
 
      /**
       * Optional methods should return Empty and not be nullable.
       */
-      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("Optional methods should return Optional.empty not null")),
+      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JSPECIFY Optional methods should return Optional.empty not null")),
 
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
