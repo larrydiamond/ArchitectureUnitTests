@@ -108,11 +108,11 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
     }
 
-    @Test void testControllerCallingServiceCallingRepositoryIsGood() {
+    @Test void testControllerCallingServiceCallingRepositoryIsGood() {  // SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.allgood");
     }
 
-    @Test void testServiceCallingControllerIsBad () {
+    @Test void testServiceCallingControllerIsBad () {  // SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.servicedependsoncontroller");
         });
@@ -121,7 +121,7 @@ class TestArchitectureUnitTest {
         assertEquals(562, ae.toString().length());
     }
 
-    @Test void testRepositoryCallingControllerIsBad () {
+    @Test void testRepositoryCallingControllerIsBad () {  // SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller");
         });
@@ -130,7 +130,7 @@ class TestArchitectureUnitTest {
         assertEquals(581, ae.toString().length());
     }
 
-    @Test void testRepositoryCallingServiceIsBad () {
+    @Test void testRepositoryCallingServiceIsBad () {  // SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsonservice");
         });
@@ -139,11 +139,11 @@ class TestArchitectureUnitTest {
         assertEquals(566, ae.toString().length());
     }
 
-    @Test void testFieldsThatArentIsBlahIsGood() {
+    @Test void testFieldsThatArentIsBlahIsGood() { // RENAME_IS_FIELDS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.good");
     }
 
-    @Test void testFieldsThatAreIsBlahIsBad () {
+    @Test void testFieldsThatAreIsBlahIsBad () { // RENAME_IS_FIELDS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad");
         });

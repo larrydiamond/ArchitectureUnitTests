@@ -152,9 +152,7 @@ public enum ArchitectureRule {
      IS_METHODS_RETURN_PRIMITIVE_BOOLEAN (methods().that().haveNameMatching("is[A-Z][a-zA-Z]+").should().haveRawReturnType(new DescribedPredicate<JavaClass>("primitive boolean") {
         @Override
         public boolean test(JavaClass input) {
-            if (input.isPrimitive() && ("boolean".equals(input.getName())))
-                return true;
-            return false;
+            return input.isPrimitive() && "boolean".equals(input.getName());
         }
      }).because ("Is methods should return primitive boolean - Boolean could return null").allowEmptyShould(true)),
 
