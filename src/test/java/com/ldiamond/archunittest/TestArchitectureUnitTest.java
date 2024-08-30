@@ -78,11 +78,11 @@ class TestArchitectureUnitTest {
         assertEquals(549, ae.toString().length());
     }
 
-    @Test void testJpaCohesionViolationDoesNotFailRuleset () {
+    @Test void testJpaCohesionViolationDoesNotFailRuleset () { // positive test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasNoProblem");
     }
 
-    @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () {
+    @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () { // negative test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean");
         });        
@@ -108,11 +108,11 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
     }
 
-    @Test void testControllerCallingServiceCallingRepositoryIsGood() {  // SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
+    @Test void testControllerCallingServiceCallingRepositoryIsGood() {  // positive test for SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.allgood");
     }
 
-    @Test void testServiceCallingControllerIsBad () {  // SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS
+    @Test void testServiceCallingControllerIsBad () {  // negative test for SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.servicedependsoncontroller");
         });
@@ -121,7 +121,7 @@ class TestArchitectureUnitTest {
         assertEquals(562, ae.toString().length());
     }
 
-    @Test void testRepositoryCallingControllerIsBad () {  // SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
+    @Test void testRepositoryCallingControllerIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller");
         });
@@ -130,7 +130,7 @@ class TestArchitectureUnitTest {
         assertEquals(581, ae.toString().length());
     }
 
-    @Test void testRepositoryCallingServiceIsBad () {  // SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
+    @Test void testRepositoryCallingServiceIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsonservice");
         });
@@ -139,11 +139,11 @@ class TestArchitectureUnitTest {
         assertEquals(566, ae.toString().length());
     }
 
-    @Test void testFieldsThatArentIsBlahIsGood() { // RENAME_IS_FIELDS
+    @Test void testFieldsThatArentIsBlahIsGood() { // positive test for RENAME_IS_FIELDS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.good");
     }
 
-    @Test void testFieldsThatAreIsBlahIsBad () { // RENAME_IS_FIELDS
+    @Test void testFieldsThatAreIsBlahIsBad () { // negative test forRENAME_IS_FIELDS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad");
         });

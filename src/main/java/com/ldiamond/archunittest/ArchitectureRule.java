@@ -128,6 +128,7 @@ public enum ArchitectureRule {
     
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
+     * Positive test is testJpaCohesionViolationDoesNotFailRuleset, negative test is testJpaCohesionViolationFailsRuleset
      */
     JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
 
@@ -158,6 +159,7 @@ public enum ArchitectureRule {
 
      /**
       * This rule recommends against field named isBlah since they're confusing and should just be blah.   blah setter and getter would be setBlah and isBlah, isBlah setter and getter would be setIsBlah and isIsBlah which is confusing
+      * Positive test method is testFieldsThatArentIsBlahIsGood, negative test method is testFieldsThatAreIsBlahIsBad
       */
       RENAME_IS_FIELDS (noFields().should().haveNameMatching("is[A-Z][a-zA-Z]+").because("isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing").allowEmptyShould(true)),
 
