@@ -52,7 +52,7 @@ class TestArchitectureUnitTest {
         "com.ldiamond.archunittest.testpackage");
     }
 
-    @Test void testImplViolationFailsRuleset () {
+    @Test void testImplViolationFailsRuleset () { // Negative test for INTERFACES_SHOULD_NOT_END_IN_IMPL
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.hasImplInterface");
         });
@@ -61,11 +61,11 @@ class TestArchitectureUnitTest {
         assertEquals(371, ae.toString().length());
     }
 
-    @Test void testNoImplInterfacesDoesNotFailRuleset () {
+    @Test void testNoImplInterfacesDoesNotFailRuleset () { // Negative test for INTERFACES_SHOULD_NOT_END_IN_IMPL
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveImplInterface");
     }
 
-    @Test void testNoInterfacesDoesNotFailRuleset () {
+    @Test void testNoInterfacesDoesNotFailRuleset () { // Positive test for INTERFACES_SHOULD_NOT_END_IN_IMPL
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveInterfaces");
     }
 
@@ -143,7 +143,7 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.good");
     }
 
-    @Test void testFieldsThatAreIsBlahIsBad () { // negative test forRENAME_IS_FIELDS
+    @Test void testFieldsThatAreIsBlahIsBad () { // negative test for RENAME_IS_FIELDS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad");
         });

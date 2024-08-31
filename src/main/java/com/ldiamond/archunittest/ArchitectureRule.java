@@ -123,6 +123,7 @@ public enum ArchitectureRule {
 
     /**
      * This rule prevents interfaces being named *Impl 
+     * Positive tests are testNoImplInterfacesDoesNotFailRuleset and testNoInterfacesDoesNotFailRuleset, negative tests is testImplViolationFailsRuleset
      */
     INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).allowEmptyShould(true).because("Interfaces should not be named Impl")),
     
@@ -185,16 +186,19 @@ public enum ArchitectureRule {
 
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
+      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
       */
       SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Service").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Services should not call Controller methods")),
 
       /**
       * This rule prevents Spring Boot repository classes from calling controller methods
+      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingControllerIsBad
       */
       SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Repositories should not call Controller methods")),
 
       /**
       * This rule prevents Spring Boot repository classes from calling service methods
+      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingServiceIsBad
       */
       SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods"))
       ;
