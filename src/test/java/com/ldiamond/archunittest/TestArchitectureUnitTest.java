@@ -69,7 +69,7 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.doesNotHaveInterfaces");
     }
 
-    @Test void testJpaCohesionViolationFailsRuleset () {
+    @Test void testJpaCohesionViolationFailsRuleset () { // negative test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem");
         });
@@ -82,7 +82,7 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasNoProblem");
     }
 
-    @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () { // negative test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
+    @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () { // negative test for IS_METHODS_RETURN_PRIMITIVE_BOOLEAN
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean");
         });        
@@ -91,11 +91,11 @@ class TestArchitectureUnitTest {
         assertEquals(482, ae.toString().length());
     }
 
-    @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () {
+    @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () { // positive test for IS_METHODS_RETURN_PRIMITIVE_BOOLEAN
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesReturnBoolean");
     }
 
-    @Test void testRestateNegativeIsNotFailsRuleset () {
+    @Test void testRestateNegativeIsNotFailsRuleset () { // negative test for RESTATE_ISNOT_METHODS_AS_POSITIVE
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasNegative");
         });
@@ -104,7 +104,7 @@ class TestArchitectureUnitTest {
         assertEquals(483, ae.toString().length());
     }
 
-    @Test void testRestateNegativeIsNotDoesNotFailRuleset () {
+    @Test void testRestateNegativeIsNotDoesNotFailRuleset () { // positive test for RESTATE_ISNOT_METHODS_AS_POSITIVE
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasPositive");
     }
 

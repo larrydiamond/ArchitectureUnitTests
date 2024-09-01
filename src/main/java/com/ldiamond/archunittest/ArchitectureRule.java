@@ -150,6 +150,7 @@ public enum ArchitectureRule {
     
     /**
      * This rule ensures isSomething methods return primitive boolean
+     * Positive test is testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset, negative test is testIsMethodReturnsPrimitiveBooleanFailsRuleset
      */
      IS_METHODS_RETURN_PRIMITIVE_BOOLEAN (methods().that().haveNameMatching("is[A-Z][a-zA-Z]+").should().haveRawReturnType(new DescribedPredicate<JavaClass>("primitive boolean") {
         @Override
@@ -166,6 +167,7 @@ public enum ArchitectureRule {
 
     /**
      * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods 
+     * Positive test method is testRestateNegativeIsNotDoesNotFailRuleset, negative test method is testRestateNegativeIsNotFailsRuleset
      */
      RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true)),
      
