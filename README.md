@@ -54,7 +54,7 @@ or
 1. Write the test class
 
 ```java
-package com.example.myproject;
+package com.example.myproject;  // change to your package
 import org.junit.jupiter.api.Test;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
 
@@ -62,7 +62,7 @@ public class ArchitectureUnitTests {
 
     @Test
     public void runArchitectureTests() {
-        ArchitectureUnitTest.testArchitecture("com.example.myproject");
+        ArchitectureUnitTest.testArchitecture("com.example.myproject");  // change to your package
     }
 }
 ```
@@ -84,7 +84,7 @@ This unit tests will fail if any of the architecture rules are violated.   These
 1. Write the test class
 
 ```java
-package com.example.myproject;
+package com.example.myproject;  // change to your package
 import org.junit.jupiter.api.Test;
 import com.ldiamond.archunittest.ArchitectureRule;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
@@ -96,7 +96,7 @@ public class ArchitectureUnitTests {
     public void runArchitectureTests() {
         ArchitectureUnitTest.testArchitecture(
             Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
-            "com.example.myproject");
+            "com.example.myproject");  // change to your package
     }
 }
 ```
