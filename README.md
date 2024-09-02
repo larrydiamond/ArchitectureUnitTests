@@ -51,18 +51,14 @@ or
 
 ### Usage
 
-1. Import the necessary class from the library into your test classes:
+1. Write the test class
 
 ```java
+package com.example.myproject;
+import org.junit.jupiter.api.Test;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
-```
 
-This library creates no transitive dependencies for your consumers, and this library only has a transitive dependency on ArchUnit itself.
-
-2. Test the rules on your classes:
-
-```java
-public class MyArchitectureTests {
+public class ArchitectureUnitTests {
 
     @Test
     public void runArchitectureTests() {
@@ -71,7 +67,7 @@ public class MyArchitectureTests {
 }
 ```
 
-3. Execute your test suite to ensure architectural compliance:
+2. Run your tests:
 
 ```
 mvn test
@@ -85,18 +81,16 @@ gradle test
 
 This unit tests will fail if any of the architecture rules are violated.   These tests are reasonable and common sense, but valid exceptions to many of the rules will exist.   If the testArchitecture call fails and you decide that the failing test should be ignored, then modify your code to exclude the offending ArchRules from the test.
 
-1. Import the necessary classes from the library into your test classes:
+1. Write the test class
 
 ```java
+package com.example.myproject;
+import org.junit.jupiter.api.Test;
 import com.ldiamond.archunittest.ArchitectureRule;
 import com.ldiamond.archunittest.ArchitectureUnitTest;
 import java.util.Arrays;
-```
 
-2. List the architectural rules to exclude:
-
-```java
-public class MyArchitectureTests {
+public class ArchitectureUnitTests {
 
     @Test
     public void runArchitectureTests() {
@@ -107,7 +101,7 @@ public class MyArchitectureTests {
 }
 ```
 
-3. Execute your test suite to ensure architectural compliance:
+2. Run your tests:
 
 ```
 mvn test
