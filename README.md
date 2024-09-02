@@ -106,6 +106,10 @@ public class ArchitectureUnitTests {
 ```
 mvn test
 ```
+or
+```
+gradle test
+```
 
 ## What architecture tests do we have today?
 
