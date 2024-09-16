@@ -19,6 +19,8 @@
  */
 package com.ldiamond.archunittest;
 
+import java.util.List;
+
 import java.util.Collection;
 import java.util.ArrayList;
 
@@ -41,7 +43,7 @@ public class ArchitectureUnitTest {
     public static void testArchitecture (final Collection<ArchitectureRule> exclusions, final String... packagesToImport) {
         JavaClasses classes = new ClassFileImporter().importPackages(packagesToImport);
 
-        ArrayList<AssertionError> failures = new ArrayList<>();
+        List<AssertionError> failures = new ArrayList<>();
 
         for (ArchitectureRule rule : ArchitectureRule.values()) {
             if (!exclusions.contains(rule)) {
