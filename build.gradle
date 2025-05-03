@@ -5,6 +5,7 @@ plugins {
 	id "org.owasp.dependencycheck" version "12.1.1"
     id 'signing'
     id 'maven-publish'
+    id("org.openrewrite.rewrite") version("7.4.1")
 }
 
 group = 'com.ldiamond'
@@ -37,6 +38,10 @@ dependencies {
     testCompileOnly 'org.springframework:spring-context:5.3.39'
     testCompileOnly 'org.springframework:spring-web:5.3.39'
     testCompileOnly 'jakarta.persistence:jakarta.persistence-api:3.2.0'
+
+	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:3.6.1")
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:2.7.1")
+	rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.7.0")
 }
 
 tasks.named('test') {
@@ -51,6 +56,62 @@ sonarqube {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.scm.disabled", "true"
     }
+}
+
+// gradle rewriteRun
+rewrite {
+	activeRecipe("org.openrewrite.java.testing.archunit.ArchUnit0to1Migration")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertEqualsBooleanToAssertBoolean")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertEqualsNullToAssertNull")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseEqualsToAssertNotEquals")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseNegationToAssertTrue")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseNullToAssertNotNull")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertLiteralBooleanToFailRecipe")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertNotEqualsBooleanToAssertBoolean")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueComparisonToAssertEquals")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueEqualsToAssertEquals")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueNegationToAssertFalse")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueNullToAssertNull")
+	activeRecipe("org.openrewrite.java.testing.junit5.CleanupAssertions")
+	activeRecipe("org.openrewrite.java.testing.junit5.RemoveTryCatchFailBlocks")
+	
+	activeRecipe("org.openrewrite.staticanalysis.AtomicPrimitiveEqualsUsesGet")
+	activeRecipe("org.openrewrite.staticanalysis.BooleanChecksNotInverted")
+	activeRecipe("org.openrewrite.staticanalysis.BufferedWriterCreationRecipes")
+	activeRecipe("org.openrewrite.staticanalysis.CaseInsensitiveComparisonsDoNotChangeCase")
+	activeRecipe("org.openrewrite.staticanalysis.CatchClauseOnlyRethrows")
+	activeRecipe("org.openrewrite.staticanalysis.NoEmptyCollectionWithRawType")
+	activeRecipe("org.openrewrite.staticanalysis.EqualsAvoidsNull")
+	activeRecipe("org.openrewrite.staticanalysis.IndexOfReplaceableByContains")
+	activeRecipe("org.openrewrite.staticanalysis.IsEmptyCallOnCollections")
+	activeRecipe("org.openrewrite.staticanalysis.ReplaceThreadRunWithThreadStart")
+	activeRecipe("org.openrewrite.staticanalysis.ReplaceWeekYearWithYear")
+	activeRecipe("org.openrewrite.staticanalysis.StringLiteralEquality")
+	activeRecipe("org.openrewrite.staticanalysis.UnnecessaryPrimitiveAnnotations")
+	activeRecipe("org.openrewrite.staticanalysis.WriteOctalValuesAsDecimal")
+
+	activeRecipe("org.openrewrite.java.migrate.CastArraysAsListToList")
+	activeRecipe("org.openrewrite.java.migrate.guava.NoGuavaJava11")
+	activeRecipe("org.openrewrite.java.migrate.guava.NoGuavaDirectExecutor")
+	activeRecipe("org.openrewrite.java.migrate.guava.NoGuavaListsNewArrayList")
+	activeRecipe("org.openrewrite.java.migrate.guava.NoGuavaMapsNewHashMap")
+	activeRecipe("org.openrewrite.java.migrate.guava.PreferJavaUtilCollectionsSynchronizedNavigableMap")
+	activeRecipe("org.openrewrite.java.migrate.guava.PreferJavaUtilOptional")
+	activeRecipe("org.openrewrite.java.migrate.jacoco.UpgradeJaCoCo")
+	activeRecipe("org.openrewrite.java.migrate.lang.StringRulesRecipes")
+	activeRecipe("org.openrewrite.java.migrate.lang.UseStringIsEmptyRecipe")
+	activeRecipe("org.openrewrite.java.migrate.ThreadStopDestroy")
+	activeRecipe("org.openrewrite.java.migrate.util.IteratorNext")
+	activeRecipe("org.openrewrite.java.migrate.util.JavaUtilAPIs")
+	activeRecipe("org.openrewrite.java.migrate.util.ListFirstAndLast")
+	activeRecipe("org.openrewrite.java.migrate.util.OptionalNotEmptyToIsPresent")
+	activeRecipe("org.openrewrite.java.migrate.util.OptionalNotPresentToIsEmpty")
+	activeRecipe("org.openrewrite.java.migrate.util.OptionalStreamRecipe")
+	activeRecipe("org.openrewrite.java.migrate.util.UseEnumSetOf")
+	activeRecipe("org.openrewrite.java.migrate.util.UseLocaleOf")
+	activeRecipe("org.openrewrite.java.migrate.util.UseMapOf")
+
+	setExportDatatables(true)
 }
 
 test {
