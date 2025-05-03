@@ -9,8 +9,10 @@ plugins {
 
 group = 'com.ldiamond'
 version = '2.0.0'
-sourceCompatibility = '11'
-targetCompatibility = '11'
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 
 configurations {
 	compileOnly {
@@ -20,8 +22,8 @@ configurations {
 
 repositories {
 	mavenCentral()
-	maven { url 'https://repo.spring.io/milestone' }
-	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url = uri('https://repo.spring.io/milestone') }
+	maven { url = uri('https://repo.spring.io/snapshot') }
 }
 
 dependencies {
