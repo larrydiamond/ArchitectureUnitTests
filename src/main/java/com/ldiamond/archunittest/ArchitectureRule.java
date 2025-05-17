@@ -221,6 +221,12 @@ public enum ArchitectureRule {
       OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JSPECIFY Optional methods should return Optional.empty not null")),
 
      /**
+      * JUnit 5 tests are ignored if they are static
+      */
+     JUNIT5_TESTS_CANT_BE_STATIC (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().beStatic()
+        .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static")),
+
+     /**
       * This rule prevents Spring Boot service classes from calling controller methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
       */

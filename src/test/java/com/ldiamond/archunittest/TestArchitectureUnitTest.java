@@ -165,4 +165,14 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @Controller in (BadService.java:10) and Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @RestController in (BadService.java:10)"));
         assertEquals(804, ae.toString().length());
     }
+
+    @Test void testStaticUnitTestsFail() { // negative test for STATIC_UNIT_TESTS_SHOULD_NOT_BE_STATIC
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be static, because JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier STATIC in (StaticUnitTest.java:10)"));
+        assertEquals(441, ae.toString().length());
+
+    }
 }
