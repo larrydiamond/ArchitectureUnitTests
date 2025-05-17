@@ -92,12 +92,12 @@ public enum ArchitectureRule {
     USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER (noClasses().should().callConstructor(java.lang.StringBuffer.class).because("Use StringBuilder instead of StringBuffer because StringBuilder is unsynchronized and faster")),
 
     /**
-     * Skip lists are faster than balanced trees
+     * Skip lists are generally faster than balanced trees
      */
     USE_CONCURRENTSKIPLISTSET_INSTEAD_OF_TREESET (noClasses().should().callConstructor(java.util.TreeSet.class).because("Use ConcurrentSkipListSet instead of TreeSet because the SkipList algo is faster than Balanced Tree")),
 
     /**
-     * Skip lists are faster than balanced trees
+     * Skip lists are generally faster than balanced trees
      */
     USE_CONCURRENTSKIPLISTMAP_INSTEAD_OF_TREEMAP (noClasses().should().callConstructor(java.util.TreeMap.class).because("Use ConcurrentSkipListMap instead of TreeMap because the SkipList algo is faster than Balanced Tree")),
 
@@ -139,6 +139,16 @@ public enum ArchitectureRule {
     JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
 
     /**
+     * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Post restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
+     */
+    JPA_COUPLING_RESTFUL_POST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_POST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
+
+    /**
+     * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Post restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
+     */
+    JPA_COUPLING_RESTFUL_POST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
+
+    /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
     JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
@@ -147,7 +157,31 @@ public enum ArchitectureRule {
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
     JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
-    
+
+    /**
+     * This rule requires that methods annotated with RequestMapping be in a class annotated with Controller
+     */
+    SPRING_BOOT_REQUESTMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping")
+        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+        .allowEmptyShould(true).because("SPRING_BOOT_REQUESTMAPPING_CONTROLLER RequestMapping methods should be in Controller classes")),
+
+    /**
+     * This rule requires that methods annotated with GetMapping be in a class annotated with Controller
+     */
+    SPRING_BOOT_GETMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping")
+        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+        .allowEmptyShould(true).because("SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes")),
+
+    /**
+     * This rule requires that methods annotated with PostMapping be in a class annotated with Controller
+     */
+    SPRING_BOOT_POSTMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping")
+        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+        .allowEmptyShould(true).because("SPRING_BOOT_POSTMAPPING_CONTROLLER GetMapping methods should be in Controller classes")),
+
     /**
      * This rule ensures isSomething methods return primitive boolean
      * Positive test is testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset, negative test is testIsMethodReturnsPrimitiveBooleanFailsRuleset

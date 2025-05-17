@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.tngtech.archunit:archunit-junit5:1.4.0'
+	implementation 'com.tngtech.archunit:archunit-junit5:1.4.1'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
@@ -194,7 +194,7 @@ publishing {
     }
 }
 
-/* only needed when building release version
+/* only needed when building release version 
 signing {
     useGpgCmd()
     sign configurations.runtimeElements
@@ -205,4 +205,4 @@ publishMavenJavaPublicationToMavenLocal.dependsOn signRuntimeElements
 publish.dependsOn signRuntimeElements
 publishMavenJavaPublicationToOSSRHRepository.dependsOn signRuntimeElements
 publishMavenJavaPublicationToMyRepoRepository.dependsOn signRuntimeElements
-*/
+/* */

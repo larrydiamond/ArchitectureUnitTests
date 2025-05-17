@@ -152,4 +152,17 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isNotAGoodIdea> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
         assertEquals(594, ae.toString().length());
     }
+
+    @Test void testMethodAnnotatedWithGetMappingIsInControllerClass() { // positive test for SPRING_BOOT_REQUESTMAPPING_CONTROLLER
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springannotations.good");
+    }
+
+    @Test void testMethodAnnotatedWithGetMappingIsntInControllerClassFailsRuleset() { // negative test for SPRING_BOOT_REQUESTMAPPING_CONTROLLER
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springannotations.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that are annotated with @GetMapping should be declared in classes that are annotated with @RestController or should be declared in classes that are annotated with @Controller, because SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @Controller in (BadService.java:10) and Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @RestController in (BadService.java:10)"));
+        assertEquals(804, ae.toString().length());
+    }
 }
