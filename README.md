@@ -32,13 +32,13 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 <dependency>
     <groupId>com.ldiamond</groupId>
     <artifactId>architectureunittests</artifactId>
-    <version>3.0.0</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 
 or in your `build.gradle`:
 ```xml
-testImplementation 'com.ldiamond:architectureunittests:3.0.0'
+testImplementation 'com.ldiamond:architectureunittests:4.0.0'
 ```
 
 or
