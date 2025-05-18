@@ -229,7 +229,7 @@ public enum ArchitectureRule {
      /**
       * JUnit 5 tests are ignored if they are private but not private protected
       */
-        JUNIT5_TESTS_CANT_BE_PRIVATE (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test")
+    JUNIT5_TESTS_CANT_BE_PRIVATE (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test")
             .should().bePrivate().orShould().notBeProtected()
             .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private")),
 
