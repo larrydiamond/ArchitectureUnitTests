@@ -166,13 +166,18 @@ class TestArchitectureUnitTest {
         assertEquals(804, ae.toString().length());
     }
 
-    @Test void testStaticUnitTestsFail() { // negative test for STATIC_UNIT_TESTS_SHOULD_NOT_BE_STATIC
+    @Test void testStaticUnitTestsFail() { // negative test for STATIC_UNIT_TESTS_SHOULD_NOT_BE_STATIC and STATIC_UNIT_TESTS_SHOULD_NOT_BE_PRIVATE
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests");
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be static, because JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static' was violated (1 times):"));
-        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier STATIC in (StaticUnitTest.java:10)"));
-        assertEquals(441, ae.toString().length());
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier STATIC in (StaticUnitTest.java:9)"));
 
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be private or should not be protected, because JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private' was violated (3 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.PrivateUnitTest.testNoImplInterfacesDoesNotFailRuleset()> does not have modifier PROTECTED in (PrivateUnitTest.java:9)"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.PrivateUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier PRIVATE in (PrivateUnitTest.java:9)"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> does not have modifier PROTECTED in (StaticUnitTest.java:9)"));
+
+        assertEquals(1181, ae.toString().length());
     }
 }
