@@ -32,13 +32,13 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 <dependency>
     <groupId>com.ldiamond</groupId>
     <artifactId>architectureunittests</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.1</version>
 </dependency>
 ```
 
 or in your `build.gradle`:
 ```xml
-testImplementation 'com.ldiamond:architectureunittests:4.0.0'
+testImplementation 'com.ldiamond:architectureunittests:4.0.1'
 ```
 
 or
@@ -147,7 +147,6 @@ gradle test
 | OPTIONAL_NOT_NULLABLE_JAVAX  | This rule encourages returning Optional.empty() rather than NULL using the older javax annotation rather than the newer jakarta annotation (Since 1.0) |
 | OPTIONAL_NOT_NULLABLE_JSPECIFY  | This rule encourages returning Optional.empty() rather than NULL using the jspecify nullable annotation because [standards](https://xkcd.com/927/) (Since 1.0)                                                                   |
 | JUNIT5_TESTS_CANT_BE_STATIC | JUnit does not run tests in static methods.   If you see this error, then the method it flagged isnt being run by JUnit (Since 4.0) |
-| JUNIT5_TESTS_CANT_BE_PRIVATE | JUnit does not run tests in private methods.   If you see this error, then the method it flagged isnt being run by JUnit (Since 4.0) |
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Services do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Services (Since 2.0)                                              |

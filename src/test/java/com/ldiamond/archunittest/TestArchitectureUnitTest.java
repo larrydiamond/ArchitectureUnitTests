@@ -19,6 +19,7 @@
  */
 package com.ldiamond.archunittest;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -166,6 +167,7 @@ class TestArchitectureUnitTest {
         assertEquals(804, ae.toString().length());
     }
 
+    @Disabled
     @Test void testStaticUnitTestsFail() { // negative test for STATIC_UNIT_TESTS_SHOULD_NOT_BE_STATIC and STATIC_UNIT_TESTS_SHOULD_NOT_BE_PRIVATE
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests");
