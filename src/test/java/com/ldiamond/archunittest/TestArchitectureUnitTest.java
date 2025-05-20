@@ -19,7 +19,6 @@
  */
 package com.ldiamond.archunittest;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
