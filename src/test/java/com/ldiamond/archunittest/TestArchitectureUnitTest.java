@@ -172,7 +172,6 @@ class TestArchitectureUnitTest {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests");
         });
 
-        System.out.println(ae.toString());
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be static, because JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier STATIC in (StaticUnitTest.java:9)"));
 
