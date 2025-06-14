@@ -148,6 +148,8 @@ gradle test
 | OPTIONAL_NOT_NULLABLE_JSPECIFY  | This rule encourages returning Optional.empty() rather than NULL using the jspecify nullable annotation because [standards](https://xkcd.com/927/) (Since 1.0)                                                                   |
 | JUNIT5_TESTS_CANT_BE_STATIC | JUnit does not run tests in static methods.   If you see this error, then the method it flagged isnt being run by JUnit (Since 4.0) |
 | JUNIT5_TESTS_CANT_BE_PRIVATE | JUnit does not run tests in private methods.   If you see this error, then the method it flagged isnt being run by JUnit (Since 4.0.2) |
+| PREFER_CAFFEINE_OVER_GUAVA_CACHING | Prefer Caffeine over Google Guava caching [Documentation](https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html) (Since 5.0.0) |
+| GUAVA_EVENTBUS_SHOULD_NOT_BE_USED | Guava discourages the use of their EventBus [Documentation](https://github.com/google/guava/wiki/EventBusExplained) (Since 5.0.0) |
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Services do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Services (Since 2.0)                                              |

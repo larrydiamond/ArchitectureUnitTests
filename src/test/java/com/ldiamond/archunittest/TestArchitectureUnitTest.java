@@ -183,4 +183,20 @@ class TestArchitectureUnitTest {
     @Test void testGoodTestsSucceed() { // positive test for  JUNIT5_TESTS_CANT_BE_STATIC and JUNIT5_TESTS_CANT_BE_PRIVATE
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.validjunittests");
     }
+
+    @Test void testGuavaCacheFailsRuleset() { // negative test for PREFER_CAFFEINE_OVER_GUAVA_CACHING
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavacache");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.cache', because PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html' was violated (5 times):"));
+        assertEquals(1283, ae.toString().length());
+    }
+
+    @Test void testGuavaEventBusFailsRuleset() { // negative test for GUAVA_EVENTBUS_SHOULD_NOT_BE_USED
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavaeventbus");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.eventbus', because GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus' was violated (4 times):"));
+        assertEquals(1073, ae.toString().length());
+    }
 }

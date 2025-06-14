@@ -232,6 +232,20 @@ public enum ArchitectureRule {
      JUNIT5_TESTS_CANT_BE_PRIVATE (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().bePrivate()
         .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private")),
 
+    /**
+     * Prefer Caffeine over Google Guava caching
+     */
+    PREFER_CAFFEINE_OVER_GUAVA_CACHING (
+        noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.cache")
+        .allowEmptyShould(true).because("PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html")),
+
+    /**
+     * Guava discourages the use of their EventBus
+     */
+    GUAVA_EVENTBUS_SHOULD_NOT_BE_USED (
+        noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.eventbus")
+        .allowEmptyShould(true).because("GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus")),
+
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad

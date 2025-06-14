@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.tngtech.archunit:archunit-junit5:1.4.1'
+	implementation 'com.tngtech.archunit:archunit-junit5:latest.release'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
@@ -39,9 +39,12 @@ dependencies {
     testCompileOnly 'org.springframework:spring-web:5.3.39'
     testCompileOnly 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 
-	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:3.6.1")
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:2.7.1")
-	rewrite("org.openrewrite.recipe:rewrite-migrate-java:3.7.0")
+    // Needed to test Guava rules
+    testImplementation("com.google.guava:guava:33.4.8-jre")
+
+	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
 }
 
 tasks.named('test') {
