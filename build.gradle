@@ -42,6 +42,12 @@ dependencies {
     // Needed to test Guava rules
     testImplementation("com.google.guava:guava:33.4.8-jre")
 
+    compileOnly("org.projectlombok:lombok:1.18.+")
+	annotationProcessor("org.projectlombok:lombok:1.18.+")
+	
+	testCompileOnly("org.projectlombok:lombok:1.18.+")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.+")
+
 	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-static-analysis:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
@@ -122,6 +128,12 @@ test {
 }
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        csv.required = true
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
 }
 
 jacocoTestReport {
@@ -197,7 +209,7 @@ publishing {
     }
 }
 
-/* only needed when building release version */
+/* only needed when building release version 
 signing {
     useGpgCmd()
     sign configurations.runtimeElements

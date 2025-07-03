@@ -199,4 +199,28 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.eventbus', because GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus' was violated (4 times):"));
         assertEquals(1073, ae.toString().length());
     }
+
+    @Test void testImmutableSucceedsRuleset() { // positive test for PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.immutable.nomutable");
+    }
+
+    @Test void testMutableFailsRuleset() { // negative test for PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.immutable.hasmutable");
+        });
+        System.out.println(ae.toString());
+        System.out.println(ae.toString().length());
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'fields that are public and are static should be final and should ensure their public static fields are final, because PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE Public static fields should be final and immutable.' was violated (10 times):"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableInternalClass.mutablePublicStaticField> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.array> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.dateFormat> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.dateTimeFormatter> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.list> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.map> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.mutableAnnotatedClass> contains field <mutableField> which is settable by method com.ldiamond.archunittest.immutable.hasmutable.MutableAnnotatedClass.setMutableField(java.lang.String) in (MutableTest.java)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.mutableInternalClass> contains public static field <mutablePublicStaticField> which does not have modifier final in (MutableTest.java)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.someDouble> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.immutable.hasmutable.MutableTest.someInt> does not have modifier FINAL in (MutableTest.java:0)"));
+        assertEquals(1902, ae.toString().length());
+    }
 }

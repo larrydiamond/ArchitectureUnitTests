@@ -20,10 +20,19 @@
 package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.base.DescribedPredicate;
+import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.domain.JavaCodeUnit;
+import com.tngtech.archunit.core.domain.JavaField;
+import com.tngtech.archunit.core.domain.JavaFieldAccess;
+import com.tngtech.archunit.core.domain.JavaMethod;
+import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noFields;
@@ -35,6 +44,8 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JODATIME;
+
+import java.util.Set;
 
 /**
  * This enum contains all the arch rules that this library includes.   Please note that over time we expect this enum to expand as more good ideas are accepted.
@@ -125,7 +136,7 @@ public enum ArchitectureRule {
      * This rule prevents interfaces being named *Impl 
      * Positive tests are testNoImplInterfacesDoesNotFailRuleset and testNoInterfacesDoesNotFailRuleset, negative tests is testImplViolationFailsRuleset
      */
-    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).allowEmptyShould(true).because("Interfaces should not be named Impl")),
+    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).because("Interfaces should not be named Impl")),
     
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
@@ -246,6 +257,121 @@ public enum ArchitectureRule {
         noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.eventbus")
         .allowEmptyShould(true).because("GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus")),
 
+     /**
+      * This rule prevents having public static fields in classes where the field has a set method or is non-final
+      */
+    PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE (
+        fields().that().arePublic().and().areStatic().should().beFinal()
+        .andShould(new ArchCondition<JavaField>("ensure their public static fields are immutable") {
+            @Override
+            public void check(final JavaField field, ConditionEvents events) {
+                JavaClass owner = field.getRawType();
+                for (JavaField f : owner.getFields()) {
+                    // Does this field have public static non-final members?
+                    if (isPublic(f) && isStatic(f) && !isFinal(f)) {
+                        events.add(new SimpleConditionEvent(field, false,
+                            String.format("Field <%s> contains public static field <%s> which does not have modifier final in (%s)", field.getFullName(), f.getName(), field.getSourceCodeLocation().getSourceFileName())));
+                    }
+                    // Is this field settable?
+                    Set<JavaFieldAccess> accesses = f.getAccessesToSelf();
+                    for (JavaFieldAccess access : accesses) {
+                        if (access.getAccessType() == JavaFieldAccess.AccessType.SET) {
+                            JavaCodeUnit origin = access.getOrigin();
+                            if (origin instanceof JavaMethod) {
+                                JavaMethod method = (JavaMethod) origin;
+                                if (method.getModifiers().contains(JavaModifier.PUBLIC)) {
+                        System.out.println ("Setter " + access.getOrigin().getFullName() + " for field " + f.getFullName());
+                        System.out.println ("Origin " + access.getOrigin().toString());
+                        System.out.println ("Owner " + access.getOwner().toString());
+                        System.out.println ("Target " + access.getTarget().toString());
+                        System.out.println (String.format("Field <%s> contains field <%s> which is settable by method %s in (%s)", 
+                                        field.getFullName(), f.getName(), method.getFullName(), field.getSourceCodeLocation().getSourceFileName()));
+                                    events.add(new SimpleConditionEvent(field, false,
+                                        String.format("Field <%s> contains field <%s> which is settable by method %s in (%s)", 
+                                        field.getFullName(), f.getName(), method.getFullName(), field.getSourceCodeLocation().getSourceFileName())));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            public boolean isPublic(final JavaField field) {
+                if (field.getModifiers().contains(JavaModifier.PUBLIC)) {
+                    return true;
+                }
+                return false;
+            }
+
+            public boolean isStatic(final JavaField field) {
+                if (field.getModifiers().contains(JavaModifier.STATIC)) {
+                    return true;
+                }
+                return false;
+            }
+
+            public boolean isFinal(final JavaField field) {
+                if (field.getModifiers().contains(JavaModifier.FINAL)) {
+                    return true;
+                }
+                return false;
+            }
+        })
+        .allowEmptyShould(true)
+        .because("PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE Public static fields should be final and immutable.")),
+        /*  
+                    // Does this field have members marked as Mutable?
+                    for (JavaAnnotation<JavaField> annotation : f.getAnnotations()) {
+                        if (annotation.getRawType().getName().endsWith(".Mutable")) {
+                            events.add(new SimpleConditionEvent(field, false,
+                                String.format("Field <%s> contains field <%s> which is marked as mutable with annotation %s in (%s)", 
+                                field.getFullName(), f.getName(), annotation.getRawType().getFullName(), field.getSourceCodeLocation().getSourceFileName())));
+                        }
+                    }
+                    if (f.isPublic() && f.isStatic() && !f.isFinal()) {
+                        events.add(new SimpleConditionEvent(field, false,
+                            String.format("Field %s contains field %s which is public, static and non-final", field.getFullName(), f.getFullName())));
+
+String setterName = "set" + capitalize(field.getName());
+                boolean hasSetter = owner.getMethods().stream()
+                    .anyMatch(m -> m.getName().equals(setterName)
+                        && m.getRawParameterTypes().size() == 1
+                        && m.getRawParameterTypes().get(0).equals(field.getRawType()));
+                if (hasSetter) {
+                    events.add(new SimpleConditionEvent(field, !hasSetter, String.format("Field %s has a setter method", field.getFullName())));
+                } else {
+                    System.out.println(field.getFullName() + " has no setter method " + setterName + " " + owner.getFullName());
+                }
+            }
+            
+            private String capitalize(String name) {
+                if (name == null || name.isEmpty()) return name;
+                return name.substring(0, 1).toUpperCase() + name.substring(1);
+            }
+
+    PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE (noFields().that().arePublic().and().areStatic()
+        .should().beFinal().andShould(new ArchCondition<JavaField>("not have a setter method") {
+            @Override
+            public void check(JavaField field, ConditionEvents events) {
+                JavaClass owner = field.getOwner();
+                String setterName = "set" + capitalize(field.getName());
+                boolean hasSetter = owner.getMethods().stream()
+                    .anyMatch(m -> m.getName().equals(setterName)
+                        && m.getRawParameterTypes().size() == 1
+                        && m.getRawParameterTypes().get(0).equals(field.getRawType()));
+                if (hasSetter) {
+                events.add(new SimpleConditionEvent(field, !hasSetter,
+                    String.format("Field %s has a setter method", field.getFullName())));
+                }
+            }
+            
+            private String capitalize(String name) {
+                if (name == null || name.isEmpty()) return name;
+                return name.substring(0, 1).toUpperCase() + name.substring(1);
+            }
+        }).allowEmptyShould(true)
+        .because("PUBLIC_STATIC_FIELDS_SHOULD_BE_IMMUTABLE Public static fields should be final and have no set methods as these public variables are difficult to unit test and are shared state within your application.")),
+/*  */
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
