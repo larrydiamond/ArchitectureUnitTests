@@ -125,7 +125,7 @@ public enum ArchitectureRule {
      * This rule prevents interfaces being named *Impl 
      * Positive tests are testNoImplInterfacesDoesNotFailRuleset and testNoInterfacesDoesNotFailRuleset, negative tests is testImplViolationFailsRuleset
      */
-    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).allowEmptyShould(true).because("Interfaces should not be named Impl")),
+    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).because("Interfaces should not be named Impl")),
     
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
