@@ -82,7 +82,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testJpaCohesionViolationDoesNotFailRuleset () { // positive test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
@@ -102,7 +102,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () { // positive test for IS_METHODS_RETURN_PRIMITIVE_BOOLEAN
@@ -122,7 +122,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testRestateNegativeIsNotDoesNotFailRuleset () { // positive test for RESTATE_ISNOT_METHODS_AS_POSITIVE
@@ -146,7 +146,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testRepositoryCallingControllerIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
@@ -162,7 +162,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testRepositoryCallingServiceIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
@@ -178,7 +178,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testFieldsThatArentIsBlahIsGood() { // positive test for RENAME_IS_FIELDS
@@ -199,7 +199,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testMethodAnnotatedWithGetMappingIsInControllerClass() { // positive test for SPRING_BOOT_REQUESTMAPPING_CONTROLLER
@@ -219,7 +219,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testStaticUnitTestsFail() { // negative test for JUNIT5_TESTS_CANT_BE_STATIC and JUNIT5_TESTS_CANT_BE_PRIVATE
@@ -240,7 +240,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testGoodTestsSucceed() { // positive test for  JUNIT5_TESTS_CANT_BE_STATIC and JUNIT5_TESTS_CANT_BE_PRIVATE
@@ -259,7 +259,7 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testGuavaEventBusFailsRuleset() { // negative test for GUAVA_EVENTBUS_SHOULD_NOT_BE_USED
@@ -274,6 +274,6 @@ class TestArchitectureUnitTest {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
-        assertTrue(rightLength);
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 }
