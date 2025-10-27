@@ -37,7 +37,7 @@ dependencies {
     // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS - when Java 17 has a higher market share we will upgrade to Java 17 and upgrade the Spring Dependency to latest
     testCompileOnly 'org.springframework:spring-context:5.3.39'
     testCompileOnly 'org.springframework:spring-web:5.3.39'
-    testCompileOnly 'jakarta.persistence:jakarta.persistence-api:3.2.0'
+    testImplementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 
     // Needed to test Guava rules
     testImplementation("com.google.guava:guava:33.4.8-jre")
