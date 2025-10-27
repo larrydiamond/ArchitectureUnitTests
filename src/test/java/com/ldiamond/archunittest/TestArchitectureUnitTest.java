@@ -37,7 +37,7 @@ class TestArchitectureUnitTest {
         boolean rightLength = false;
         if (ae.toString().length() == 867) {
             rightLength = true;
-        } else if (ae.toString().length() == 866) {
+        } else if (ae.toString().length() == 865) {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
@@ -276,7 +276,7 @@ class TestArchitectureUnitTest {
         boolean rightLength = false;
         if (ae.toString().length() == 1283) {
             rightLength = true;
-        } else if (ae.toString().length() == 1282) {
+        } else if (ae.toString().length() == 1278) {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
@@ -291,7 +291,7 @@ class TestArchitectureUnitTest {
         boolean rightLength = false;
         if (ae.toString().length() == 1073) {
             rightLength = true;
-        } else if (ae.toString().length() == 1072) {
+        } else if (ae.toString().length() == 1069) {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
