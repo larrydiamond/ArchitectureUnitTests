@@ -196,7 +196,7 @@ publishing {
     }
 }
 
-/* only needed when building release version */
+/* only needed when building release version 
 signing {
     useGpgCmd()
     sign configurations.runtimeElements
