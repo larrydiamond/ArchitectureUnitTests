@@ -75,7 +75,14 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.jparest.hasProblem.ProblemController.failmytest(java.lang.String)> has raw return type annotated with @Entity in (ProblemController.java:29)"));
-        assertEquals(549, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 549) {
+            rightLength = true;
+        } else if (ae.toString().length() == 548) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testJpaCohesionViolationDoesNotFailRuleset () { // positive test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
@@ -88,7 +95,14 @@ class TestArchitectureUnitTest {
         });        
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that have name matching 'is[A-Z][a-zA-Z]+' should have raw return type primitive boolean, because Is methods should return primitive boolean - Boolean could return null' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean.Blah.isBad()> does not have raw return type primitive boolean in (Blah.java:23)"));
-        assertEquals(482, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 482) {
+            rightLength = true;
+        } else if (ae.toString().length() == 481) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset () { // positive test for IS_METHODS_RETURN_PRIMITIVE_BOOLEAN
@@ -101,7 +115,14 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that have name matching 'isNot[A-Z][a-zA-Z]+' should have name starting with 'isNot', because isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.restatePositive.hasNegative.Blah.isNotBlah()> has name starting with 'isNot' in (Blah.java:23)"));
-        assertEquals(483, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 483) {
+            rightLength = true;
+        } else if (ae.toString().length() == 482) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testRestateNegativeIsNotDoesNotFailRuleset () { // positive test for RESTATE_ISNOT_METHODS_AS_POSITIVE
@@ -118,7 +139,14 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Service should depend on classes that are annotated with @Controller, because Spring Boot Services should not call Controller methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadService.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadController.badIdea()> in (BadService.java:22"));
-        assertEquals(562, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 562) {
+            rightLength = true;
+        } else if (ae.toString().length() == 561) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testRepositoryCallingControllerIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
@@ -127,7 +155,14 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Controller, because Spring Boot Repositories should not call Controller methods' was violated (1 times)"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadController.badIdea()> in (BadRepository.java:22"));
-        assertEquals(581, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 581) {
+            rightLength = true;
+        } else if (ae.toString().length() == 580) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testRepositoryCallingServiceIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
@@ -136,7 +171,14 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Service, because Spring Boot Repositories should not call Service methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadService.badIdea()> in (BadRepository.java:22"));
-        assertEquals(566, ae.toString().length());
+        boolean rightLength = false;
+        if (ae.toString().length() == 566) {
+            rightLength = true;
+        } else if (ae.toString().length() == 565) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength);
     }
 
     @Test void testFieldsThatArentIsBlahIsGood() { // positive test for RENAME_IS_FIELDS
