@@ -53,11 +53,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 473) {
-            rightLength = true;
-        } else if (ae.toString().length() == 472) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 472, 473: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -74,11 +75,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that have simple name ending with 'Impl' should be interfaces, because Interfaces should not be named Impl' was violated (1 times):"));
         assertTrue(ae.toString().contains("Class <com.ldiamond.archunittest.impl.hasImplInterface.BlahImpl> is an interface in (BlahImpl.java:0)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 371) {
-            rightLength = true;
-        } else if (ae.toString().length() == 370) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 370, 371: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
