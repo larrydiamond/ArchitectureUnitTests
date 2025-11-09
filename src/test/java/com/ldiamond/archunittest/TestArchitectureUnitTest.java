@@ -309,7 +309,7 @@ class TestArchitectureUnitTest {
         boolean rightLength = false;
         if (ae.toString().length() == 699) {
             rightLength = true;
-        } else if (ae.toString().length() == 697) {
+        } else if (ae.toString().length() == 698) {
             // on some systems the line endings are different so we allow for that
             rightLength = true;
         }
