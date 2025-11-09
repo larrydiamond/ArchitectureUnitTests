@@ -100,11 +100,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.jparest.hasProblem.ProblemController.failmytest(java.lang.String)> has raw return type annotated with @Entity in (ProblemController.java:29)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 549) {
-            rightLength = true;
-        } else if (ae.toString().length() == 548) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 548, 549: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -120,11 +121,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that have name matching 'is[A-Z][a-zA-Z]+' should have raw return type primitive boolean, because Is methods should return primitive boolean - Boolean could return null' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean.Blah.isBad()> does not have raw return type primitive boolean in (Blah.java:23)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 482) {
-            rightLength = true;
-        } else if (ae.toString().length() == 481) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 481, 482: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -140,11 +142,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that have name matching 'isNot[A-Z][a-zA-Z]+' should have name starting with 'isNot', because isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.restatePositive.hasNegative.Blah.isNotBlah()> has name starting with 'isNot' in (Blah.java:23)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 483) {
-            rightLength = true;
-        } else if (ae.toString().length() == 482) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 482, 483: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
