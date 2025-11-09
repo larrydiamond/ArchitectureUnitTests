@@ -37,11 +37,13 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 867) {
-            rightLength = true;
-        } else if (ae.toString().length() == 865) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 865:
+            case 867: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
