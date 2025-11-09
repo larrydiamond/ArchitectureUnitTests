@@ -23,8 +23,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import javax.swing.Spring;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
@@ -38,8 +36,7 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
         boolean rightLength = false;
         switch (ae.toString().length()) {
-            case 865:
-            case 867: // line endings are different
+            case 865, 867: // line endings are different
                 rightLength = true;
                 break;
             default:
