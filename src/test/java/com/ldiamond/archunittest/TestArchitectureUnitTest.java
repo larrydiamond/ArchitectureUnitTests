@@ -167,11 +167,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Service should depend on classes that are annotated with @Controller, because Spring Boot Services should not call Controller methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadService.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadController.badIdea()> in (BadService.java:22"));
         boolean rightLength = false;
-        if (ae.toString().length() == 562) {
-            rightLength = true;
-        } else if (ae.toString().length() == 561) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 561, 562: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -183,11 +184,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Controller, because Spring Boot Repositories should not call Controller methods' was violated (1 times)"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadController.badIdea()> in (BadRepository.java:22"));
         boolean rightLength = false;
-        if (ae.toString().length() == 581) {
-            rightLength = true;
-        } else if (ae.toString().length() == 580) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 580, 581: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -199,11 +201,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Service, because Spring Boot Repositories should not call Service methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadService.badIdea()> in (BadRepository.java:22"));
         boolean rightLength = false;
-        if (ae.toString().length() == 566) {
-            rightLength = true;
-        } else if (ae.toString().length() == 565) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 565, 566: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -220,11 +223,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isAlsoNotAGoodChoice> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
         assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isNotAGoodIdea> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 594) {
-            rightLength = true;
-        } else if (ae.toString().length() == 592) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 592, 594: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -240,11 +244,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that are annotated with @GetMapping should be declared in classes that are annotated with @RestController or should be declared in classes that are annotated with @Controller, because SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @Controller in (BadService.java:10) and Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @RestController in (BadService.java:10)"));
         boolean rightLength = false;
-        if (ae.toString().length() == 804) {
-            rightLength = true;
-        } else if (ae.toString().length() == 803) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 803, 804: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -261,11 +266,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.PrivateUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier PRIVATE in (PrivateUnitTest.java:9)"));
 
         boolean rightLength = false;
-        if (ae.toString().length() == 812) {
-            rightLength = true;
-        } else if (ae.toString().length() == 810) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 810, 812: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -280,11 +286,12 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.cache', because PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html' was violated (5 times):"));
         boolean rightLength = false;
-        if (ae.toString().length() == 1283) {
-            rightLength = true;
-        } else if (ae.toString().length() == 1278) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 1278, 1283: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -295,11 +302,12 @@ class TestArchitectureUnitTest {
         });
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.eventbus', because GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus' was violated (4 times):"));
         boolean rightLength = false;
-        if (ae.toString().length() == 1073) {
-            rightLength = true;
-        } else if (ae.toString().length() == 1069) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 1069, 1073: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
@@ -311,11 +319,12 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Cacheable should be called by any method in the same class, because Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springcache.bad.BadCache.findAuthorById(java.lang.Long) is called by com.ldiamond.archunittest.springcache.bad.BadCache.findAnotherAuthorById(java.lang.Long) in the same class com.ldiamond.archunittest.springcache.bad.BadCache"));
         boolean rightLength = false;
-        if (ae.toString().length() == 699) {
-            rightLength = true;
-        } else if (ae.toString().length() == 698) {
-            // on some systems the line endings are different so we allow for that
-            rightLength = true;
+        switch (ae.toString().length()) {
+            case 698, 699: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
