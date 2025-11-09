@@ -1,15 +1,15 @@
 plugins {
 	id 'java'
-    id "org.sonarqube" version "7.0.1.6134"
 	id 'jacoco'
-	id "org.owasp.dependencycheck" version "12.1.1"
     id 'signing'
     id 'maven-publish'
-    id("org.openrewrite.rewrite") version("7.5.0")
+    id "org.sonarqube" version "7.0.1.6134"
+	id "org.owasp.dependencycheck" version "12.1.8"
+    id("org.openrewrite.rewrite") version("latest.release")
 }
 
 group = 'com.ldiamond'
-version = '4.0.2'
+version = '5.0.0'
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -34,7 +34,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
 
-    // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS - when Java 17 has a higher market share we will upgrade to Java 17 and upgrade the Spring Dependency to latest
+    // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS
     testCompileOnly 'org.springframework:spring-context:5.3.39'
     testCompileOnly 'org.springframework:spring-web:5.3.39'
     testImplementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
@@ -42,9 +42,11 @@ dependencies {
     // Needed to test Guava rules
     testImplementation("com.google.guava:guava:33.4.8-jre")
 
-	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:latest.release")
-	rewrite("org.openrewrite.recipe:rewrite-static-analysis:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-rewrite:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-spring:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-static-analysis:latest.release")
+	rewrite("org.openrewrite.recipe:rewrite-testing-frameworks:latest.release")
 }
 
 tasks.named('test') {
@@ -68,7 +70,7 @@ rewrite {
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseEqualsToAssertNotEquals")
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseNegationToAssertTrue")
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertFalseNullToAssertNotNull")
-	activeRecipe("org.openrewrite.java.testing.cleanup.AssertLiteralBooleanToFailRecipe")
+	activeRecipe("org.openrewrite.java.testing.cleanup.AssertLiteralBooleanToFailRecipes")
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertNotEqualsBooleanToAssertBoolean")
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueComparisonToAssertEquals")
 	activeRecipe("org.openrewrite.java.testing.cleanup.AssertTrueEqualsToAssertEquals")
