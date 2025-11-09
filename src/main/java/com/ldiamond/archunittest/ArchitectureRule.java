@@ -20,8 +20,13 @@
 package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.base.DescribedPredicate;
+import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.domain.JavaMethod;
+import com.tngtech.archunit.core.domain.JavaMethodCall;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
@@ -246,6 +251,12 @@ public enum ArchitectureRule {
         noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.eventbus")
         .allowEmptyShould(true).because("GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus")),
 
+    /**
+     * Spring cache creates proxies around cacheable methods, calling them from inside the same class will bypass the proxy and not use the cache
+     */
+    SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS (noMethods().that().areAnnotatedWith("org.springframework.cache.annotation.Cacheable")
+        .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache")),
+
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
@@ -274,5 +285,25 @@ public enum ArchitectureRule {
      * @return Archrule
      */
     public ArchRule getRule () { return rule; }
+
+    /*
+     * An ArchCondition that checks whether a method is called by any method in the same class
+     */
+    static ArchCondition<JavaMethod> beCalledByAnyMethodInTheSameClass() {
+        return new ArchCondition<JavaMethod>("be called by any method in the same class") {
+            @Override
+            public void check(JavaMethod javaMethod, ConditionEvents conditionEvents) {
+                for (JavaMethodCall javaMethodCall : javaMethod.getCallsOfSelf()) {
+                    if (javaMethodCall.getOriginOwner().getFullName().equals(javaMethodCall.getTargetOwner().getFullName())) {
+                        String message = String.format("Method %s is called by %s in the same class %s",
+                                javaMethod.getFullName(),
+                                javaMethodCall.getOrigin().getFullName(),
+                                javaMethod.getOwner().getFullName());
+                        conditionEvents.add(new SimpleConditionEvent(javaMethod, true, message));
+                    }
+                }
+            }
+        };
+    }
 }
 

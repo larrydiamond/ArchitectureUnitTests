@@ -23,6 +23,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import javax.swing.Spring;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
@@ -296,5 +298,25 @@ class TestArchitectureUnitTest {
             rightLength = true;
         }
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
+    }
+
+    @Test void testSpringCacheableMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Cacheable should be called by any method in the same class, because Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springcache.bad.BadCache.findAuthorById(java.lang.Long) is called by com.ldiamond.archunittest.springcache.bad.BadCache.findAnotherAuthorById(java.lang.Long) in the same class com.ldiamond.archunittest.springcache.bad.BadCache"));
+        boolean rightLength = false;
+        if (ae.toString().length() == 699) {
+            rightLength = true;
+        } else if (ae.toString().length() == 697) {
+            // on some systems the line endings are different so we allow for that
+            rightLength = true;
+        }
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
+    }
+
+    @Test void testSpringCacheableMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good");
     }
 }
