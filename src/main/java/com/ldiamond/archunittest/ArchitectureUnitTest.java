@@ -57,10 +57,9 @@ public class ArchitectureUnitTest {
 
         if (!failures.isEmpty()) {
             StringBuilder sb = new StringBuilder("The following architecture rules were violated:\n");
-            for (AssertionError ae : failures) {
-                sb.append (ae.getMessage());
-                sb.append("\n\n");
-            }
+            failures.stream()
+                .map(ae -> ae.getMessage() + "\n\n")
+                .forEach(sb::append);
             throw new AssertionError(sb.toString());
         }
     }
