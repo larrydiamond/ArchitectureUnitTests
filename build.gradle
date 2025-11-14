@@ -4,8 +4,10 @@ plugins {
     id 'signing'
     id 'maven-publish'
     id "org.sonarqube" version "7.0.1.6134"
-	id "org.owasp.dependencycheck" version "12.1.8"
+	id "org.owasp.dependencycheck" version "12.1.9"
     id("org.openrewrite.rewrite") version("latest.release")
+	id 'se.patrikerdes.use-latest-versions' version '0.2.19'
+  	id 'com.github.ben-manes.versions' version '0.53.0'
 }
 
 group = 'com.ldiamond'
@@ -30,17 +32,17 @@ repositories {
 dependencies {
 	implementation 'com.tngtech.archunit:archunit-junit5:latest.release'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.1'
 
     // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS
-    testCompileOnly 'org.springframework:spring-context:5.3.39'
-    testCompileOnly 'org.springframework:spring-web:5.3.39'
+    testCompileOnly 'org.springframework:spring-context:7.0.0'
+    testCompileOnly 'org.springframework:spring-web:7.0.0'
     testImplementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 
     // Needed to test Guava rules
-    testImplementation("com.google.guava:guava:33.4.8-jre")
+    testImplementation("com.google.guava:guava:33.5.0-jre")
 
 	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-rewrite:latest.release")
