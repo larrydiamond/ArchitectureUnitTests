@@ -279,7 +279,13 @@ public enum ArchitectureRule {
       * This rule prevents Spring Boot repository classes from calling service methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingServiceIsBad
       */
-      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods"))
+      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods")),
+
+      /**
+       * Spring requires Async methods to be public since it creates proxies around them, non-public methods bypass the proxy and won't be executed asynchronously
+       */
+      METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC (methods().that().areAnnotatedWith("org.springframework.scheduling.annotation.Async").should().bePublic()
+        .because("Spring requires Async methods to be public").allowEmptyShould(true))
       ;
 
     private final ArchRule rule;

@@ -156,6 +156,7 @@ gradle test
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Services do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Services (Since 2.0)                                              |
+| METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC | Spring requires Async methods to be public since it creates proxies around them; non-public methods bypass the proxy and won't be executed asynchronously (Since 5.1.0) |
 
 ## Why arent you just freezing rule violations?
 

@@ -353,4 +353,16 @@ class TestArchitectureUnitTest {
     @Test void testSpringTransactionalMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good");
     }
+
+    @Test void testAsyncMethodNotPublicFailsRuleset() { // negative test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that are annotated with @Async should be public, because Spring requires Async methods to be public' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springasync.bad.BadAsync.doSomethingAsync()> does not have modifier PUBLIC in (BadAsync.java:11)"));
+    }
+
+    @Test void testAsyncMethodPublicDoesNotFailRuleset() { // positive test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good");
+    }
 }
