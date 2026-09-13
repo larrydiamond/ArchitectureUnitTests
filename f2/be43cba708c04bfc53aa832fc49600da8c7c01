@@ -1,0 +1,32 @@
+gradle/wrapper/gradle-wrapper.properties
+  s_ffdae4b309dfdd::t_e7c8b6759ecfe1 3
+  s_ffdae4b309dfdd::t_3c07e8ff23d956 5-6
+gradlew
+  s_ffdae4b309dfdd::t_3c07e8ff23d956 23,32,60
+  s_ffdae4b309dfdd::t_e7c8b6759ecfe1 4
+gradlew.bat
+  s_ffdae4b309dfdd::t_e7c8b6759ecfe1 1-21,23-25,28-53,55-67,69-74,79
+  s_ffdae4b309dfdd::t_3c07e8ff23d956 22,26-27,54,68,75-78,80-82
+build.gradle
+  s_ffdae4b309dfdd::t_251a961abacd24 8
+  s_ffdae4b309dfdd::t_8e73e9e739e184 9
+  s_ffdae4b309dfdd::t_023a97a7d1ffce 11
+  s_ffdae4b309dfdd::t_0c0713500676ff 6-7
+  s_ffdae4b309dfdd::t_6ed772d02ce242 36-38,41-42,46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f2be43cba708c04bfc53aa832fc49600da8c7c01",
+  "prompts": {},
+  "sessions": {
+    "s_ffdae4b309dfdd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "67ba8d65-6a49-4583-b56c-da18e9f4f6fb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
