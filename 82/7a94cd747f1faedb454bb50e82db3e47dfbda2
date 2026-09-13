@@ -1,0 +1,33 @@
+src/main/java/com/ldiamond/archunittest/ArchitectureRule.java
+  s_e81c9e8c5ef917::t_d89af3f91175df 282-288
+src/test/java/com/ldiamond/archunittest/springasync/good/GoodAsyncUsage.java
+  s_e81c9e8c5ef917::t_c3be62713ab4a4 1-12
+src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java
+  s_e81c9e8c5ef917::t_c2d0dac6f4c97c 356-360,363-367
+  s_e81c9e8c5ef917::t_1ff0dd1b0f24ee 361-362
+README.md
+  s_e81c9e8c5ef917::t_c60535c51ca974 159
+src/test/java/com/ldiamond/archunittest/springasync/bad/BadAsync.java
+  s_e81c9e8c5ef917::t_e3238a2ed8d299 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "827a94cd747f1faedb454bb50e82db3e47dfbda2",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  },
+  "sessions": {
+    "s_e81c9e8c5ef917": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c6f3c2c-61b5-488f-b969-ea43014b3ae2",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
