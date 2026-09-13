@@ -12,7 +12,7 @@ plugins {
 }
 
 group = 'com.ldiamond'
-version = '5.0.0'
+version = '5.1.0'
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -40,6 +40,7 @@ dependencies {
     // Needed to test JPA_COHESION_RESTFUL_GET_MAPPINGS
     testCompileOnly 'org.springframework:spring-context:7.0.9'
     testCompileOnly 'org.springframework:spring-web:7.0.9'
+    testCompileOnly 'org.springframework:spring-tx:7.0.9'
     testImplementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 
     // Needed to test Guava rules

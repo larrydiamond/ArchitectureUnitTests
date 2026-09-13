@@ -257,6 +257,12 @@ public enum ArchitectureRule {
     SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS (noMethods().that().areAnnotatedWith("org.springframework.cache.annotation.Cacheable")
         .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache")),
 
+    /**
+     * Spring transaction management creates proxies around transactional methods, calling them from inside the same class will bypass the proxy and not start a new transaction
+     */
+    SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS (noMethods().that().areAnnotatedWith("org.springframework.transaction.annotation.Transactional")
+        .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction")),
+
      /**
       * This rule prevents Spring Boot service classes from calling controller methods
       * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad

@@ -332,4 +332,25 @@ class TestArchitectureUnitTest {
     @Test void testSpringCacheableMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good");
     }
+
+    @Test void testSpringTransactionalMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Transactional should be called by any method in the same class, because Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction' was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAuthor(java.lang.Long) is called by com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAnotherAuthor(java.lang.Long) in the same class com.ldiamond.archunittest.springtransactional.bad.BadTransactional"));
+        boolean rightLength = false;
+        switch (ae.toString().length()) {
+            case 760, 761: // line endings are different
+                rightLength = true;
+                break;
+            default:
+                rightLength = false;
+        }
+        assertTrue(rightLength, "Actual length: " + ae.toString().length());
+    }
+
+    @Test void testSpringTransactionalMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good");
+    }
 }

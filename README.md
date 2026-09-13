@@ -33,13 +33,13 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 <dependency>
     <groupId>com.ldiamond</groupId>
     <artifactId>architectureunittests</artifactId>
-    <version>5.0.0</version>
+    <version>5.1.0</version>
 </dependency>
 ```
 
 or in your `build.gradle`:
 ```xml
-testImplementation 'com.ldiamond:architectureunittests:5.0.0'
+testImplementation 'com.ldiamond:architectureunittests:5.1.0'
 ```
 
 or
@@ -152,6 +152,7 @@ gradle test
 | PREFER_CAFFEINE_OVER_GUAVA_CACHING | Prefer Caffeine over Google Guava caching [Documentation](https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html) (Since 5.0.0) |
 | GUAVA_EVENTBUS_SHOULD_NOT_BE_USED | Guava discourages the use of their EventBus [Documentation](https://github.com/google/guava/wiki/EventBusExplained) (Since 5.0.0) |
 | SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS | Calling a cacheable method from another method in the same class bypasses the caching. (Since 5.0.0) |
+| SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS | Calling a transactional method from another method in the same class bypasses the transactional proxy and will not start a new transaction. (Since 5.1.0) |
 | SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Services do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Controllers (Since 2.0)                                              |
 | SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS  | A rule that checks that Spring Boot Repositories do not call methods on Spring Boot Services (Since 2.0)                                              |
