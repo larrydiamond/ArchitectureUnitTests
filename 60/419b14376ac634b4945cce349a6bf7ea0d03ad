@@ -1,0 +1,16 @@
+gradle/wrapper/gradle-wrapper.properties
+  h_bb8abe7e00e0ce 3
+gradlew.bat
+  h_bb8abe7e00e0ce 29-55,75-79,82,90-94,97,107,109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "60419b14376ac634b4945cce349a6bf7ea0d03ad",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
