@@ -1,0 +1,31 @@
+src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java
+  s_e81c9e8c5ef917::t_dd03fdf0278b7a 368-378
+src/main/java/com/ldiamond/archunittest/ArchitectureRule.java
+  s_e81c9e8c5ef917::t_5ab8c0af820e0a 293-294
+  s_e81c9e8c5ef917::t_10eb2304b51c90 288-292,295
+build.gradle
+  s_e81c9e8c5ef917::t_0214b035d420f3 49-51
+README.md
+  s_e81c9e8c5ef917::t_52a7103e6f14f0 160
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d529f43a55beea98769e0b0ac1412fc5257dd324",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  },
+  "sessions": {
+    "s_e81c9e8c5ef917": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c6f3c2c-61b5-488f-b969-ea43014b3ae2",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
