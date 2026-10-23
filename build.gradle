@@ -8,7 +8,7 @@ plugins {
     // Pinned below latest.release: 7.40.0/7.41.0 depend on rewrite-bom 8.91.0, which isn't published to Maven Central yet
     id("org.openrewrite.rewrite") version("7.39.0")
 	id 'se.patrikerdes.use-latest-versions' version '0.2.19'
-  	id 'io.github.ben-manes.versions' version '0.62.0'
+  	id 'io.github.ben-manes.versions' version '0.66.0'
 }
 
 group = 'com.ldiamond'
@@ -44,10 +44,10 @@ dependencies {
     testImplementation 'jakarta.persistence:jakarta.persistence-api:3.2.0'
 
     // Needed to test Guava rules
-    testImplementation("com.google.guava:guava:33.7.1-jre")
+    testImplementation("com.google.guava:guava:33.7.2-jre")
 
     // Needed to test the Apache Commons Lang3 tuple rule
-    testImplementation("org.apache.commons:commons-lang3:3.19.0")
+    testImplementation("org.apache.commons:commons-lang3:3.21.0")
 
 	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-rewrite:latest.release")
