@@ -1,0 +1,14 @@
+build.gradle
+  h_bb8abe7e00e0ce 11,47,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "22157839ba0a617e56ef605b2d0773c895f6d7a3",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
