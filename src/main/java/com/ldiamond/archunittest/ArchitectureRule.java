@@ -285,7 +285,14 @@ public enum ArchitectureRule {
        * Spring requires Async methods to be public since it creates proxies around them, non-public methods bypass the proxy and won't be executed asynchronously
        */
       METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC (methods().that().areAnnotatedWith("org.springframework.scheduling.annotation.Async").should().bePublic()
-        .because("Spring requires Async methods to be public").allowEmptyShould(true))
+        .because("Spring requires Async methods to be public").allowEmptyShould(true)),
+
+      /**
+       * org.apache.commons.lang3.tuple classes (Pair, Triple, etc) remove the context of what the actual object represents and prevent creating custom methods specific to the business need. Make a real class instead.
+       */
+      DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES (
+        noClasses().should().dependOnClassesThat().resideInAPackage("org.apache.commons.lang3.tuple")
+        .allowEmptyShould(true).because("DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES These classes remove the context of what the actual object is and prevent creating custom methods specific to the business need for a real class - make a real class instead"))
       ;
 
     private final ArchRule rule;

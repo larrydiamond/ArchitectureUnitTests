@@ -365,4 +365,15 @@ class TestArchitectureUnitTest {
     @Test void testAsyncMethodPublicDoesNotFailRuleset() { // positive test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good");
     }
+
+    @Test void testApacheCommonsLang3TupleConstructionFailsRuleset() { // negative test for DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES
+        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.commonslang3tuple.bad");
+        });
+        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'org.apache.commons.lang3.tuple', because DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES These classes remove the context of what the actual object is and prevent creating custom methods specific to the business need for a real class - make a real class instead' was violated"));
+    }
+
+    @Test void testApacheCommonsLang3TupleNotUsedDoesNotFailRuleset() { // positive test for DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES
+        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.commonslang3tuple.good");
+    }
 }

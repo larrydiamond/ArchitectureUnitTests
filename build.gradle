@@ -46,6 +46,9 @@ dependencies {
     // Needed to test Guava rules
     testImplementation("com.google.guava:guava:33.7.1-jre")
 
+    // Needed to test the Apache Commons Lang3 tuple rule
+    testImplementation("org.apache.commons:commons-lang3:3.19.0")
+
 	rewrite("org.openrewrite.recipe:rewrite-migrate-java:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-rewrite:latest.release")
 	rewrite("org.openrewrite.recipe:rewrite-spring:latest.release")
