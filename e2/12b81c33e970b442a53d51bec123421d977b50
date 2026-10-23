@@ -1,0 +1,26 @@
+src/test/java/com/ldiamond/archunittest/commonslang3tuple/good/GoodTupleUsage.java
+  s_e81c9e8c5ef917::t_8c2fc12a2d105a 1-10
+src/test/java/com/ldiamond/archunittest/commonslang3tuple/bad/BadTupleUsage.java
+  s_e81c9e8c5ef917::t_ceab7e4a011dc1 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e212b81c33e970b442a53d51bec123421d977b50",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  },
+  "sessions": {
+    "s_e81c9e8c5ef917": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c6f3c2c-61b5-488f-b969-ea43014b3ae2",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
