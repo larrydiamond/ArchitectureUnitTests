@@ -1,0 +1,25 @@
+build.gradle
+  s_6b2a1184371a5f::t_e78446e38ac63c 12,64-73
+  s_6b2a1184371a5f::t_9b0394919f2fa9 74-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f51e7ae48089773167577ddb77735db5df389478",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  },
+  "sessions": {
+    "s_6b2a1184371a5f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44d347e1-4f3d-4708-8f27-f7bc8cf61605",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
