@@ -1,0 +1,44 @@
+openwiki/rules/custom-conditions.md
+  s_6b2a1184371a5f::t_7e9b2723a3c348 1-90
+openwiki/quickstart.md
+  s_6b2a1184371a5f::t_43bda96a1384db 1-79
+openwiki/operations/build-and-release.md
+  s_6b2a1184371a5f::t_3413f8efe58678 1-77
+openwiki/workflows/adding-a-rule.md
+  s_6b2a1184371a5f::t_aa47b416e34f1e 1-96
+openwiki/architecture/overview.md
+  s_6b2a1184371a5f::t_a93b6921e00a94 1-64
+openwiki/architecture/rule-runner.md
+  s_6b2a1184371a5f::t_097b8f922f08f9 1-59
+openwiki/rules/rule-catalog.md
+  s_6b2a1184371a5f::t_677297a0d471ca 1-63
+openwiki/testing/test-suite.md
+  s_6b2a1184371a5f::t_04438289b6b05b 1-77
+openwiki/rules/known-issues.md
+  s_6b2a1184371a5f::t_1c13571ba39086 1-87
+openwiki/testing/mutation-testing.md
+  s_6b2a1184371a5f::t_c3b915cf87e1e1 1-75
+AGENTS.md
+  s_6b2a1184371a5f::t_09e23511c6688c 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "00dd8c38f7cd4809d2c744d2b5ba0d8b83bff3dc",
+  "prompts": {},
+  "humans": {
+    "h_bb8abe7e00e0ce": {
+      "author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  },
+  "sessions": {
+    "s_6b2a1184371a5f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44d347e1-4f3d-4708-8f27-f7bc8cf61605",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
