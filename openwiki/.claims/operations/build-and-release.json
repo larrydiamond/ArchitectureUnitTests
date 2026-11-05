@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:cd78edec920084782fd46f01a4ef40163f53239668c3eda7ab7e3ba58918ca28",
+  "claims": [
+    {
+      "id": "claim_ee05495917b04889b9db4899323528c8",
+      "statement": "The library compiles with source and target compatibility of Java 17 and depends on archunit-junit5 at the floating version latest.release.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L16-L20",
+          "version": "repo-lines-v1:sha256:dd4256ef0658e815f686a54aedc40038a4218e1dcae509029df372b28ada316f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQ1NzIzZmI2ZmI3YTNhNjI0OTdmMjFhZGIwYTVjYWQ3NWI5YTlmMGJkYTEwZmE5MzBkMjRlYzY0ZjllMWQ0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzgxMWU5MmJiNjBmZDgwZmFmNDFlODllZGNkNjQ0OTc1ZTQ2ZjU2ZmNmNzE3MDE5MDY3N2JhYjJkZjgxYzkyZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzY1YzI3ODgzNTNjNjUyNDQzOWYzNjliZTU1NmIwODI3MjU4MGM4OTdkZjgzNzAzYzBmYjViMzJmNTQ5YWY0NiJ9"
+        },
+        {
+          "resource": "repo://build.gradle#L35-L35",
+          "version": "repo-lines-v1:sha256:2f1b7d8e72c2b157eb7471d7399de33599fe909a75b37f9cafa0b58d45cba8fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmYxYjdkOGU3MmMyYjE1N2ViNzQ3MWQ3Mzk5ZGUzMzU5OWZlOTA5YTc1YjM3ZjljYWZhMGI1OGQ0NWNiYThmZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmYxYjdkOGU3MmMyYjE1N2ViNzQ3MWQ3Mzk5ZGUzMzU5OWZlOTA5YTc1YjM3ZjljYWZhMGI1OGQ0NWNiYThmZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWZhYzljNGViYjBmZTMyMzNkYWJiMjg1ZGRmYTNlNTY0YTJiMThiOGQ1MWVlN2RhOWQ0MTQ1OTRjMDk1YjA5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTBmN2VhZDRlMDkxODMwOTM4YTllM2U2NWNmYWM4YjIyYzdhNDdmMDJlZGRlMzlmNTYzOTE4MDQwYmQ5N2JmOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_df3aedef5ccf4ab896c715663afc4e7e",
+      "statement": "Spring, Jakarta Persistence, Guava, and commons-lang3 are declared only as test (or test compile-only) dependencies to compile fixture classes.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L37-L51",
+          "version": "repo-lines-v1:sha256:80a8ff3a1a2259b2bc30db301c7daf9dd99994039e3d9b64889c0d254f0b1990:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MTU2OTcyMTc0ZDFhMzBlZWMzMjBlZDEyM2IwMTk4NDY4MWFiOGM4ZjZmZTg4ZTZiM2M5Nzc1YmJiOGU2M2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZjlkMzI2MDYzZjdjOWUxMmZlNmIwNGY3Yzk0ZTgzOGMwZGVjMDEwMDM3ZDM3ZmU2YWEyNmYwZjk2NzJlNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0YWU4ODAwNWUzODI4MzQ1N2QxZjkwNmY3ZjhjNzZiNWRhYWU5ZjBiMzU2ZThlMTQ3NDk5OTIwMTVlNmZlYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwMTNiY2RjODY1NmY5ZmJiMWE1NmFkMWQ3NGE4OGFjNTUwMWU5ODU2YTU2YTIwNzYxOTk1ZDc3NDI0NWIzZjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e9a4dcafb48d41408f8d17a23e223f99",
+      "statement": "The GitHub Actions workflow runs on pushes to main and on pull requests, sets up JDK 17, and runs './gradlew build sonar --info' using the SONAR_TOKEN secret.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/build.yml",
+          "version": "repo-file-v1:sha256:941c4d600ec6e058de0e5b536e8dd0c224ba627a033fb693c758a7899c5e3d4f"
+        }
+      ]
+    },
+    {
+      "id": "claim_8e44944dd8e848febb852233da0e7317",
+      "statement": "The test task is finalized by jacocoTestReport, which produces XML, CSV, and HTML coverage reports.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L141-L154",
+          "version": "repo-lines-v1:sha256:5fa2107eca69c14a007f3bf38f23d7eb9772215461cc082f9b73cea20e0dfbc8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYzM5N2U0MTA1MjEzYzVmMWM4ZmU1MWEwMzVhYWU0YmE4MjlmMzA5YTI0NjdkOTI4NjA5MThlYTAwY2Q2ZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzOWQ0OWRiYjg0ZGRkNGIzMzAyYzhmNTBmNDM4MjkwMDFjOTAxMmQ3MmRlNjFhMDVmODkyOTgxMGJkMzY3NDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg5ZTZjYmNlNzA3NWViNGI4NWQ2ZTMyMzVlNmY5YjNjYmQ5OWQ4MjUzZTk5OTQ5ZjQ1MDkyNzc1ZmEwODIwODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ba52fa512054d95a730d9023e8b02bc",
+      "statement": "Publishing targets a local build/repo directory and Sonatype OSSRH, choosing the snapshot or release staging URL depending on whether the version ends in SNAPSHOT, with credentials from Gradle properties or OSSRH_USERNAME/OSSRH_PASSWORD.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L161-L184",
+          "version": "repo-lines-v1:sha256:393047da3b12b6017045d896ce8199f6a6b751559ac00f0564e549779da7a810:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0YTEwYjRhYWVkNjEyODFkNWVmMTVkZGMxMzM1ZTNhZDA0NjZlMWZmMWY4YzNmNTk5Njk3NDdlZWNlN2QzMGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzNzkwMmZkYTZjOWY1NTQyNDIzMmQ4ZjU1MzAwMTg5OTgzZDJjY2M5YjdlYTU4ZjkyYzc0ODlhNTBiMDY5MjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk5OWJkZWZlZWFjYTYzNDBlMDI5MGRjODZlODg5Yzg5ZDVlMTg5YWE1YmE0NGI1ODViM2I3MDczNGY0YTYyZDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6dbd33d428924972b10b7bfa5662adaa",
+      "statement": "Artifact signing is commented out in build.gradle and must be re-enabled for release builds.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L220-L232",
+          "version": "repo-lines-v1:sha256:4eb26062972367cb196ed2e7d9a630708adf574e0535982a5d3f6062557b1001:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjY2M1ZThhOWE3YWQ2MDhhMDRmMjQyNTMwMzQ1Njk0YmQ3MTUwYmQ3MzMxNTUxMzI4NDE0MmI2YTM5YmE0YjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVmMjkxYzdjZTkxOWY0NjU0ZjY2ZTk0ZjY1NDdkMzQyYzU0MWQ2MGZlMjUwNTNjZTEyODc3NDcxN2QwMGFmMTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_584b508b6f5845f7888d67d6d2d99126",
+      "statement": "The OpenRewrite plugin is pinned to 7.39.0 and configured with a curated list of active recipes that run only via rewriteRun.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L8-L9",
+          "version": "repo-lines-v1:sha256:c353eedda11c20ca46db036440934960be4fc142a71afeb700049611bc9f7d55:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE0MWU5NDg3YWE2MTJjOWJjYzVlMWJjN2U0M2ZjNjgxNDAzODE0MTM4ZGY5YzFkMTFhOTEyYTYwYTY3MTc1ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWIxN2E0MTVkYzkyYmM1Mjk4YzFhYzZmM2ViYmYwYWMwYjE2N2VmZGJkNTc2Mjg3Mzg4MTg1MDRhZTQ1MDQzYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1NGI1NGI1NTNkY2VmOWIxYWViN2Q5NTNjMGY5YmMwMzZkNWEyYjViMDI4Y2UxMDYwMWRhZDI4YzU2Mzc5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzdlZGU3MjU5M2U4YjMxNzJiMTZlZDEyOGU0NGM4ZGUzNmUwNjZhNTc0NTUzYmM1OGQ5MjkxN2NlMThjYWQyMSJ9"
+        },
+        {
+          "resource": "repo://build.gradle#L85-L139",
+          "version": "repo-lines-v1:sha256:91afc4da06401ccf07682ac731e62e76f63f23c6a2af2f1ae724c02840117e89:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2ZjU4NzA2Yjk4NzBiOWEwNmEyNGE2YWEzMzExNmE4NGZhMzZlM2U1YTQ2MGZkZjgwMjU5NmEyZDhhZTZkMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZTc2MzU1Y2YxMTk5NDgwYzNmOTk4MzZiMTQ4NmM4NDFkODkxZmFhZDkwNGM2MDhlMDkzMDIyZDM3NTdhZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkY2NmZDA5OTc0NGIzYzY5OTBlM2E1M2I1NGI3ZjRlNGFjOGI3MTIyNDIxZTgxMTljYjA2Mzc4NzM5OGFhNWMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

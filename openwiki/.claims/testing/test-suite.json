@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5f4a30d79515c9380acc2a3f66c79dbe8acf971ded086dad93adcce2af845d40",
+  "claims": [
+    {
+      "id": "claim_07dd9485548843bd808c65f036fbe1c1",
+      "statement": "Tests exercise rules only through ArchitectureUnitTest.testArchitecture against dedicated fixture packages under src/test, so every test runs the full rule set.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java",
+          "version": "repo-file-v1:sha256:6dd51294b7e642571a1a5c14ff695a48dddcabb8b4c7ca384e41e99a48a70336"
+        }
+      ]
+    },
+    {
+      "id": "claim_16d7d6b60d214279a65e4a99a4445f8f",
+      "statement": "Negative tests use assertThrowsExactly(AssertionError.class) and assert the rule header and violation line via contains, plus an exact message length that accepts two values to tolerate line-ending differences.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L29-L46",
+          "version": "repo-lines-v1:sha256:cc5e4c08500e7cdc09eda85b25d427c9bef4ab2bd65875374943047153dcd21f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkMjY0YjFjNjVmMTE1YjAzYjMzMmYyYjgxYmViZWQ4YjkxYjEyNTQ0MTIxNDYxNWQ0MDg2ZGQ0ODNkMjI3YmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiM2RjZmMxNWEzZWE3YjEwODlhYzA0YTMyZTM0NDRlMDVjNzI3OTQwNjY1MTYwZmM5Y2M5YzBlNmMxOWM3Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI1MGM2ZmM5MzY0Y2VlYmEwYTMwMzU2Y2ExMjczN2E2NTA1NDc5NzUzN2JiYzFjMzI3MjhmMzkzMTQ5OGRkYmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7b3c86187e4f4705ba382347362596b7",
+      "statement": "The exclusion API is tested on the testpackage fixture with no exclusions, with USE_ARRAYLIST_INSTEAD_OF_VECTOR excluded, and with both the Vector and Hashtable rules excluded (which passes).",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L29-L69",
+          "version": "repo-lines-v1:sha256:95b51635a62c7865801d1340eccb7b0de8849ba3852262dcd5b5f3f1d1ed8794:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkMjY0YjFjNjVmMTE1YjAzYjMzMmYyYjgxYmViZWQ4YjkxYjEyNTQ0MTIxNDYxNWQ0MDg2ZGQ0ODNkMjI3YmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiM2RjZmMxNWEzZWE3YjEwODlhYzA0YTMyZTM0NDRlMDVjNzI3OTQwNjY1MTYwZmM5Y2M5YzBlNmMxOWM3Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YmJhY2ZkZjM0NjMwOGU1NzcwZDQwYmZmY2YyMzIxMTFmYTBjOGEzNGI0MWI2ZGE0NjBmNTlmZDE4MDAzY2MifQ"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/testpackage/ClassWithViolationsUnderTest.java",
+          "version": "repo-file-v1:sha256:524d922439ae9ed23d9c878d527362cb424a27b812c1850c84b581f8b4a72014"
+        }
+      ]
+    },
+    {
+      "id": "claim_0d6a0537ca65402fb090ff39fb13e331",
+      "statement": "The springasync and commonslang3tuple negative tests assert only message substrings and omit the exact-length check used by older tests.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L357-L378",
+          "version": "repo-lines-v1:sha256:cc13f1d29447292d235ee110dedfc2020d8faebad581275caf4df499e735d025:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0MDg1ZjNiZjZmYjA4YjhlYTk1YTZhZDJjNGZlZTAxY2MwMzllYjhhOGVkMDhiMDdlODU5MmFiODMyOWQ4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjNWFiMWFhZWQ4YWFiYjE4Y2M1OThjNTVlMWI5NjFmMzdmMzI0MDRkZmI4ODg5MmNhMGRjYTRjYTljZGQ5YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a0931991d14148d0a399237fdb0011b5",
+      "statement": "Fixture classes rely on test-scoped Spring, Jakarta Persistence, Guava, and commons-lang3 dependencies declared in build.gradle.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L37-L51",
+          "version": "repo-lines-v1:sha256:80a8ff3a1a2259b2bc30db301c7daf9dd99994039e3d9b64889c0d254f0b1990:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MTU2OTcyMTc0ZDFhMzBlZWMzMjBlZDEyM2IwMTk4NDY4MWFiOGM4ZjZmZTg4ZTZiM2M5Nzc1YmJiOGU2M2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZjlkMzI2MDYzZjdjOWUxMmZlNmIwNGY3Yzk0ZTgzOGMwZGVjMDEwMDM3ZDM3ZmU2YWEyNmYwZjk2NzJlNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0YWU4ODAwNWUzODI4MzQ1N2QxZjkwNmY3ZjhjNzZiNWRhYWU5ZjBiMzU2ZThlMTQ3NDk5OTIwMTVlNmZlYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwMTNiY2RjODY1NmY5ZmJiMWE1NmFkMWQ3NGE4OGFjNTUwMWU5ODU2YTU2YTIwNzYxOTk1ZDc3NDI0NWIzZjQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

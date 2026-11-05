@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3fb19f2c7f25106c5eb497d7f25feb9e62f242b9c46f5dc9f31652898cd382e6",
+  "claims": [
+    {
+      "id": "claim_5e2c5a258da94a76ac558267620be802",
+      "statement": "New rules require no registration beyond adding an ArchitectureRule enum constant, because testArchitecture iterates ArchitectureRule.values().",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L290-L296",
+          "version": "repo-lines-v1:sha256:5c147acb419523ff16edd4f525cb75e38d6894ba0f1fd20e0692463b09d7fdcb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2NlMzNlNjdjN2ZkMTkxMzYxNWI2NDVmODFmNjkxZTc5YmEyODQ3ODgyYzE2ZTk3ZTE5OWU4MzI4ZmFkZTljMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmNhYzY4NTRmNmQ0ZDBlODgxOGYwZmQ3Y2Q3Zjg1YWZmMzg0OGYzNDI5YTMzODMxMGE3ZTVkMTc0OTRlNWFhNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWFiN2U1NjMyNGVhMzQ5OTY0MTNlMDdlNDg0ZWEzODg1OWQ3MWJkOTIxYWRmNzg3NzRmNmY3YThlZTY4Njg0NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzFlNjU5MmFjZGNhN2ZmMGUwZDMyZTY3MTFiNmMwYjcxNjhkYmI5YWIxNGQxYjNlNWJkMjM3ZTUwZmVjZDkwZSJ9"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L48-L48",
+          "version": "repo-lines-v1:sha256:815fe7e3ab5f9ae22816e935ea3a4558bbcfaf42dd85bc8394b3bb836ebc6164:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODE1ZmU3ZTNhYjVmOWFlMjI4MTZlOTM1ZWEzYTQ1NThiYmNmYWY0MmRkODViYzgzOTRiM2JiODM2ZWJjNjE2NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODE1ZmU3ZTNhYjVmOWFlMjI4MTZlOTM1ZWEzYTQ1NThiYmNmYWY0MmRkODViYzgzOTRiM2JiODM2ZWJjNjE2NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgzZGRlNzZhMWNhZTljZjY5MWEyNmYxZjBkNWM1NTFmODgxMjFlZTQ3ZjQ0OGQ1YmMwYjNhMzljYTBmYjMwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmQ0NDI3YzU0OWRhZDIyN2U3ZWI1YTkwOWUwYTUyNDhhYjZiNGM4YjRkMTJjYTRlYjRjM2U1MmYzMGQ1MWY1YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_1b9a97e9373a41a795de40e336ba3484",
+      "statement": "Each recent rule is accompanied by a bad and good fixture package, a negative test asserting the violation message, a positive test expecting a clean run, and a README table row.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:861ff3da38e4879b26b010c00b963e474b8044be845721becac77d6088f6d638"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L357-L378",
+          "version": "repo-lines-v1:sha256:cc13f1d29447292d235ee110dedfc2020d8faebad581275caf4df499e735d025:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0MDg1ZjNiZjZmYjA4YjhlYTk1YTZhZDJjNGZlZTAxY2MwMzllYjhhOGVkMDhiMDdlODU5MmFiODMyOWQ4YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjNWFiMWFhZWQ4YWFiYjE4Y2M1OThjNTVlMWI5NjFmMzdmMzI0MDRkZmI4ODg5MmNhMGRjYTRjYTljZGQ5YTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/commonslang3tuple/bad/BadTupleUsage.java",
+          "version": "repo-file-v1:sha256:9e8e43208ed56c28fc7a821f5108f75c662971e2f39537e6c802ecc9ad4d4d01"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/springasync/bad/BadAsync.java",
+          "version": "repo-file-v1:sha256:1da0090469b6948b129aa25171709c1ac5d88a254974e653ea5d181ef0078a9f"
+        }
+      ]
+    },
+    {
+      "id": "claim_2fe9876b5a81422d97f03c91d0448f71",
+      "statement": "The README explicitly solicits contributed ArchRules from the community.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:861ff3da38e4879b26b010c00b963e474b8044be845721becac77d6088f6d638"
+        }
+      ]
+    },
+    {
+      "id": "claim_f27ef658cdb54c57bceebaf832699374",
+      "statement": "Negative tests print the actual message length in their assertion failure message, which contributors use to set the expected length.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L37-L45",
+          "version": "repo-lines-v1:sha256:c81674d11ec54c3102fb05a7ae3e696f2ef76f0244c00568647a9bef61269173:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThlNDE5OWFlZTllMTlmZWZmMzZlY2Y3NjdlNGFlMTllMWUwMDE2OWJlNGFlOTU1NTBlNjhiNjNkOGMxZTk0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzAyYzQ5OTk2ZmYzZTMxZjg3YjE0MWEyZGE2OTk2MjdkYmE5ODljM2FlZjY3MWQxZDIzNGM3MjQzMjFjNDNhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzhiOWNlZDU1YmVjYWYwYmEwMWVkMWI5NDhjOTQ2NzVmMTY0ZjIwZTBiZjg2NGI0ODMwYTZiMGJhOTBjNjkzMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjc3Y2U0OTQ0YmE2YzAxM2M0M2EwNzQzOWMxMGZlYzIzN2Y1MTVhZWM1NmE1MGE2MmNiMTczZGE2YmFlYzA3NyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

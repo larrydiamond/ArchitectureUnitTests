@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5bf9b223238b2bd0665284b535d00d621d0103d9c66b66190a3e37bb052d5c43",
+  "claims": [
+    {
+      "id": "claim_a079424c25e54b46a484b67d07977f29",
+      "statement": "Consumers run all rules with ArchitectureUnitTest.testArchitecture(packages...) and can skip specific rules by passing a collection of ArchitectureRule constants as the first argument.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:861ff3da38e4879b26b010c00b963e474b8044be845721becac77d6088f6d638"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L37-L74",
+          "version": "repo-lines-v1:sha256:c034117b5199c5c6ca600db29378e709fc83d3ee5be65483a8ce37cd63880cc9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5ZDc2ZDkxNTdhMWI3NzViNTYyZmJlYzQ4YjJlNDI3ZjJlNjc4ZmU1M2UzODVjMWQwNjkyZDdhYzE3MTliMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwNGY4OWZjMGVjOThjOTgyNDE4M2U3OTVkM2VkZDE5ZTkzMGY3YmM0NzFmOTAxMmFhM2Q1MDNiZTJmODk3NGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cce78700e8dc4845a9b02f06261b82bd",
+      "statement": "The library is published as com.ldiamond:architectureunittests at version 5.1.0.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L15-L16",
+          "version": "repo-lines-v1:sha256:6bd44bad9514f5096cd5e62fa1b29621638da7ca0bee5b7f5d5b5f270788d7d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTlmMzcyMDlhNDM3YWJjNmVkYmFjMWNlOTgzZjU3YTZkYTU3ODRiMzAwYmM4NTgxNGJmMWI3OWFmOTFmYWQwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQ1NzIzZmI2ZmI3YTNhNjI0OTdmMjFhZGIwYTVjYWQ3NWI5YTlmMGJkYTEwZmE5MzBkMjRlYzY0ZjllMWQ0ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjgyNDk4YmQ0ZWQ3MzA1NDgyOTM4ODI2MTdjNjBkZTFkN2JjZTQwOTg2YzVjOTg2ODAyOTJhODY3NjlmNzY5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTllNjkxYjc1MjdhYzZmOTQ1NzNiYjljZGMyZjlhODE0YmE2Njc1NGY1OWI0MDE4NTFlNGI5NzIxZjE3NDM0NCJ9"
+        },
+        {
+          "resource": "repo://build.gradle#L189-L193",
+          "version": "repo-lines-v1:sha256:66cfa786910d66a16ad2fe24fb0c3d23a43d655a85ecad57799e707daba05963:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2MxODY5MTQzMTRkMWRmMDAwMDI1ZTcwYzRlM2JjZjIwYjM5ZWZmOWQ1NTk4ZTlhNzBmODMzMmJiOGY1YWUxMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDkwOGE3NjgyZmNkNjEzYWE5YTdkMzY3NjM3MmVhMzhiZjBmNjIyOTBiZGY1NDQ3MzVhNDA1OTRmMzE4ZmJkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWIyYzJhZjA0ZWY0MmY5NThiMzFhMmJkNjRhMmIzNjE2NDg3ZWRiNDY4OWY4NjFlZGJjYmNjMWM1YTRmZTg2NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDk0ZjkzNTM0NjI5YmQ2ZTM0NDIyNGFlZDBjMmM2NmJiMWRjOWMwZTI0ZWQ0OTY0NGVjZmE4NzIxNzgxZmFmMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3d4f5b5aa1274c83abb632b8f17e2a6e",
+      "statement": "Any rule violations cause a single AssertionError listing every violation.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L58-L64",
+          "version": "repo-lines-v1:sha256:92f77c2d147c4c998d6f6617ad992520dc2a0fd2061739f80fb51a3501fbf62e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTc0YzBiZGI3ZmZiNjI4OWRiM2Q5ZTBlOGY2YzczMGNmODM1NjgwNjRjZGRlOTZiZGU2OWIwNjJiMWE5MWRmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGE5Zjg2ZDI4ZTc4NGY5ZmQzMWZiNzJkMTVmNjBjYmNlYWFmZGQ2NjljYmQ1YjZkYTc4ODhhMDIzMzIxZWJiOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWUyYjllMjFmZGM4NmZjMmMyZWU0NDcyMTg1ZDY3NjQ2N2JkZDFjYmYyZTI0YjRkYzY0NGFiMWFiYjMzMjU0NyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

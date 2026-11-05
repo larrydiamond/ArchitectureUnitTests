@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a1d85bf971295685fd9d8835f1516577d090cabc32055dd2cb27d32c8dc83821",
+  "claims": [
+    {
+      "id": "claim_fcb76d9a8f7b400a91db279762a49023",
+      "statement": "The production code consists of the ArchitectureRule enum, whose constants each wrap one ArchUnit ArchRule exposed via getRule(), and the ArchitectureUnitTest utility class with a private constructor and static testArchitecture methods.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L47-L306",
+          "version": "repo-lines-v1:sha256:f52dbf86f60cc08a2ab32821902c0e4c44efb64569517adb14e5d23253399b39:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2ZDc2MGNjNTg0MWE3MjFkNGY5ZDRkY2YyYjRhNTFkYWI3ZWY5MDViNDFmZDM4MDlmMjdmYzk2ZDc0NTE3ODYyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI3ZWI3NjcwZDVjMzM4NzI2NzM2ZWNlZmQ5NzE4ZGE0YmRhYTg2MzQ5ZmNiZGU1MWMxZjliMDBlMTMxZmMxNmU2IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1OGNkMTA2YzAxMDcxOTQxMWIwNGFkNmUzOGI1NDdlZTIzMDU3YjZkMWI4ZmIwYWNkZTM2OTI1OWYzNzM5MjgwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI5NWEwNzJjZTlmZTNhNjk3N2E2MjNmYzJmMjk3NTMyNmEwMjgyMjA2NjI2MzUxMWVkZjc4MTRlZDg4ZmQ3M2MzIn0"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L33-L76",
+          "version": "repo-lines-v1:sha256:02b61536264130f4b70d7227e8c40f8d75e214d968e5704a4281c781824b6aa3:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlY2UwMDVlMjY3MzI5M2YzMzhlNmRiNWIxNDljMjQ4ZmZjYTUxMWQwZTg5MDhhZjIwZDliNDQ5MGYwZjcwN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljZDlkZjhmNDNiNzE5Mzc0MjQwZDE1OGNlZWE0OGFhNWQ1OTU5NGFiN2VjNDdjNTliODY3YTA0ZjcwNzkzMjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8bb3030f9e0d4047ac3358b5276da4be",
+      "statement": "testArchitecture iterates ArchitectureRule.values(), so every enum constant not explicitly excluded is checked; adding a constant automatically includes the rule for all consumers.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L16-L18",
+          "version": "repo-lines-v1:sha256:037028292fb7461991c98dfcc001160290d1bb584cacdf9440f9957f266d2035:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZkOWU5YzBiNTNjMTQxNDJkMTJhOWVmNTAzMGNjM2Y1MGEyZWQxOTQwOTU3N2E2NWFmZjZkY2QxOTEzYzA1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmM1YWJkODIyNzM2MGY1YjgwM2I0OGM4MzUyZjFhMzc5MTM4ZDVmYzRjYzE3ZDhlNWMxMGMxMzViZmUxYTAwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTViZjNlNTYzZTkxMGU5MDQwNDNhZjc4NGRkNzM2Yjg2NTYwNDcxOGJjNDFlNDVlYzY4M2E4NTlkMDQ1YWNhNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2Y1NGJmOGE4Y2UyMWVjNGRhMGE5MjUxMTJlODNmN2FkYTcwNzlhMzc4OTMyMTczYjU5ZjdhOWZlNDA1ZWJkZSJ9"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L43-L56",
+          "version": "repo-lines-v1:sha256:099eebf1841350b64197e736e5e9f7e93b5d1140c2c0b625fd901660899ec004:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlMzJmYWVmNzdlNDRlNjRlMzkxNTExMmJjNTgwODkxM2U2NjExMGQwMGNhYmQ2NGYzMjgwYjY4NmY0OWIyNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlNzA5NDM2MjhkMWIyZGQ4ODViZDY2YjA4MGJmM2RhMGZmYTM1NmZiZDdmMjAyNGViZjg0YjgwMzJlNzVmNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2NTg5MWI2OWJmYTA2YmFjMDk0NTJjZmY5ZjM2OWZmZmE3ZWJiNjgwOWRiMWUzODE2YTg4ZGM3ODk1NjJlZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8c5e6b7793c848099b735e197e8c04d6",
+      "statement": "Exclusion of rules via a Collection<ArchitectureRule> argument is the only customization point; the single-argument overload passes an empty exclusion list.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L43-L74",
+          "version": "repo-lines-v1:sha256:b39bd259a3c5825aac88e1d7909d7b52194449a0cb0e0e3ca5c6639ae299fe25:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlMzJmYWVmNzdlNDRlNjRlMzkxNTExMmJjNTgwODkxM2U2NjExMGQwMGNhYmQ2NGYzMjgwYjY4NmY0OWIyNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlNzA5NDM2MjhkMWIyZGQ4ODViZDY2YjA4MGJmM2RhMGZmYTM1NmZiZDdmMjAyNGViZjg0YjgwMzJlNzVmNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwNGY4OWZjMGVjOThjOTgyNDE4M2U3OTVkM2VkZDE5ZTkzMGY3YmM0NzFmOTAxMmFhM2Q1MDNiZTJmODk3NGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8b0b0b6320554def83d58c4c0371c59d",
+      "statement": "Framework-specific rules reference Spring, JPA, and other annotations by fully qualified string names, so the library only depends on archunit-junit5 at implementation scope and keeps Spring/JPA as test-only dependencies.",
+      "evidence": [
+        {
+          "resource": "repo://build.gradle#L36-L52",
+          "version": "repo-lines-v1:sha256:b5ffc90958a84ccd120beef9451c4ea9e238bbc8478e0acec7388d633004fbe4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVhNzc4MGI4M2VjYjI4Yzg1ZTRiY2I0ODVkZWRjNjg3MzQwYjE4MThmODc0MmU0MmM2OWVmOGRhMzIyYzBiNmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiMjNhMmQ0ZDg4YWFlOThlNzU5Y2M5Y2E0ZjcyMTY0MTA4NmM0MDk5NTUxMjk3YmFiNzRiZTgyYzUxODJjNjcifQ"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L139-L188",
+          "version": "repo-lines-v1:sha256:3b3b41fd3a93fff5dadd6e1feef4d9516c508fda5f46e06eebfd2554499f24c2:eyJzZWxlY3RlZExpbmVDb3VudCI6NTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0OWQ1YzZhYWU2MDg5MWEyMjQzODJhYmUwYjc3YTIwYWY1MTgyOTViOGMzMDUzOGJkOWM5YWFmMmY5ZDFkNDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwZWUxZDIwM2QyZTIyMjUyY2EwYjgzMmJkMmY1OWM3ZGU1OWJmYWJlOTBmMTRlNzQ1MjI1M2EyYTE1NDM1ZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxMjdhYmJlMGIxOGE3ODVkMTM3MTJhN2U2MWRmOTcxM2VjMDVlMWVkN2RiNWJiNmZkM2U1YTVjMjYwYThhYmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkMjc0MjkxNTdhZTRiMmQ1ZTJlYjNmNjM4MDE3MjYyNzZmMzFjNzBjZTNjYjgxOTNiODJjNTQ4ZDUzYTgyMTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5daff1aeb3d5476fb109b5360d23235b",
+      "statement": "Most rules call allowEmptyShould(true) so that a rule whose selection matches no classes passes rather than failing.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L114-L133",
+          "version": "repo-lines-v1:sha256:08a32727e7512ad373a607c33e994953bbcc9632fb66686f537bec52ec7d9e96:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4NzEwOWJjMjdiYjJjZWM3ZWJiNDcxMTYzZjY1ZjlmOTgyODhjOGRhZDE1NDRmNDRiM2U4OGE1ODdlNzU5ZTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3ZmY5MzUyNDc3YmMwNWI4M2MyNTExMTJiOTIzYTYzYzRhYWU2NmJkYjE0ODQ3OTVkNGMwZjE1NmYyY2RkYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY0NWRjNWRiYjdhNzllZDM1ODlhM2ZmYmVhYzZmNmM0YzQyOGZkNDZiY2VmODAwZWIxMjkzMTUwMDkzZTQ4YTMifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

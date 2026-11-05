@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f79b76d4ccd1866fb59253b6e2e91b9f5c59ff578adb254304ebbec0fa935e3b",
+  "claims": [
+    {
+      "id": "claim_3e7b472fe47e4acf8aebc92e9ffab255",
+      "statement": "testArchitecture imports the requested packages with a default ClassFileImporter and checks each non-excluded ArchitectureRule in enum declaration order.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L43-L56",
+          "version": "repo-lines-v1:sha256:099eebf1841350b64197e736e5e9f7e93b5d1140c2c0b625fd901660899ec004:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlMzJmYWVmNzdlNDRlNjRlMzkxNTExMmJjNTgwODkxM2U2NjExMGQwMGNhYmQ2NGYzMjgwYjY4NmY0OWIyNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YjA0NDkxNDY5NzIyZTgzNjNhOTRlNDA0NDUzOGUwMTNhMmEyMTdlMzZiMWU1NjhiYTYwYWNiN2I0YzhmMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlNzA5NDM2MjhkMWIyZGQ4ODViZDY2YjA4MGJmM2RhMGZmYTM1NmZiZDdmMjAyNGViZjg0YjgwMzJlNzVmNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2NTg5MWI2OWJmYTA2YmFjMDk0NTJjZmY5ZjM2OWZmZmE3ZWJiNjgwOWRiMWUzODE2YTg4ZGM3ODk1NjJlZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_97b9c6caa57d44878123925929228923",
+      "statement": "AssertionErrors thrown by individual rule checks are caught and collected so remaining rules still run; other exception types are not caught.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L48-L56",
+          "version": "repo-lines-v1:sha256:97b52cf2d5f83306c586e5fcfa7df3402f23f75e7b3f70f041fbb74fbe0e802d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODE1ZmU3ZTNhYjVmOWFlMjI4MTZlOTM1ZWEzYTQ1NThiYmNmYWY0MmRkODViYzgzOTRiM2JiODM2ZWJjNjE2NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgzZGRlNzZhMWNhZTljZjY5MWEyNmYxZjBkNWM1NTFmODgxMjFlZTQ3ZjQ0OGQ1YmMwYjNhMzljYTBmYjMwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjY1ODkxYjY5YmZhMDZiYWMwOTQ1MmNmZjlmMzY5ZmZmYTdlYmI2ODA5ZGIxZTM4MTZhODhkYzc4OTU2MmVlNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_235988609f9a4c4996ec5bec3541ee79",
+      "statement": "When any rule fails, a single new AssertionError is thrown whose message starts with 'The following architecture rules were violated:' followed by each failure message plus two newlines; the original errors are not chained as causes.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L58-L64",
+          "version": "repo-lines-v1:sha256:92f77c2d147c4c998d6f6617ad992520dc2a0fd2061739f80fb51a3501fbf62e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTc0YzBiZGI3ZmZiNjI4OWRiM2Q5ZTBlOGY2YzczMGNmODM1NjgwNjRjZGRlOTZiZGU2OWIwNjJiMWE5MWRmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTZiMDQ0OTE0Njk3MjJlODM2M2E5NGU0MDQ0NTM4ZTAxM2EyYTIxN2UzNmIxZTU2OGJhNjBhY2I3YjRjOGYyZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGE5Zjg2ZDI4ZTc4NGY5ZmQzMWZiNzJkMTVmNjBjYmNlYWFmZGQ2NjljYmQ1YjZkYTc4ODhhMDIzMzIxZWJiOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWUyYjllMjFmZGM4NmZjMmMyZWU0NDcyMTg1ZDY3NjQ2N2JkZDFjYmYyZTI0YjRkYzY0NGFiMWFiYjMzMjU0NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2aa3a153e4924519bcbfc16722e5591d",
+      "statement": "The varargs-only testArchitecture overload delegates with an empty ArrayList, meaning no exclusions.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureUnitTest.java#L72-L74",
+          "version": "repo-lines-v1:sha256:6fa015b6e858533119459379756b3018f07ac68c82ec7de1b8baa7b9fe59f5b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGNjMDNhYjZmMjQxZWU5YzIxMjgwZjg5ZDZmNzVkNDA4ODNjMjMxYWJiZTc3Yzk1NDczMGJkMzVjYTEyOGE3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTkwOThkY2NiYzRiODViYzNmNTBlN2VkNDhjYzVkNTNkZjAyZTA3YWZmZGIxNjcyNGU5NzUzNWQxYmM5MGQxMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODA0Zjg5ZmMwZWM5OGM5ODI0MTgzZTc5NWQzZWRkMTllOTMwZjdiYzQ3MWY5MDEyYWEzZDUwM2JlMmY4OTc0YiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

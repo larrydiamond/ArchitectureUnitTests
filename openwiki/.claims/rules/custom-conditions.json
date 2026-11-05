@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:1b8b6fee7776eff86cc4be3feedfbd32f12d477688f632f51413e961fc1674d6",
+  "claims": [
+    {
+      "id": "claim_9d406bb4cd8842fa914ed6d8027a51c1",
+      "statement": "beCalledByAnyMethodInTheSameClass iterates a method's getCallsOfSelf() and emits a satisfied SimpleConditionEvent whenever the call's origin owner and target owner have the same fully qualified name.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L311-L326",
+          "version": "repo-lines-v1:sha256:e1fdb07898edbaa3bbe5c577fdea6c4b6ea4ed21fb411142ae08071c3aeea3c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlMzkyNTFmNDRkOTdkYWYyOTQ3OTNiYmZjNmYzYTNmMjc5NmMwNGQ1YjZkNjgyYmNkZmMwZTNiMDc3ZDQ1N2MiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4ODI2NWRiNWQ4NDlkMDA1OTU5NGI3MjY3MDdmZDMwODllMGVjM2JmZmFiMzliYjI2ZjdkYWYxNDNkYjdkY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkzOGRlNzRiZTk3YmYzYWJhNzg3MmE2MWJhMGU0MjA4NDAwOGM4MWU4YTIwMmE2MTIxMzRjNzU1YWFmN2ZhMDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e16621f37c914b13b660d29905c4700c",
+      "statement": "The Spring @Cacheable and @Transactional self-invocation rules apply beCalledByAnyMethodInTheSameClass under noMethods(), so any same-class call to an annotated method is reported as a violation.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L257-L264",
+          "version": "repo-lines-v1:sha256:ab2516366ed12915d5d06f8b329769000a79db4ba421a9e00127175eae2a4686:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzhlNDhkYTk3YWFiNjgwY2FmNjMwY2U2YmVhYzcyYjFiNTA1MDIxZThmZDkwYjcwNWI1NWFjMzhmNWE5Y2IyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzVjY2ViMGQ0NzcyN2RmMzEyNmIwNWQ2NjM4NjA2YmJiYzE0YTZlZGJiYmMyODlhNGMxOTBkMGM2MzBkNWIyMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTE3NTg4ODkyNmY4MTg4Y2UxYmNhNWE3Y2Q4ZmVlMDRjMjk5ZTRjZDU2YTVjZDJlMDhkYzU3Y2Q1MzU5MjVmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTRhNDAxZDg4ZjVmZDFhZjhhY2MzZTIzY2M2YmFlZDNkMDliYzYwNGEzY2IxYmI3ZjI0M2M2Yjg4Yjg0NjNjMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_302aaf3fabb24278a50f28034ecaf38f",
+      "statement": "Because ownership is compared by class name, calls from nested or inner classes are not reported, while a method calling itself recursively is reported.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L315-L322",
+          "version": "repo-lines-v1:sha256:7d9cd85d19f7bbb1841cde0ba738eab5e849b7816f74802f28a7df8e4f16319c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUxMTdjMjVjMDcxYTQwMDNhZDFiNmQyM2E3MDI4NDgwMzE0OTk3Y2FmMWU1OGJiYjViZDMyZDA2MjIzNTE1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGRiMzM5YzE3ZDRjYzU0ZTcwYzRmY2ZlY2I2MTFiYjllN2QzNjNmMjViMThlMDkyM2ExZDMwNmNjOTU5MjRlNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTRiOWZmMWE1NDYyZTNhNWUzNjBjZjJlNTBhZDczZDQ5NjQ5OWFiMWJhOTVkOWYyODg2MGVhNjc5MmJiY2M5YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDMwOWJjOGFlMWMzZjViZDdmMzg1N2RjZWEzNjBlMTlkNWJiYjc0YjI3MzhlMGFjZjVlYmZiNWVlODkwNWNiOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2643e79ff98f4cdabc365d7e6b07ae0e",
+      "statement": "IS_METHODS_RETURN_PRIMITIVE_BOOLEAN requires methods named is[A-Z][a-zA-Z]+ to have a raw return type that is primitive and named 'boolean', rejecting boxed Boolean.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L194-L199",
+          "version": "repo-lines-v1:sha256:37804d85e639981ec366d567d76f42cc877cf7c26b7a0827b5e6d782a9b62ce4:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDYyNTc2ZDZkOTdhMmNlMjQwOTRhNGQ5NTRhMTVhMzQ2ZTk1N2ViNzZlZjlkMDVmZjFmNTkxY2IzNDE3MWZkZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmM4MGJiOWQwZGY5NzhkMzc3ODViZmMzYTQ4YTJhZDM2YTkyYWM2ODk1ODhlM2RmMTY0YmZiMjBmZTdhMDFlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDllZWI2YWQxOGVkMmEwZjE0MzJjYTQxYWU1MGQ4ODdlMDgxZjdkYTgwZjEzMTE4YWM1NWFkMDU1MWEwMWM0NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmI2ZThmYmQxMGE5NWY2OGFlMjk0NWQyMzlhMGY0YmM4ZmVlM2NhZjM5ZGJlYWFiMWJkYWEwNjNhZjE0NWM2NCJ9"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/IsReturnsBoolean/IsDoesNotReturnBoolean/Blah.java",
+          "version": "repo-file-v1:sha256:210e0f519e81fc337ffef1d2d4fabe4d512dda14b93394dff765b7c7e638b82a"
+        }
+      ]
+    },
+    {
+      "id": "claim_49d90952a2054db3b23c885477c9b576",
+      "statement": "The springcache.bad fixture calls its @Cacheable method from another method of the same class and is expected to fail with one violation, while springcache.good calls it from a separate class and passes.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L315-L334",
+          "version": "repo-lines-v1:sha256:d7a8380c7302dc3dc362a5a4c9482c35c2f6400ad5eaa68981d8d00f44c9a9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1MWVhMDIxOTVlMmUzZTA5Nzg4NmE5MTQ2NDQ4NjNkYzE1Nzc1M2U5N2I2MGE0YjI5MjM4YjMzZmVmZjQzNDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5OGJjN2Y2YjNiNWE3NjY3M2FiMGJhMmZhOGU4NWY0NDgyMTk0MjU4OTcxMDAwYTM1ZDhiZmFhZjllYTFkM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjViN2Q2OTczOTQ3MTEwNjRhOGJhMGY1MmMwOGU4ODMxYTE4M2YzYjZiMzM0OTczODI1Mzg3MzkxZmM5NGM5M2IifQ"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/springcache/bad/BadCache.java",
+          "version": "repo-file-v1:sha256:578afd7ea04a74a8e22350a29976b2dd3485c7beb332ae5cd161b89d1b5c2d3d"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/springcache/good/GoodCacheCaller.java",
+          "version": "repo-file-v1:sha256:2d2a7c2e1648bc53a4c4d25c9e9ceefc7b6b265ba51d4357c60eddbf9263de4f"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

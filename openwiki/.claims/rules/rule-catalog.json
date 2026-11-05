@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2a4ce954dc6b06a3e314d3a5fcfcac871d774a5f222b499f3e3f09ac8eaa27ab",
+  "claims": [
+    {
+      "id": "claim_de10f8854e6f41d0876bd87c2c3aaede",
+      "statement": "The seven ARCHUNIT_* constants re-export ArchUnit GeneralCodingRules rules, and only the field-injection one adds allowEmptyShould(true).",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L36-L82",
+          "version": "repo-lines-v1:sha256:1ac0bb30567005b5ae16c7c98ecb1772d663de6f65ccbf78f3a9a9495238b3c1:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3ZDY1NzdkOGM4Nzc5ODQxMzM2NzYzNmI1ZjU0ZjA2ZDUyYTkwNDEwMGJhMjM4Y2I3MTI4ZWRjNjg4NjVlYmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NDI2MGYwMWRmZjZjNzhjNTc5ZWU0Nzg0NzQ0YWNmNmQyMWNjOTIzNmU3NTIxZDVjZWIyNjk3NzY2NDdlODciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NWVhZTg5Yzc5OThkOWRlMDhmYjhiYTZmMGZlMzRjNzdhYjY2MTc5NWQ4ZjY3ODBjMTlkYThiYTU0ZDg3MDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkOGE1NzBhZDk5NmU4NzM2YmEyYWQ3MzY5NDg0ODRiZTI1ZTQzNDk4ZTc5NGQzN2JhNzM4Njg5NWZhZDllYzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ccd5d9425c0f4e2e9bed6907e03599ec",
+      "statement": "The JPA coupling rules forbid methods annotated with GetMapping, PostMapping, or RequestMapping from returning a type annotated with jakarta.persistence.Entity, with _JAVAX variants checking javax.persistence.Entity.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L135-L164",
+          "version": "repo-lines-v1:sha256:b35b06f2f4c549368128b4e96296e29a795e8e3042800c4369addfbae225eb86:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4OTY2ZWQ2ODhmZDFiNTFmMWIzNTA3MGIxYjA5NjY1YTkwZWZiYTNjMGMzNGE2MzJjYjE0MzA2NjM4YTZmYmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAyOGU5ODNmOWVmMTA0MWQ4M2NkNDQyZWU0NWRhMzM4OTRiNmU1YmMyNmY4MDk3OWUzOGE2NzI4YzMwYmM0NGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiOGU2M2FiYTc3ZmEwZjUwMjYyNGFhNDExNDAxZjc2ODJiYjFiMDkzZGY1YmM3ODY0NTk2ZGIxMTk4M2QyYzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_33112a4b97d94667bc53a11dce4244ce",
+      "statement": "The Spring mapping placement rules require RequestMapping, GetMapping, and PostMapping methods to be declared in classes annotated with RestController or Controller.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L166-L188",
+          "version": "repo-lines-v1:sha256:113f316386155ab94b08ea8cffbef0ae99808a3af0773668a301ec48b828bc05:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwZWUxZDIwM2QyZTIyMjUyY2EwYjgzMmJkMmY1OWM3ZGU1OWJmYWJlOTBmMTRlNzQ1MjI1M2EyYTE1NDM1ZmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhNGVhNGZhNjMzZTdmODBmNmI4MmQ1OTM0OTMwMGUzZWE4YWU0MDc2ZTQ1MzU4NTQ2MDcwMzJjY2ZjMGZiNTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkMjc0MjkxNTdhZTRiMmQ1ZTJlYjNmNjM4MDE3MjYyNzZmMzFjNzBjZTNjYjgxOTNiODJjNTQ4ZDUzYTgyMTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5be0ee53c634c94a6cea22ecc37fd1c",
+      "statement": "JUNIT5_TESTS_CANT_BE_STATIC and JUNIT5_TESTS_CANT_BE_PRIVATE forbid methods annotated with org.junit.jupiter.api.Test from being static or private.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L228-L238",
+          "version": "repo-lines-v1:sha256:ced53c968fb546f4a62c4dcafef52d558e4e3341fe3a5d65b4e1cd7ef08f469b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZTA3NjBjM2UwNTI4ZWUzMGIxZjIxNDU0MDJiZTQ3ZDVkZTQwNzUyNGJjZDU0MGY5YjY4OThhNDU4YTQ3NGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ5OWRmMmU1NGU2Yjk0YTJmNjAxMmE2OWRmZmVjNmYyYzZmNzczYTA2MTRiMDU3NDBkNWZhNDY5M2NjNzhjZTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZTQwNDRhMjgwNjNkOGVlZTg5MDQwZmRmNzM2ODliODJmMDZiZDIzYjMyMTI3NGFjYTQzNWZkOWYwMGZhYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA2ZmU1Zjc1YmRjZGJlNTIyMmY5NzQ3MzVlMzI3YjY3MzFhNDlhYTc2NjcyNzI0ZmY3MWYwZGFkMzk5NDhkMzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7b845d9a08c24405bffa5088dc852e82",
+      "statement": "The Guava cache, Guava EventBus, and commons-lang3 tuple rules forbid any class from depending on classes in com.google.common.cache, com.google.common.eventbus, and org.apache.commons.lang3.tuple respectively.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L240-L252",
+          "version": "repo-lines-v1:sha256:69c13ae6a9bb6459bac78dc505f35e12d7089dcf66bd5169c3d2f81bf41b6980:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkMTgxZDY5ZjIwNTcyZWZkOWU3ZjkzM2Y3ZDdiMWFmMTg0NjhjOGExYmIxZDAyM2I2ODZlOGE5YjYwMDYzMTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdlNWM1OWVmMmE5NDhlZTc0ODFhMTkxZmEzMjMxZTJmMzM0NjA5MGRjNWI5ZDczYzViMzk5NmZkYzZmNTEzODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2ZmQzOWUwY2IwZDY1NmE1OGI4YzRkODU2NWEyZjRiM2Q4OGIzZjdkZTBhN2I1OGY3NzA5YTNlYmFjMTg1NzIifQ"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L290-L295",
+          "version": "repo-lines-v1:sha256:776ad1bb8bfa590918a40f13c698948d04ac0968f891d11c26d31fcec4e4d59e:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2NlMzNlNjdjN2ZkMTkxMzYxNWI2NDVmODFmNjkxZTc5YmEyODQ3ODgyYzE2ZTk3ZTE5OWU4MzI4ZmFkZTljMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzhlMTNmNmJjZjg3NTFiMmVmMjczNGIxNzFmMGIyMzEyM2I0MTk2ZmUxZjM5ZmQ2ZTg1MzAyOTRlMGM4ZDNmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWFiN2U1NjMyNGVhMzQ5OTY0MTNlMDdlNDg0ZWEzODg1OWQ3MWJkOTIxYWRmNzg3NzRmNmY3YThlZTY4Njg0NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGUxNTRjNzA4YWE1NGFiZDhjYTkxYzU3N2M2ZWQ3NjAzNjQzODAxY2ZhOGIwNDEwNjdmN2Q2OGNhZTUwYWY1ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_9a234ead3d644aa280d2bfc329291b1c",
+      "statement": "RESTATE_ISNOT_METHODS_AS_POSITIVE selects methods matching isNot[A-Z][a-zA-Z]+ and asserts none start with isNot, so every such method is a violation.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L207-L211",
+          "version": "repo-lines-v1:sha256:6a60047b70bdff08f52405869f0d9ce7c052401ac95283fa4edf54647828629c:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzljYmJjNjU0NjlkYjFjYTI4NDJlZmQ5N2RmN2VlMmNlNmNjMTU3MTQ4MmQwMWExOGI3OTBhMTBjN2M1MTBmMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzA4OTkzMjYzZmIyMjQ5ODQ4ZWIzMTYzMTliM2VjMTI5Yjc2NDcxYmZlZWZjY2QzMmQ0MzFlMzNiNmFjYTZhMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTgwZjNmZWJjODI1ZDc3ZGRiMWM3YTY2MjlhZTFjYjJmM2FjNGU1YzU4MTU1ZDllMzY1ZDUxNjYyZTE3Y2I3MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTAyOWQxYWE3OWI4MWM2Y2I1M2M4MTJmMDdmZGY3YWRiZjRmMTkzYzQxYWQ3YmYwMWRkYTE0YTg4NTAyYzVmNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_472c4c05986546d28023d4587e2e58eb",
+      "statement": "The README table lists every rule constant with a description and the library version in which it was introduced.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:861ff3da38e4879b26b010c00b963e474b8044be845721becac77d6088f6d638"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:75c917ba03d74a58c9221bdeb8fc1cded93e7823da63dd1093fed5cebe02beae",
+  "claims": [
+    {
+      "id": "claim_13d5a54c014d4efd887dfa552f34cd97",
+      "statement": "The OPTIONAL_NOT_NULLABLE, OPTIONAL_NOT_NULLABLE_JAVAX, and OPTIONAL_NOT_NULLABLE_JSPECIFY rules test whether the return type is annotated with an annotation named java.util.Optional, which never matches because Optional is a class, so these rules cannot report violations.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L213-L226",
+          "version": "repo-lines-v1:sha256:6e0ecdd341009c3440d9fd8abb69cad0455a097b17a4accbb49f0c5c29b8d75a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZTA3NjBjM2UwNTI4ZWUzMGIxZjIxNDU0MDJiZTQ3ZDVkZTQwNzUyNGJjZDU0MGY5YjY4OThhNDU4YTQ3NGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwMWZiM2U0Nzg5OTg0OGI0Zjc3MDJjMjljYzIxNTI2MjVkNDBmODBlYTM1MWU0NDhhMjM2YjAyNGJkZjA4YzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFjODk5NmU1YjgzNGYyMGZmMjA1NWMxOGFiNzNlMDFkMjM1ZDZkMmU3NjNhZTBhMDYwNzI3NThkNWE4ZmJiZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwYjdiNWViNDJjNTFhYWZhZmNlOGQwZmM4NWY1NzRkZWJmZTY1Zjc2YjEwYTQ2OWJiN2RhOTVjNzVmMGE0MmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0bfcb2ecec154cfba7b9811149b494be",
+      "statement": "SPRING_BOOT_POSTMAPPING_CONTROLLER's because message says 'GetMapping methods', and JPA_COUPLING_RESTFUL_POST_MAPPINGS_JAVAX's because message names JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L154-L154",
+          "version": "repo-lines-v1:sha256:1b485ed2a3bc22af1e4ef0e9a477f327cc8f00e80869400ff000b9ce9451220e:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWI0ODVlZDJhM2JjMjJhZjFlNGVmMGU5YTQ3N2YzMjdjYzhmMDBlODA4Njk0MDBmZjAwMGI5Y2U5NDUxMjIwZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWI0ODVlZDJhM2JjMjJhZjFlNGVmMGU5YTQ3N2YzMjdjYzhmMDBlODA4Njk0MDBmZjAwMGI5Y2U5NDUxMjIwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmZmMjEyYmE2MzNlNTZhMTJiY2RmMzgwZTFlNzVmNGNjYTJiNGZhMGU0YTAzNjc2NzAwMWM0MmQ5ZjcwYzk3NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDVmMzc5NzU2NmEzY2I2YTcxMDJlZTIwOTBiYmUzNjJiOTg1Y2RiMGY0YzdlZDg1MWZiODZlYTg3MjI5MzA5MiJ9"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L185-L188",
+          "version": "repo-lines-v1:sha256:7e9e935ed01273fc4c35a04f52c29ba4cf95fd8ad36fce29f012668af3efbded:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDBmMTg5ZDMxMzU3ZjZlZTc4M2ZjNmYwYTI5NTBlY2MzYTQ1Njk5ZmJiMDZjNzUzOWQyMWMzMjI2OTI4ZGMwMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTBlZTFkMjAzZDJlMjIyNTJjYTBiODMyYmQyZjU5YzdkZTU5YmZhYmU5MGYxNGU3NDUyMjUzYTJhMTU0MzVmZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjI4ZjVjN2IwZmMzZGQ0OTE0Y2NlMGZjY2MxOWUwNjhhNmI1MzY1NzVlYTgxMmI3NDVmMWIwYTFlMzgzMGE3ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmQyNzQyOTE1N2FlNGIyZDVlMmViM2Y2MzgwMTcyNjI3NmYzMWM3MGNlM2NiODE5M2I4MmM1NDhkNTNhODIxMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e196c30b7aa44a3d9f3e274b81554ef8",
+      "statement": "The library has parallel Spring layering rules: one set based on ..service../..controller../..repository.. package patterns and one set based on @Service/@Repository/@Controller annotations.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L114-L127",
+          "version": "repo-lines-v1:sha256:338bbd01a2e7e2ad35d8881eaee16c86afa9c7ec37a4276055bed2476e3594f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5Y2JiYzY1NDY5ZGIxY2EyODQyZWZkOTdkZjdlZTJjZTZjYzE1NzE0ODJkMDFhMThiNzkwYTEwYzdjNTEwZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU3MDg2YzFiYTM0NWQ3ZmRiNjU2ZTlmMzQ2ODQ2Y2IzODVjZTM1MDgwNTA5YTc0MjljYmRhM2Y3MGJmNWJmNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA3ZmY5MzUyNDc3YmMwNWI4M2MyNTExMTJiOTIzYTYzYzRhYWU2NmJkYjE0ODQ3OTVkNGMwZjE1NmYyY2RkYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4ZGU2N2JkY2RhNDUxYjAzYjc4OThhZTYyNGYwY2FkNzExZmQ2YmU0Yjc5ZmI4ZjUzZTIzM2IxMjE4ZmVmYTkifQ"
+        },
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L266-L282",
+          "version": "repo-lines-v1:sha256:a5c668732c656ee346b96ab0395e67507d3f733137a80a99f63ffeb0d9ba4a96:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5ZTA3NjBjM2UwNTI4ZWUzMGIxZjIxNDU0MDJiZTQ3ZDVkZTQwNzUyNGJjZDU0MGY5YjY4OThhNDU4YTQ3NGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5M2NiNDkwNDRkOGUyOTQzMjliNjAwMmM4Zjg3MTcxNmIwMjZlM2I1Y2FiOGU2ZWI3YzExMTU0ZWNkNmNmMTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhYWE4MjA5YTQyNmYxZjg0NjkzODQzM2M1YzFiNDEyNDdhYjg2MzFkMmRiMzU0YzIwNDUzODMwNTY4YWY3YzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlMDM3ZDk0NzJjYzVlZGFmZmEzOTkyZGU4NzBjZjM4MGM5NTVjMjgwYzQyOGE5ZDc2ODYwYzhkNDg0MGVlMmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_39da6b2332ca41e5a2446e1782943cf5",
+      "statement": "DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES forbids any dependency on org.apache.commons.lang3.tuple, not only constructor calls.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L293-L295",
+          "version": "repo-lines-v1:sha256:e81bfc8889a266bbea5dcc76e043e39c32e0d351e58f886fe497c4671c463b72:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTcyOTdkYjNkYjI1Y2UyMzQ2MmMxN2MxNGY3MDM2Yjk1ZWU1ZTA1ZjQ4YjIzZjYyYTQzNWZhNzI4OWFmMjFkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzhlMTNmNmJjZjg3NTFiMmVmMjczNGIxNzFmMGIyMzEyM2I0MTk2ZmUxZjM5ZmQ2ZTg1MzAyOTRlMGM4ZDNmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGE2ZmVlNzg1YjA5NDU4ZDk5MDVjODc3NTA5MWI3MmRiMzA3OWIxODdjYTk0OTllYjEwZmNkNWI3OWY4OWQwMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGUxNTRjNzA4YWE1NGFiZDhjYTkxYzU3N2M2ZWQ3NjAzNjQzODAxY2ZhOGIwNDEwNjdmN2Q2OGNhZTUwYWY1ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_040d664a55244e49a28a29a4ed41d0be",
+      "statement": "The collection and concurrency preference rules only flag constructor calls of Vector, Hashtable, StringBuffer, TreeSet, TreeMap, and ThreadGroup.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L87-L112",
+          "version": "repo-lines-v1:sha256:0296a541e922544c06271c6adcb8337b0df63438346c8b56921da7c3c3d948d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxNjk4NWU3NjE5YTMyNTBiYzcyYWJjNjI4N2U0MTgzZDgzNDcxNDc5OTI5ZWQ3YzkxYTcyMzc2OTQwNGE4M2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMTE4ZmRlZDkxZjExYWEwZGYxOGM5MTA0YjNhNjkyOGNlNjQ1Zjg5MTE5MTAyYWQzODQ0Y2NjY2JhMGU3MDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlZTc2NTIwZTkwMTE5NGM3Y2ZjNGUzYzFkNzk2NjdjMmQzYjkzOGMyY2EyNWNlOWRmNDQyMjEzMThkM2Q1YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3ZTA4MzYwZGIyMzcxZjY2YWUwNjFkNjAwYjc4NjFhNTQ5Y2ExYTNmNDIwNmFkZTc4NzBiZTlhMWFmNGJlMWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_56944db1dbd2441e9786480596e78e84",
+      "statement": "The tests labeled as covering SPRING_BOOT_REQUESTMAPPING_CONTROLLER use @GetMapping fixtures and assert the SPRING_BOOT_GETMAPPING_CONTROLLER message, so the RequestMapping and PostMapping placement rules have no violating fixture.",
+      "evidence": [
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java#L236-L255",
+          "version": "repo-lines-v1:sha256:565dbb51608982e42659bc58764179a8294e3c1f2b4e142d62ea892f9de2b0e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZhMjRjYWJmM2I3Yzg1YTZlZTdkY2FkMDg5YmYzOTA3ZTNlN2Q5NmJmNDE1NDljZDM3M2JhMWJlY2M0ZDIwYTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU5OGJjN2Y2YjNiNWE3NjY3M2FiMGJhMmZhOGU4NWY0NDgyMTk0MjU4OTcxMDAwYTM1ZDhiZmFhZjllYTFkM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxOTg0NWYyOTAxZjQzNTEzMmY0NDAyYmMxMTVkNjM3ZmNiMDlkOTM0NjkwNDY5OWNhMzYxNzcyNmM0YmU0MjEifQ"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/springannotations/bad/BadService.java",
+          "version": "repo-file-v1:sha256:a9e59eadce431fdedb56d559259b96d0e116b77995ab86899a369125d8ce8112"
+        }
+      ]
+    },
+    {
+      "id": "claim_04feadf1f3af4b83812da5d5c7192ef5",
+      "statement": "24 of the 43 rules, including all ArchUnit built-in rules, the package-based Spring rules, and the Optional rules, have no fixture package that violates them.",
+      "evidence": [
+        {
+          "resource": "repo://src/main/java/com/ldiamond/archunittest/ArchitectureRule.java#L47-L296",
+          "version": "repo-lines-v1:sha256:428b214b3270b57a38acb9f72c64754cdf0191ba5b5e0e416e9baa87d2d46c45:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2ZDc2MGNjNTg0MWE3MjFkNGY5ZDRkY2YyYjRhNTFkYWI3ZWY5MDViNDFmZDM4MDlmMjdmYzk2ZDc0NTE3ODYyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIyY2FjNjg1NGY2ZDRkMGU4ODE4ZjBmZDdjZDdmODVhZmYzODQ4ZjM0MjlhMzM4MzEwYTdlNWQxNzQ5NGU1YWE2IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1OGNkMTA2YzAxMDcxOTQxMWIwNGFkNmUzOGI1NDdlZTIzMDU3YjZkMWI4ZmIwYWNkZTM2OTI1OWYzNzM5MjgwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI3MWU2NTkyYWNkY2E3ZmYwZTBkMzJlNjcxMWI2YzBiNzE2OGRiYjlhYjE0ZDFiM2U1YmQyMzdlNTBmZWNkOTBlIn0"
+        },
+        {
+          "resource": "repo://src/test/java/com/ldiamond/archunittest/TestArchitectureUnitTest.java",
+          "version": "repo-file-v1:sha256:6dd51294b7e642571a1a5c14ff695a48dddcabb8b4c7ca384e41e99a48a70336"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.8.0",
+    "at": "2026-11-05T03:23:32.912Z"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/overview.md": {
+      "pageVersion": "sha256:a1d85bf971295685fd9d8835f1516577d090cabc32055dd2cb27d32c8dc83821",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/architecture/rule-runner.md": {
+      "pageVersion": "sha256:f79b76d4ccd1866fb59253b6e2e91b9f5c59ff578adb254304ebbec0fa935e3b",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/operations/build-and-release.md": {
+      "pageVersion": "sha256:cd78edec920084782fd46f01a4ef40163f53239668c3eda7ab7e3ba58918ca28",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:5bf9b223238b2bd0665284b535d00d621d0103d9c66b66190a3e37bb052d5c43",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/rules/custom-conditions.md": {
+      "pageVersion": "sha256:1b8b6fee7776eff86cc4be3feedfbd32f12d477688f632f51413e961fc1674d6",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/rules/known-issues.md": {
+      "pageVersion": "sha256:75c917ba03d74a58c9221bdeb8fc1cded93e7823da63dd1093fed5cebe02beae",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/rules/rule-catalog.md": {
+      "pageVersion": "sha256:2a4ce954dc6b06a3e314d3a5fcfcac871d774a5f222b499f3e3f09ac8eaa27ab",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/testing/mutation-testing.md": {
+      "pageVersion": "sha256:9e182134b9e9b8bfd7d722fcd61b7f316101559f4f07814f48144ec389c42b17",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/testing/test-suite.md": {
+      "pageVersion": "sha256:5f4a30d79515c9380acc2a3f66c79dbe8acf971ded086dad93adcce2af845d40",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    },
+    "/openwiki/workflows/adding-a-rule.md": {
+      "pageVersion": "sha256:3fb19f2c7f25106c5eb497d7f25feb9e62f242b9c46f5dc9f31652898cd382e6",
+      "completedBy": "claude-code",
+      "completedRunId": "e86d414d-1ef1-4f61-a514-2bd1b58bfec9",
+      "gitHead": "f51e7ae48089773167577ddb77735db5df389478",
+      "sourceFingerprint": "sha256:182c15811b323352aee806839780826c9d38a2b1f474a8210c1e462cc61be165"
+    }
+  }
+}
