@@ -1,0 +1,12 @@
+{
+  "$schema": "https://calm.finos.org/release/1.3/meta/calm.json",
+  "nodes": [
+    {
+      "unique-id": "architecture-unit-tests-library",
+      "node-type": "system",
+      "name": "Architecture Unit Tests Library",
+      "description": "Java library (com.ldiamond:architectureunittests) that bundles an opinionated set of common-sense ArchUnit rules so projects can enforce their architecture from a single unit test call, with support for excluding rules that do not fit a project."
+    }
+  ],
+  "relationships": []
+}
