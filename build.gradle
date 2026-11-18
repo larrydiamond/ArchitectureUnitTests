@@ -61,6 +61,19 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// Navigable, progressively disclosed tree of every ArchitectureRule, built from the metadata on the enum.
+// ./gradlew rulesTree  (report in build/reports/rules-tree/index.html, plus rules-tree.json)
+tasks.register('rulesTree', JavaExec) {
+    group = 'documentation'
+    description = 'Generates an HTML/JSON tree of the available architecture rules from their categories and tags.'
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.ldiamond.archunittest.RuleTreeReport'
+    def outputDir = layout.buildDirectory.dir('reports/rules-tree')
+    args outputDir.get().asFile.absolutePath, project.version.toString()
+    outputs.dir outputDir
+    doLast { logger.lifecycle("Rules tree: ${outputDir.get().file('index.html').asFile.toURI()}") }
+}
+
 // Mutation testing: ./gradlew pitest  (report in build/reports/pitest)
 pitest {
     pitestVersion = '1.30.1'
