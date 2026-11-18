@@ -16,6 +16,21 @@ public final class RuleTree {
      */
     static final String ROOT_LABEL = "Architecture rules";
 
+    /**
+     * Orders dotted version strings numerically, so that 10.0.0 sorts after 9.0.0.
+     */
+    static final Comparator<String> VERSION_ORDER = (a, b) -> {
+        String[] x = a.split("\\.");
+        String[] y = b.split("\\.");
+        for (int i = 0; i < Math.max(x.length, y.length); i++) {
+            int cmp = Integer.compare(part(x, i), part(y, i));
+            if (cmp != 0) {
+                return cmp;
+            }
+        }
+        return 0;
+    };
+
     private RuleTree() {
     }
 
@@ -80,21 +95,6 @@ public final class RuleTree {
                 .collect(Collectors.toList());
         return RuleTreeNode.root("since", ROOT_LABEL, "Grouped by the version that introduced them", groups);
     }
-
-    /**
-     * Orders dotted version strings numerically, so that 10.0.0 sorts after 9.0.0.
-     */
-    static final Comparator<String> VERSION_ORDER = (a, b) -> {
-        String[] x = a.split("\\.");
-        String[] y = b.split("\\.");
-        for (int i = 0; i < Math.max(x.length, y.length); i++) {
-            int cmp = Integer.compare(part(x, i), part(y, i));
-            if (cmp != 0) {
-                return cmp;
-            }
-        }
-        return 0;
-    };
 
     private static int part(final String[] parts, final int i) {
         return i < parts.length ? Integer.parseInt(parts[i]) : 0;

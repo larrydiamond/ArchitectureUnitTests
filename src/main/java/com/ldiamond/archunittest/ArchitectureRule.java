@@ -103,7 +103,7 @@ public enum ArchitectureRule {
     /**
      * This rule recommends replacing StringBuffer with StringBuilder since StringBuffer is synchronized and generally slower than StringBuilder
      */
-    USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER(noClasses().should().callConstructor(java.lang.StringBuffer.class).because("Use StringBuilder instead of StringBuffer because StringBuilder is unsynchronized and faster"),
+    USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER(noClasses().should().callConstructor(StringBuffer.class).because("Use StringBuilder instead of StringBuffer because StringBuilder is unsynchronized and faster"),
             RuleCategory.SYNCHRONIZED_LEGACY_CLASSES, "1.0.0", RuleTag.PERFORMANCE, RuleTag.CONCURRENCY),
 
     /**
@@ -121,7 +121,7 @@ public enum ArchitectureRule {
     /**
      * Thread groups have long been recommended against, with ExecutorService classes being recommended as their replacement
      */
-    USE_EXECUTORSERVICE_INSTEAD_OF_THREADGROUP(noClasses().should().callConstructor(java.lang.ThreadGroup.class).because("Use ExecutorService instead of ThreadGroup"),
+    USE_EXECUTORSERVICE_INSTEAD_OF_THREADGROUP(noClasses().should().callConstructor(ThreadGroup.class).because("Use ExecutorService instead of ThreadGroup"),
             RuleCategory.THREADING, "1.0.0", RuleTag.CONCURRENCY, RuleTag.DEPRECATED_APIS),
 
     /**
