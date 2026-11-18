@@ -38,7 +38,8 @@ To use the ArchUnit Easy Access Java Library in your project, include the follow
 ```
 
 or in your `build.gradle`:
-```xml
+
+```gradle
 testImplementation 'com.ldiamond:architectureunittests:5.1.0'
 ```
 
