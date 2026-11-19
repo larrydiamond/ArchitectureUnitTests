@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,290 +20,372 @@
 package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.base.DescribedPredicate;
-import com.tngtech.archunit.lang.ArchCondition;
-import com.tngtech.archunit.lang.ArchRule;
-import com.tngtech.archunit.lang.ConditionEvents;
-import com.tngtech.archunit.lang.SimpleConditionEvent;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.domain.JavaMethodCall;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
+import com.tngtech.archunit.lang.ArchCondition;
+import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
+import com.tngtech.archunit.lang.SimpleConditionEvent;
 
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noFields;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noMethods;
-import static com.tngtech.archunit.library.GeneralCodingRules.ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE;
-import static com.tngtech.archunit.library.GeneralCodingRules.DEPRECATED_API_SHOULD_NOT_BE_USED;
-import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
-import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
-import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
-import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
-import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JODATIME;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Set;
+
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
+import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
 /**
  * This enum contains all the arch rules that this library includes.   Please note that over time we expect this enum to expand as more good ideas are accepted.
+ * <p>
+ * Every rule declares a {@link RuleCategory}, the version that introduced it and any number of {@link RuleTag}s.
+ * That metadata is all {@link RuleTree} and {@link RuleTreeReport} need to build the navigable rules tree
+ * ({@code ./gradlew rulesTree}), so a new rule shows up there automatically.
  */
 public enum ArchitectureRule {
 
     /**
      * Archunit defined rule: A rule that checks that all AssertionErrors have a detail message.
      */
-    ARCHUNIT_ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE (ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE),
+    ARCHUNIT_ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE(ASSERTIONS_SHOULD_HAVE_DETAIL_MESSAGE,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.EXCEPTIONS),
 
     /**
      * Archunit defined rule: A rule checking that no class accesses Deprecated members
      */
-    ARCHUNIT_DEPRECATED_API_SHOULD_NOT_BE_USED (DEPRECATED_API_SHOULD_NOT_BE_USED),
+    ARCHUNIT_DEPRECATED_API_SHOULD_NOT_BE_USED(DEPRECATED_API_SHOULD_NOT_BE_USED,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.DEPRECATED_APIS),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes uses field injection.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION (NO_CLASSES_SHOULD_USE_FIELD_INJECTION.allowEmptyShould(true)),
+    ARCHUNIT_NO_CLASSES_SHOULD_USE_FIELD_INJECTION(NO_CLASSES_SHOULD_USE_FIELD_INJECTION.allowEmptyShould(true),
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.DEPENDENCY_INJECTION),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes access Java Util Logging.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING (NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING),
+    ARCHUNIT_NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING(NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.LOGGING),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes throw generic exceptions like Exception, RuntimeException, or Throwable.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS (NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS),
+    ARCHUNIT_NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.EXCEPTIONS),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes access the standard streams System.out and System.err.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS (NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS),
+    ARCHUNIT_NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS(NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.LOGGING),
 
     /**
      * Archunit defined rule: A rule that checks that none of the given classes access JodaTime.
      */
-    ARCHUNIT_NO_CLASSES_SHOULD_USE_JODATIME (NO_CLASSES_SHOULD_USE_JODATIME),
+    ARCHUNIT_NO_CLASSES_SHOULD_USE_JODATIME(NO_CLASSES_SHOULD_USE_JODATIME,
+            RuleCategory.ARCHUNIT_GENERAL_CODING_RULES, "1.0.0", RuleTag.ARCHUNIT_LIBRARY, RuleTag.DATE_TIME, RuleTag.DEPRECATED_APIS),
 
     /**
      * This rule recommends replacing Vector with ArrayList since Vector is synchronized and generally slower than ArrayList
      */
-    USE_ARRAYLIST_INSTEAD_OF_VECTOR (noClasses().should().callConstructor(java.util.Vector.class).because("Use ArrayList instead of Vector because Arraylist is unsynchronized and faster")),
+    USE_ARRAYLIST_INSTEAD_OF_VECTOR(noClasses().should().callConstructor(java.util.Vector.class).because("Use ArrayList instead of Vector because Arraylist is unsynchronized and faster"),
+            RuleCategory.SYNCHRONIZED_LEGACY_CLASSES, "1.0.0", RuleTag.PERFORMANCE, RuleTag.COLLECTIONS, RuleTag.CONCURRENCY),
 
     /**
      * This rule recommends replacing HashTable with HashMap since HashTable is synchronized and generally slower than HashMap
      */
-    USE_HASHMAP_INSTEAD_OF_HASHTABLE (noClasses().should().callConstructor(java.util.Hashtable.class).because("Use HashMap instead of HashTable because HashMap is unsynchronized and faster")),
+    USE_HASHMAP_INSTEAD_OF_HASHTABLE(noClasses().should().callConstructor(java.util.Hashtable.class).because("Use HashMap instead of HashTable because HashMap is unsynchronized and faster"),
+            RuleCategory.SYNCHRONIZED_LEGACY_CLASSES, "1.0.0", RuleTag.PERFORMANCE, RuleTag.COLLECTIONS, RuleTag.CONCURRENCY),
 
     /**
      * This rule recommends replacing StringBuffer with StringBuilder since StringBuffer is synchronized and generally slower than StringBuilder
      */
-    USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER (noClasses().should().callConstructor(java.lang.StringBuffer.class).because("Use StringBuilder instead of StringBuffer because StringBuilder is unsynchronized and faster")),
+    USE_STRINGBUILDER_INSTEAD_OF_STRINGBUFFER(noClasses().should().callConstructor(StringBuffer.class).because("Use StringBuilder instead of StringBuffer because StringBuilder is unsynchronized and faster"),
+            RuleCategory.SYNCHRONIZED_LEGACY_CLASSES, "1.0.0", RuleTag.PERFORMANCE, RuleTag.CONCURRENCY),
 
     /**
      * Skip lists are generally faster than balanced trees
      */
-    USE_CONCURRENTSKIPLISTSET_INSTEAD_OF_TREESET (noClasses().should().callConstructor(java.util.TreeSet.class).because("Use ConcurrentSkipListSet instead of TreeSet because the SkipList algo is faster than Balanced Tree")),
+    USE_CONCURRENTSKIPLISTSET_INSTEAD_OF_TREESET(noClasses().should().callConstructor(java.util.TreeSet.class).because("Use ConcurrentSkipListSet instead of TreeSet because the SkipList algo is faster than Balanced Tree"),
+            RuleCategory.SORTED_COLLECTIONS, "1.0.0", RuleTag.PERFORMANCE, RuleTag.COLLECTIONS),
 
     /**
      * Skip lists are generally faster than balanced trees
      */
-    USE_CONCURRENTSKIPLISTMAP_INSTEAD_OF_TREEMAP (noClasses().should().callConstructor(java.util.TreeMap.class).because("Use ConcurrentSkipListMap instead of TreeMap because the SkipList algo is faster than Balanced Tree")),
+    USE_CONCURRENTSKIPLISTMAP_INSTEAD_OF_TREEMAP(noClasses().should().callConstructor(java.util.TreeMap.class).because("Use ConcurrentSkipListMap instead of TreeMap because the SkipList algo is faster than Balanced Tree"),
+            RuleCategory.SORTED_COLLECTIONS, "1.0.0", RuleTag.PERFORMANCE, RuleTag.COLLECTIONS),
 
     /**
      * Thread groups have long been recommended against, with ExecutorService classes being recommended as their replacement
      */
-    USE_EXECUTORSERVICE_INSTEAD_OF_THREADGROUP (noClasses().should().callConstructor(java.lang.ThreadGroup.class).because("Use ExecutorService instead of ThreadGroup")),
+    USE_EXECUTORSERVICE_INSTEAD_OF_THREADGROUP(noClasses().should().callConstructor(ThreadGroup.class).because("Use ExecutorService instead of ThreadGroup"),
+            RuleCategory.THREADING, "1.0.0", RuleTag.CONCURRENCY, RuleTag.DEPRECATED_APIS),
 
     /**
      * This rule prevents Spring Boot service classes from calling controller classes
      */
-    SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..service..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Services should not call Controllers")),
+    SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLERS(noClasses().that().resideInAPackage("..service..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Services should not call Controllers"),
+            RuleCategory.SPRING_LAYERING_BY_PACKAGE, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
     /**
      * This rule prevents Spring Boot repository classes from calling controller classes
      */
-    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Repositories should not call Controllers")),
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLERS(noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..controller..").allowEmptyShould(true).because("Spring Boot Repositories should not call Controllers"),
+            RuleCategory.SPRING_LAYERING_BY_PACKAGE, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
     /**
      * This rule prevents Spring Boot repository classes from calling service classes
      */
-    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES (noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true).because("Spring Boot Repositories should not call Services")),
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICES(noClasses().that().resideInAPackage("..repository..").should().dependOnClassesThat().resideInAPackage("..service..").allowEmptyShould(true).because("Spring Boot Repositories should not call Services"),
+            RuleCategory.SPRING_LAYERING_BY_PACKAGE, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
     /**
-     * This rule prevents interfaces being named *Impl 
+     * This rule prevents interfaces being named *Impl
      * Positive tests are testNoImplInterfacesDoesNotFailRuleset and testNoInterfacesDoesNotFailRuleset, negative tests is testImplViolationFailsRuleset
      */
-    INTERFACES_SHOULD_NOT_END_IN_IMPL (noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).because("Interfaces should not be named Impl")),
-    
+    INTERFACES_SHOULD_NOT_END_IN_IMPL(noClasses().that().haveSimpleNameEndingWith("Impl").should().beInterfaces().allowEmptyShould(true).because("Interfaces should not be named Impl"),
+            RuleCategory.NAMING, "1.0.0", RuleTag.NAMING),
+
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      * Positive test is testJpaCohesionViolationDoesNotFailRuleset, negative test is testJpaCohesionViolationFailsRuleset
      */
-    JPA_COUPLING_RESTFUL_GET_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "2.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAKARTA),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Get restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "2.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAVAX),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Post restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_POST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_POST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_POST_MAPPINGS(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_POST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "4.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAKARTA),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from Post restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_POST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_POST_MAPPINGS_JAVAX(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_GET_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "4.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAVAX),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("jakarta.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "2.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAKARTA),
 
     /**
      * This rule prevents inappropriate coupling by preventing instances of JPA classes from being returned from restful endpoints.   Database table layouts should not forcibly define the restful return formats, there should be data transfer objects that are returned to the clients
      */
-    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX (noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types")),
+    JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX(noMethods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping").should().haveRawReturnType(Predicates.annotatedWith("javax.persistence.Entity")).allowEmptyShould(true).because("JPA_COUPLING_RESTFUL_REQUEST_MAPPINGS_JAVAX REST response types should not be forced to always exactly match JPA Entity types"),
+            RuleCategory.JPA_ENTITY_EXPOSURE, "2.0.0", RuleTag.SPRING, RuleTag.JPA, RuleTag.REST, RuleTag.DESIGN, RuleTag.JAVAX),
 
     /**
      * This rule requires that methods annotated with RequestMapping be in a class annotated with Controller
      */
-    SPRING_BOOT_REQUESTMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping")
-        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
-        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
-        .allowEmptyShould(true).because("SPRING_BOOT_REQUESTMAPPING_CONTROLLER RequestMapping methods should be in Controller classes")),
+    SPRING_BOOT_REQUESTMAPPING_CONTROLLER(methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.RequestMapping")
+            .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+            .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+            .allowEmptyShould(true).because("SPRING_BOOT_REQUESTMAPPING_CONTROLLER RequestMapping methods should be in Controller classes"),
+            RuleCategory.SPRING_WEB, "4.0.0", RuleTag.SPRING, RuleTag.REST),
 
     /**
      * This rule requires that methods annotated with GetMapping be in a class annotated with Controller
      */
-    SPRING_BOOT_GETMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping")
-        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
-        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
-        .allowEmptyShould(true).because("SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes")),
+    SPRING_BOOT_GETMAPPING_CONTROLLER(methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.GetMapping")
+            .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+            .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+            .allowEmptyShould(true).because("SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes"),
+            RuleCategory.SPRING_WEB, "4.0.0", RuleTag.SPRING, RuleTag.REST),
 
     /**
      * This rule requires that methods annotated with PostMapping be in a class annotated with Controller
      */
-    SPRING_BOOT_POSTMAPPING_CONTROLLER (methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping")
-        .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
-        .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
-        .allowEmptyShould(true).because("SPRING_BOOT_POSTMAPPING_CONTROLLER GetMapping methods should be in Controller classes")),
+    SPRING_BOOT_POSTMAPPING_CONTROLLER(methods().that().areAnnotatedWith("org.springframework.web.bind.annotation.PostMapping")
+            .should().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.web.bind.annotation.RestController")
+            .orShould().beDeclaredInClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller")
+            .allowEmptyShould(true).because("SPRING_BOOT_POSTMAPPING_CONTROLLER GetMapping methods should be in Controller classes"),
+            RuleCategory.SPRING_WEB, "4.0.0", RuleTag.SPRING, RuleTag.REST),
 
     /**
      * This rule ensures isSomething methods return primitive boolean
      * Positive test is testIsMethodReturnsPrimitiveBooleanDoesNotFailRuleset, negative test is testIsMethodReturnsPrimitiveBooleanFailsRuleset
      */
-     IS_METHODS_RETURN_PRIMITIVE_BOOLEAN (methods().that().haveNameMatching("is[A-Z][a-zA-Z]+").should().haveRawReturnType(new DescribedPredicate<JavaClass>("primitive boolean") {
+    IS_METHODS_RETURN_PRIMITIVE_BOOLEAN(methods().that().haveNameMatching("is[A-Z][a-zA-Z]+").should().haveRawReturnType(new DescribedPredicate<>("primitive boolean") {
         @Override
         public boolean test(JavaClass input) {
             return input.isPrimitive() && "boolean".equals(input.getName());
         }
-     }).because ("Is methods should return primitive boolean - Boolean could return null").allowEmptyShould(true)),
-
-     /**
-      * This rule recommends against field named isBlah since they're confusing and should just be blah.   blah setter and getter would be setBlah and isBlah, isBlah setter and getter would be setIsBlah and isIsBlah which is confusing
-      * Positive test method is testFieldsThatArentIsBlahIsGood, negative test method is testFieldsThatAreIsBlahIsBad
-      */
-      RENAME_IS_FIELDS (noFields().should().haveNameMatching("is[A-Z][a-zA-Z]+").because("isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing").allowEmptyShould(true)),
+    }).because("Is methods should return primitive boolean - Boolean could return null").allowEmptyShould(true),
+            RuleCategory.NAMING, "1.0.0", RuleTag.NAMING, RuleTag.BOOLEANS, RuleTag.NULL_SAFETY),
 
     /**
-     * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods 
+     * This rule recommends against field named isBlah since they're confusing and should just be blah.   blah setter and getter would be setBlah and isBlah, isBlah setter and getter would be setIsBlah and isIsBlah which is confusing
+     * Positive test method is testFieldsThatArentIsBlahIsGood, negative test method is testFieldsThatAreIsBlahIsBad
+     */
+    RENAME_IS_FIELDS(noFields().should().haveNameMatching("is[A-Z][a-zA-Z]+").because("isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing").allowEmptyShould(true),
+            RuleCategory.NAMING, "1.0.0", RuleTag.NAMING, RuleTag.BOOLEANS),
+
+    /**
+     * This rule encourages positive boolean methods to avoid confusing if (!isNotSomething()) methods
      * Positive test method is testRestateNegativeIsNotDoesNotFailRuleset, negative test method is testRestateNegativeIsNotFailsRuleset
      */
-     RESTATE_ISNOT_METHODS_AS_POSITIVE (noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true)),
-     
-     /**
-      * Optional methods should return Empty and not be nullable.
-      */
-      OPTIONAL_NOT_NULLABLE (noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE Optional methods should return Optional.empty not null")),
+    RESTATE_ISNOT_METHODS_AS_POSITIVE(noMethods().that().haveNameMatching("isNot[A-Z][a-zA-Z]+").should().haveNameStartingWith("isNot").because("isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing").allowEmptyShould(true),
+            RuleCategory.NAMING, "1.0.0", RuleTag.NAMING, RuleTag.BOOLEANS),
 
-     /**
-      * Optional methods should return Empty and not be nullable.
-      */
-      OPTIONAL_NOT_NULLABLE_JAVAX (noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JAVAX Optional methods should return Optional.empty not null")),
+    /**
+     * Optional methods should return Empty and not be nullable.
+     */
+    OPTIONAL_NOT_NULLABLE(noMethods().that().areAnnotatedWith("jakarta.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE Optional methods should return Optional.empty not null"),
+            RuleCategory.NULL_SAFETY, "1.0.0", RuleTag.NULL_SAFETY, RuleTag.JAKARTA),
 
-     /**
-      * Optional methods should return Empty and not be nullable.
-      */
-      OPTIONAL_NOT_NULLABLE_JSPECIFY (noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JSPECIFY Optional methods should return Optional.empty not null")),
+    /**
+     * Optional methods should return Empty and not be nullable.
+     */
+    OPTIONAL_NOT_NULLABLE_JAVAX(noMethods().that().areAnnotatedWith("javax.annotation.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JAVAX Optional methods should return Optional.empty not null"),
+            RuleCategory.NULL_SAFETY, "1.0.0", RuleTag.NULL_SAFETY, RuleTag.JAVAX),
 
-     /**
-      * JUnit 5 tests are ignored if they are static
-      */
-     JUNIT5_TESTS_CANT_BE_STATIC (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().beStatic()
-        .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static")),
+    /**
+     * Optional methods should return Empty and not be nullable.
+     */
+    OPTIONAL_NOT_NULLABLE_JSPECIFY(noMethods().that().areAnnotatedWith("org.jspecify.annotations.Nullable").should().haveRawReturnType(Predicates.annotatedWith("java.util.Optional")).allowEmptyShould(true).because("OPTIONAL_NOT_NULLABLE_JSPECIFY Optional methods should return Optional.empty not null"),
+            RuleCategory.NULL_SAFETY, "1.0.0", RuleTag.NULL_SAFETY, RuleTag.JSPECIFY),
 
-     /**
-      * JUnit 5 tests are ignored if they are private
-      */
-     JUNIT5_TESTS_CANT_BE_PRIVATE (noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().bePrivate()
-        .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private")),
+    /**
+     * JUnit 5 tests are ignored if they are static
+     */
+    JUNIT5_TESTS_CANT_BE_STATIC(noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().beStatic()
+            .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static"),
+            RuleCategory.JUNIT5, "4.0.0", RuleTag.JUNIT, RuleTag.TESTING),
+
+    /**
+     * JUnit 5 tests are ignored if they are private
+     */
+    JUNIT5_TESTS_CANT_BE_PRIVATE(noMethods().that().areAnnotatedWith("org.junit.jupiter.api.Test").should().bePrivate()
+            .allowEmptyShould(true).because("JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private"),
+            RuleCategory.JUNIT5, "4.0.2", RuleTag.JUNIT, RuleTag.TESTING),
 
     /**
      * Prefer Caffeine over Google Guava caching
      */
-    PREFER_CAFFEINE_OVER_GUAVA_CACHING (
-        noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.cache")
-        .allowEmptyShould(true).because("PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html")),
+    PREFER_CAFFEINE_OVER_GUAVA_CACHING(
+            noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.cache")
+                    .allowEmptyShould(true).because("PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html"),
+            RuleCategory.GUAVA, "5.0.0", RuleTag.GUAVA, RuleTag.DEPRECATED_APIS),
 
     /**
      * Guava discourages the use of their EventBus
      */
-    GUAVA_EVENTBUS_SHOULD_NOT_BE_USED (
-        noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.eventbus")
-        .allowEmptyShould(true).because("GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus")),
+    GUAVA_EVENTBUS_SHOULD_NOT_BE_USED(
+            noClasses().should().dependOnClassesThat().resideInAPackage("com.google.common.eventbus")
+                    .allowEmptyShould(true).because("GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus"),
+            RuleCategory.GUAVA, "5.0.0", RuleTag.GUAVA, RuleTag.DEPRECATED_APIS),
 
     /**
      * Spring cache creates proxies around cacheable methods, calling them from inside the same class will bypass the proxy and not use the cache
      */
-    SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS (noMethods().that().areAnnotatedWith("org.springframework.cache.annotation.Cacheable")
-        .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache")),
+    SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS(noMethods().that().areAnnotatedWith("org.springframework.cache.annotation.Cacheable")
+            .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache"),
+            RuleCategory.SPRING_PROXIES, "5.0.0", RuleTag.SPRING, RuleTag.PROXIES),
 
     /**
      * Spring transaction management creates proxies around transactional methods, calling them from inside the same class will bypass the proxy and not start a new transaction
      */
-    SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS (noMethods().that().areAnnotatedWith("org.springframework.transaction.annotation.Transactional")
-        .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction")),
+    SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS(noMethods().that().areAnnotatedWith("org.springframework.transaction.annotation.Transactional")
+            .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction"),
+            RuleCategory.SPRING_PROXIES, "5.1.0", RuleTag.SPRING, RuleTag.PROXIES),
 
-     /**
-      * This rule prevents Spring Boot service classes from calling controller methods
-      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
-      */
-      SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Service").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Services should not call Controller methods")),
+    /**
+     * This rule prevents Spring Boot service classes from calling controller methods
+     * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
+     */
+    SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS(noClasses().that().areAnnotatedWith("org.springframework.stereotype.Service").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Services should not call Controller methods"),
+            RuleCategory.SPRING_LAYERING_BY_ANNOTATION, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
-      /**
-      * This rule prevents Spring Boot repository classes from calling controller methods
-      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingControllerIsBad
-      */
-      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Repositories should not call Controller methods")),
+    /**
+     * This rule prevents Spring Boot repository classes from calling controller methods
+     * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingControllerIsBad
+     */
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS(noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Controller").allowEmptyShould(true).because("Spring Boot Repositories should not call Controller methods"),
+            RuleCategory.SPRING_LAYERING_BY_ANNOTATION, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
-      /**
-      * This rule prevents Spring Boot repository classes from calling service methods
-      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingServiceIsBad
-      */
-      SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS (noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods")),
+    /**
+     * This rule prevents Spring Boot repository classes from calling service methods
+     * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testRepositoryCallingServiceIsBad
+     */
+    SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS(noClasses().that().areAnnotatedWith("org.springframework.stereotype.Repository").should().dependOnClassesThat().areAnnotatedWith("org.springframework.stereotype.Service").allowEmptyShould(true).because("Spring Boot Repositories should not call Service methods"),
+            RuleCategory.SPRING_LAYERING_BY_ANNOTATION, "2.0.0", RuleTag.SPRING, RuleTag.LAYERING),
 
-      /**
-       * Spring requires Async methods to be public since it creates proxies around them, non-public methods bypass the proxy and won't be executed asynchronously
-       */
-      METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC (methods().that().areAnnotatedWith("org.springframework.scheduling.annotation.Async").should().bePublic()
-        .because("Spring requires Async methods to be public").allowEmptyShould(true)),
+    /**
+     * Spring requires Async methods to be public since it creates proxies around them, non-public methods bypass the proxy and won't be executed asynchronously
+     */
+    METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC(methods().that().areAnnotatedWith("org.springframework.scheduling.annotation.Async").should().bePublic()
+            .because("Spring requires Async methods to be public").allowEmptyShould(true),
+            RuleCategory.SPRING_PROXIES, "5.1.0", RuleTag.SPRING, RuleTag.PROXIES, RuleTag.CONCURRENCY),
 
-      /**
-       * org.apache.commons.lang3.tuple classes (Pair, Triple, etc) remove the context of what the actual object represents and prevent creating custom methods specific to the business need. Make a real class instead.
-       */
-      DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES (
-        noClasses().should().dependOnClassesThat().resideInAPackage("org.apache.commons.lang3.tuple")
-        .allowEmptyShould(true).because("DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES These classes remove the context of what the actual object is and prevent creating custom methods specific to the business need for a real class - make a real class instead"))
-      ;
+    /**
+     * org.apache.commons.lang3.tuple classes (Pair, Triple, etc) remove the context of what the actual object represents and prevent creating custom methods specific to the business need. Make a real class instead.
+     */
+    DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES(
+            noClasses().should().dependOnClassesThat().resideInAPackage("org.apache.commons.lang3.tuple")
+                    .allowEmptyShould(true).because("DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES These classes remove the context of what the actual object is and prevent creating custom methods specific to the business need for a real class - make a real class instead"),
+            RuleCategory.APACHE_COMMONS, "5.1.0", RuleTag.APACHE_COMMONS, RuleTag.DESIGN);
 
     private final ArchRule rule;
+    private final RuleCategory category;
+    private final String since;
+    private final Set<RuleTag> tags;
 
-    private ArchitectureRule (ArchRule ruleInput) { this.rule = ruleInput; }
+    private ArchitectureRule(ArchRule ruleInput, RuleCategory category, String since, RuleTag... tags) {
+        this.rule = ruleInput;
+        this.category = category;
+        this.since = since;
+        EnumSet<RuleTag> tagSet = EnumSet.noneOf(RuleTag.class);
+        tagSet.addAll(Arrays.asList(tags));
+        this.tags = Collections.unmodifiableSet(tagSet);
+    }
 
     /**
      * Obtains the Archrule being checked
+     *
      * @return Archrule
      */
-    public ArchRule getRule () { return rule; }
+    public ArchRule getRule() {
+        return rule;
+    }
+
+    /**
+     * The category this rule is grouped under in the rules tree
+     *
+     * @return category
+     */
+    public RuleCategory getCategory() {
+        return category;
+    }
+
+    /**
+     * The library version that introduced this rule
+     *
+     * @return version, e.g. "5.1.0"
+     */
+    public String getSince() {
+        return since;
+    }
+
+    /**
+     * Cross-cutting labels for this rule
+     *
+     * @return unmodifiable set of tags, in declaration order of {@link RuleTag}
+     */
+    public Set<RuleTag> getTags() {
+        return tags;
+    }
 
     /*
      * An ArchCondition that checks whether a method is called by any method in the same class
