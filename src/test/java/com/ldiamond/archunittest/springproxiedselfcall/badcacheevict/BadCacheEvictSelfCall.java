@@ -8,6 +8,7 @@ public class BadCacheEvictSelfCall {
 
     @CacheEvict("authors")
     public void evictAuthor(Long id) {
+        // Intentionally empty: the rule only checks who calls this method
     }
 
     public void replaceAuthor(Long id) {

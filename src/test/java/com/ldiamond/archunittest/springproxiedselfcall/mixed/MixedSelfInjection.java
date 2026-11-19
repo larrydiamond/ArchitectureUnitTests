@@ -15,6 +15,7 @@ public class MixedSelfInjection {
 
     @Async
     public void sendEmail(Long id) {
+        // Intentionally empty: the rule only checks who calls this method
     }
 
     public void viaProxy(Long id) {

@@ -324,7 +324,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringCacheableMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good"));
     }
 
     @Test
@@ -339,7 +339,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringTransactionalMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good"));
     }
 
     @Test void testAsyncMethodNotPublicFailsRuleset() { // negative test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
@@ -351,7 +351,7 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testAsyncMethodPublicDoesNotFailRuleset() { // positive test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good"));
     }
 
     @Test
@@ -375,7 +375,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringProxiedMethodsCalledThroughSelfInjectionDoesNotFailRuleset() { // positive test for the SPRING_*_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS rules
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.good");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.good"));
     }
 
     @Test

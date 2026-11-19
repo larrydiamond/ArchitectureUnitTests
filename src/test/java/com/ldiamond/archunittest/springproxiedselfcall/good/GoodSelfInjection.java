@@ -16,10 +16,12 @@ public class GoodSelfInjection {
 
     @Async
     public void sendEmail(Long id) {
+        // Intentionally empty: the rule only checks who calls this method
     }
 
     @Transactional
     public void saveAuthor(Long id) {
+        // Intentionally empty: the rule only checks who calls this method
     }
 
     public void sendAllEmails(Long id) {
