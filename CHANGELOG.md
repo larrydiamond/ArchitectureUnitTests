@@ -27,6 +27,10 @@ users reference to exclude rules), `ArchitectureUnitTest` and the rules tree cla
 
 ### Changed
 
+- The library is built and tested with JDK 25 and still targets Java 17, now enforced with `--release 17`. CI also runs
+  the tests on JDK 17 and 21.
+- The ArchUnit dependency is pinned to 1.5.1. Earlier POMs declared it as `RELEASE`, so consumers got whatever ArchUnit
+  release was newest when they built.
 - Calls to a proxied method made through a self-injected reference (for example a `@Lazy` field of the class's own type)
   are no longer reported. A plain `this.method()` call is still reported, even in a class that also self-injects.
 
