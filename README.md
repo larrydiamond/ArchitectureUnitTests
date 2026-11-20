@@ -27,6 +27,8 @@ By providing a call that applies each of our architecture rules, this provides t
 
 ### Installation
 
+The library requires Java 17 or newer.
+
 To use the ArchUnit Easy Access Java Library in your project, include the following dependency in your `pom.xml`:
 
 ```xml
