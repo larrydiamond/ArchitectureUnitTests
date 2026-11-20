@@ -21,8 +21,10 @@ package com.ldiamond.archunittest;
 
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.domain.JavaFieldAccess;
 import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.domain.JavaMethodCall;
+import com.tngtech.archunit.core.domain.properties.CanBeAnnotated;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated.Predicates;
 import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
@@ -288,20 +290,6 @@ public enum ArchitectureRule {
             RuleCategory.GUAVA, "5.0.0", RuleTag.GUAVA, RuleTag.DEPRECATED_APIS),
 
     /**
-     * Spring cache creates proxies around cacheable methods, calling them from inside the same class will bypass the proxy and not use the cache
-     */
-    SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS(noMethods().that().areAnnotatedWith("org.springframework.cache.annotation.Cacheable")
-            .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache"),
-            RuleCategory.SPRING_PROXIES, "5.0.0", RuleTag.SPRING, RuleTag.PROXIES),
-
-    /**
-     * Spring transaction management creates proxies around transactional methods, calling them from inside the same class will bypass the proxy and not start a new transaction
-     */
-    SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS(noMethods().that().areAnnotatedWith("org.springframework.transaction.annotation.Transactional")
-            .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because("Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction"),
-            RuleCategory.SPRING_PROXIES, "5.1.0", RuleTag.SPRING, RuleTag.PROXIES),
-
-    /**
      * This rule prevents Spring Boot service classes from calling controller methods
      * Postive test is testControllerCallingServiceCallingRepositoryIsGood, Negative test is testServiceCallingControllerIsBad
      */
@@ -328,6 +316,24 @@ public enum ArchitectureRule {
     METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC(methods().that().areAnnotatedWith("org.springframework.scheduling.annotation.Async").should().bePublic()
             .because("Spring requires Async methods to be public").allowEmptyShould(true),
             RuleCategory.SPRING_PROXIES, "5.1.0", RuleTag.SPRING, RuleTag.PROXIES, RuleTag.CONCURRENCY),
+
+    /**
+     * Annotation-driven Spring behaviour (transactions, caching, async execution, method security...) is applied by a proxy around the bean,
+     * calling an annotated method from inside the same class bypasses that proxy and silently skips the behaviour.
+     * Calls made through a self-injected reference are allowed.
+     */
+    SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS(
+            methodsAnnotatedWithShouldNotBeCalledInsideSameClass("Methods whose behaviour is applied by a Spring proxy (@Transactional, @Cacheable, @CachePut, @CacheEvict, @Caching, @Async, @PreAuthorize, @PostAuthorize, @Secured) should not be called from inside the same class since the call bypasses the proxy and the annotation has no effect",
+                    "org.springframework.transaction.annotation.Transactional",
+                    "org.springframework.cache.annotation.Cacheable",
+                    "org.springframework.cache.annotation.CachePut",
+                    "org.springframework.cache.annotation.CacheEvict",
+                    "org.springframework.cache.annotation.Caching",
+                    "org.springframework.scheduling.annotation.Async",
+                    "org.springframework.security.access.prepost.PreAuthorize",
+                    "org.springframework.security.access.prepost.PostAuthorize",
+                    "org.springframework.security.access.annotation.Secured"),
+            RuleCategory.SPRING_PROXIES, "5.1.0", RuleTag.SPRING, RuleTag.PROXIES),
 
     /**
      * org.apache.commons.lang3.tuple classes (Pair, Triple, etc) remove the context of what the actual object represents and prevent creating custom methods specific to the business need. Make a real class instead.
@@ -388,14 +394,31 @@ public enum ArchitectureRule {
     }
 
     /*
-     * An ArchCondition that checks whether a method is called by any method in the same class
+     * Builds the rule "methods carrying any of these annotations should not be called by another method of the same class".
+     * Every Spring annotation that works through a proxy shares this failure mode, so supporting another one is just another annotation name.
+     * Annotations are matched by name so the annotated library does not have to be on this library's classpath.
+     */
+    static ArchRule methodsAnnotatedWithShouldNotBeCalledInsideSameClass(String because, String... annotationClassNames) {
+        DescribedPredicate<CanBeAnnotated> annotated = Arrays.stream(annotationClassNames)
+                .map(Predicates::annotatedWith)
+                .reduce((left, right) -> left.or(right))
+                .orElseThrow(() -> new IllegalArgumentException("at least one annotation is required"));
+        // ArchUnit's own areAnnotatedWith() reads "that are annotated with", keep the same wording
+        return noMethods().that(annotated.as("are %s", annotated.getDescription()))
+                .should(beCalledByAnyMethodInTheSameClass()).allowEmptyShould(true).because(because);
+    }
+
+    /*
+     * An ArchCondition that checks whether a method is called by any method in the same class.
+     * Calls made through a self-injected reference (a field whose type is the class itself) go through the Spring proxy, so they are not violations.
      */
     static ArchCondition<JavaMethod> beCalledByAnyMethodInTheSameClass() {
         return new ArchCondition<JavaMethod>("be called by any method in the same class") {
             @Override
             public void check(JavaMethod javaMethod, ConditionEvents conditionEvents) {
                 for (JavaMethodCall javaMethodCall : javaMethod.getCallsOfSelf()) {
-                    if (javaMethodCall.getOriginOwner().getFullName().equals(javaMethodCall.getTargetOwner().getFullName())) {
+                    if (javaMethodCall.getOriginOwner().getFullName().equals(javaMethodCall.getTargetOwner().getFullName())
+                            && !isCalledThroughSelfInjectedField(javaMethodCall)) {
                         String message = String.format("Method %s is called by %s in the same class %s",
                                 javaMethod.getFullName(),
                                 javaMethodCall.getOrigin().getFullName(),
@@ -406,5 +429,22 @@ public enum ArchitectureRule {
             }
         };
     }
-}
 
+    /*
+     * Bytecode does not record the receiver of a call, so a call like self.method() looks identical to this.method().
+     * We treat a call as going through a self-injected field when, on the same source line, the calling code reads a field typed as the owner class.
+     * A plain this.method() call elsewhere in the same class is still reported.
+     */
+    private static boolean isCalledThroughSelfInjectedField(JavaMethodCall javaMethodCall) {
+        JavaClass owner = javaMethodCall.getOriginOwner();
+        int line = javaMethodCall.getLineNumber();
+        for (JavaFieldAccess access : javaMethodCall.getOrigin().getFieldAccesses()) {
+            if (access.getAccessType() == JavaFieldAccess.AccessType.GET
+                    && access.getLineNumber() == line
+                    && access.getTarget().getRawType().equals(owner)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

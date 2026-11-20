@@ -312,46 +312,34 @@ class TestArchitectureUnitTest {
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
-    @Test void testSpringCacheableMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+    @Test
+    void testSpringCacheableMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.bad");
         });
-        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Cacheable should be called by any method in the same class, because Cacheable methods should not be called from inside the same class since Spring creates proxies around cacheable methods, calling them from inside the same class will not use the cache' was violated (1 times):"));
+        assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
+        assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springcache.bad.BadCache.findAuthorById(java.lang.Long) is called by com.ldiamond.archunittest.springcache.bad.BadCache.findAnotherAuthorById(java.lang.Long) in the same class com.ldiamond.archunittest.springcache.bad.BadCache"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 698, 699: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
-        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
-    @Test void testSpringCacheableMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_CACHEABLE_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good");
+    @Test
+    void testSpringCacheableMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.good"));
     }
 
-    @Test void testSpringTransactionalMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+    @Test
+    void testSpringTransactionalMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
         AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
             ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.bad");
         });
-        assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Transactional should be called by any method in the same class, because Transactional methods should not be called from inside the same class since Spring creates proxies around transactional methods, calling them from inside the same class will not start a new transaction' was violated (1 times):"));
+        assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
+        assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAuthor(java.lang.Long) is called by com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAnotherAuthor(java.lang.Long) in the same class com.ldiamond.archunittest.springtransactional.bad.BadTransactional"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 760, 761: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
-        assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
-    @Test void testSpringTransactionalMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_TRANSACTIONAL_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good");
+    @Test
+    void testSpringTransactionalMethodsCalledFromOtherClassDoesNotFailRuleset() { // positive test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.good"));
     }
 
     @Test void testAsyncMethodNotPublicFailsRuleset() { // negative test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
@@ -363,7 +351,41 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testAsyncMethodPublicDoesNotFailRuleset() { // positive test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
-        ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.good"));
+    }
+
+    @Test
+    void testSpringProxiedMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS, @Async
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.bad");
+        });
+        assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
+        assertTrue(ae.toString().contains("was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall.sendEmail(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall.sendAllEmails(java.lang.Long) in the same class com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall"));
+    }
+
+    @Test
+    void testSpringProxiedRuleCoversOtherAnnotationsFailsRuleset() { // same rule, a different annotation (@CacheEvict)
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.badcacheevict");
+        });
+        assertTrue(ae.toString().contains("was violated (1 times):"));
+        assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springproxiedselfcall.badcacheevict.BadCacheEvictSelfCall.evictAuthor(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.badcacheevict.BadCacheEvictSelfCall.replaceAuthor(java.lang.Long)"));
+    }
+
+    @Test
+    void testSpringProxiedMethodsCalledThroughSelfInjectionDoesNotFailRuleset() { // positive test for the SPRING_*_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS rules
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.good"));
+    }
+
+    @Test
+    void testSelfInjectionDoesNotHideDirectThisCallFailsRuleset() { // a self-injected field must only exempt calls made through it
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
+            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.mixed");
+        });
+        assertTrue(ae.toString().contains("was violated (1 times):"));
+        assertTrue(ae.toString().contains("MixedSelfInjection.sendEmail(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.mixed.MixedSelfInjection.viaThis(java.lang.Long)"));
+        assertFalse(ae.toString().contains("MixedSelfInjection.viaProxy"));
     }
 
     @Test void testApacheCommonsLang3TupleConstructionFailsRuleset() { // negative test for DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES
