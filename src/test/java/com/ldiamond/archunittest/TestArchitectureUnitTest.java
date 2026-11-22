@@ -7,9 +7,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,66 +22,55 @@ package com.ldiamond.archunittest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestArchitectureUnitTest {
-    @Test void testpackageFailsRuleset () {
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.testpackage");
-        });
+    @Test
+    void testPackageFailsRuleset() {
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.testpackage"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Vector.<init>(), because Use ArrayList instead of Vector because Arraylist is unsynchronized and faster' was violated (1 times):"));
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Vector.<init>()> in (ClassWithViolationsUnderTest.java:26)"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 865, 867: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 865, 867 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
-    @Test void testpackageFailsRulesetWithExclusionForVectorButNotHashtable () {
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR), 
-            "com.ldiamond.archunittest.testpackage");
-        });
+    @Test
+    void testPackageFailsRulesetWithExclusionForVectorButNotHashtable() {
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture(List.of(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR),
+                "com.ldiamond.archunittest.testpackage"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should call constructor Hashtable.<init>(), because Use HashMap instead of HashTable because HashMap is unsynchronized and faster' was violated (1 times):"));
         assertTrue(ae.toString().contains("Constructor <com.ldiamond.archunittest.testpackage.ClassWithViolationsUnderTest.<init>()> calls constructor <java.util.Hashtable.<init>()> in (ClassWithViolationsUnderTest.java:27)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 472, 473: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 472, 473 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
-    @Test void testpackageSucceedsRulesetWithExclusionForVectorAndHashtable () {
-        ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR, ArchitectureRule.USE_HASHMAP_INSTEAD_OF_HASHTABLE), 
+    @Test
+    void testPackageSucceedsRulesetWithExclusionForVectorAndHashtable() {
+        ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR, ArchitectureRule.USE_HASHMAP_INSTEAD_OF_HASHTABLE),
         "com.ldiamond.archunittest.testpackage");
     }
 
     @Test void testImplViolationFailsRuleset () { // Negative test for INTERFACES_SHOULD_NOT_END_IN_IMPL
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.hasImplInterface");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.impl.hasImplInterface"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that have simple name ending with 'Impl' should be interfaces, because Interfaces should not be named Impl' was violated (1 times):"));
         assertTrue(ae.toString().contains("Class <com.ldiamond.archunittest.impl.hasImplInterface.BlahImpl> is an interface in (BlahImpl.java:0)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 370, 371: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 370, 371 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -94,19 +83,14 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testJpaCohesionViolationFailsRuleset () { // negative test for JPA_COUPLING_RESTFUL_GET_MAPPINGS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.jparest.hasProblem"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @GetMapping should have raw return type annotated with @Entity, because JPA_COUPLING_RESTFUL_GET_MAPPINGS REST response types should not be forced to always exactly match JPA Entity types' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.jparest.hasProblem.ProblemController.failmytest(java.lang.String)> has raw return type annotated with @Entity in (ProblemController.java:29)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 548, 549: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 548, 549 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -115,19 +99,14 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testIsMethodReturnsPrimitiveBooleanFailsRuleset () { // negative test for IS_METHODS_RETURN_PRIMITIVE_BOOLEAN
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean");
-        });        
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that have name matching 'is[A-Z][a-zA-Z]+' should have raw return type primitive boolean, because Is methods should return primitive boolean - Boolean could return null' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.IsReturnsBoolean.IsDoesNotReturnBoolean.Blah.isBad()> does not have raw return type primitive boolean in (Blah.java:23)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 481, 482: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 481, 482 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -136,19 +115,14 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testRestateNegativeIsNotFailsRuleset () { // negative test for RESTATE_ISNOT_METHODS_AS_POSITIVE
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasNegative");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.restatePositive.hasNegative"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that have name matching 'isNot[A-Z][a-zA-Z]+' should have name starting with 'isNot', because isNot methods should be rewritten as positive conditions since if (!isNotSomething() is confusing' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.restatePositive.hasNegative.Blah.isNotBlah()> has name starting with 'isNot' in (Blah.java:23)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 482, 483: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 482, 483 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -161,53 +135,38 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testServiceCallingControllerIsBad () {  // negative test for SPRING_BOOT_SERVICES_SHOULD_NOT_CALL_CONTROLLER_METHODS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.servicedependsoncontroller");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.servicedependsoncontroller"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Service should depend on classes that are annotated with @Controller, because Spring Boot Services should not call Controller methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadService.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.servicedependsoncontroller.BadController.badIdea()> in (BadService.java:22"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 561, 562: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 561, 562 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testRepositoryCallingControllerIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_CONTROLLER_METHODS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Controller, because Spring Boot Repositories should not call Controller methods' was violated (1 times)"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsoncontroller.BadController.badIdea()> in (BadRepository.java:22"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 580, 581: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 580, 581 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testRepositoryCallingServiceIsBad () {  // negative test for SPRING_BOOT_REPOSITORIES_SHOULD_NOT_CALL_SERVICE_METHODS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsonservice");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springdependencies.repositorydependsonservice"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes that are annotated with @Repository should depend on classes that are annotated with @Service, because Spring Boot Repositories should not call Service methods' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadRepository.doSomething()> calls method <com.ldiamond.archunittest.springdependencies.repositorydependsonservice.BadService.badIdea()> in (BadRepository.java:22"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 565, 566: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 565, 566 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -216,20 +175,15 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testFieldsThatAreIsBlahIsBad () { // negative test for RENAME_IS_FIELDS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.primitiveBooleanIs.bad"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no fields should have name matching 'is[A-Z][a-zA-Z]+', because isBlah should be rewritten as blah, getter on isBlah would be isIsBlah which is confusing' was violated (2 times):"));
         assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isAlsoNotAGoodChoice> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
         assertTrue(ae.toString().contains("Field <com.ldiamond.archunittest.primitiveBooleanIs.bad.BadFields.isNotAGoodIdea> has name matching 'is[A-Z][a-zA-Z]+' in (BadFields.java:0)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 592, 594: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 592, 594 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -237,27 +191,21 @@ class TestArchitectureUnitTest {
         ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springannotations.good");
     }
 
-    @Test void testMethodAnnotatedWithGetMappingIsntInControllerClassFailsRuleset() { // negative test for SPRING_BOOT_REQUESTMAPPING_CONTROLLER
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springannotations.bad");
-        });
+    @Test
+    void testMethodAnnotatedWithGetMappingIsNotInControllerClassFailsRuleset() { // negative test for SPRING_BOOT_REQUESTMAPPING_CONTROLLER
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springannotations.bad"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that are annotated with @GetMapping should be declared in classes that are annotated with @RestController or should be declared in classes that are annotated with @Controller, because SPRING_BOOT_GETMAPPING_CONTROLLER GetMapping methods should be in Controller classes' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @Controller in (BadService.java:10) and Method <com.ldiamond.archunittest.springannotations.bad.BadService.passmytest(java.lang.String)> is not declared in classes that are annotated with @RestController in (BadService.java:10)"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 803, 804: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 803, 804 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testStaticUnitTestsFail() { // negative test for JUNIT5_TESTS_CANT_BE_STATIC and JUNIT5_TESTS_CANT_BE_PRIVATE
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.invalidjunittests"));
 
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be static, because JUNIT5_TESTS_CANT_BE_STATIC JUnit 5 ignores tests that are static' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.StaticUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier STATIC in (StaticUnitTest.java:9)"));
@@ -265,14 +213,11 @@ class TestArchitectureUnitTest {
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no methods that are annotated with @Test should be private, because JUNIT5_TESTS_CANT_BE_PRIVATE JUnit 5 ignores tests that are private' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.invalidjunittests.PrivateUnitTest.testNoImplInterfacesDoesNotFailRuleset()> has modifier PRIVATE in (PrivateUnitTest.java:9)"));
 
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 810, 812: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 810, 812 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
@@ -281,42 +226,30 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testGuavaCacheFailsRuleset() { // negative test for PREFER_CAFFEINE_OVER_GUAVA_CACHING
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavacache");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavacache"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.cache', because PREFER_CAFFEINE_OVER_GUAVA_CACHING Google recommends Caffeine over Guava caching https://javadoc.io/doc/com.google.guava/guava/latest/com/google/common/cache/CacheBuilder.html' was violated (5 times):"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 1278, 1283: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 1278, 1283 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test void testGuavaEventBusFailsRuleset() { // negative test for GUAVA_EVENTBUS_SHOULD_NOT_BE_USED
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavaeventbus");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.guavaeventbus"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'com.google.common.eventbus', because GUAVA_EVENTBUS_SHOULD_NOT_BE_USED Guava discourages the use of their EventBus' was violated (4 times):"));
-        boolean rightLength = false;
-        switch (ae.toString().length()) {
-            case 1069, 1073: // line endings are different
-                rightLength = true;
-                break;
-            default:
-                rightLength = false;
-        }
+        boolean rightLength = switch (ae.toString().length()) {
+            case 1069, 1073 -> // line endings are different
+                    true;
+            default -> false;
+        };
         assertTrue(rightLength, "Actual length: " + ae.toString().length());
     }
 
     @Test
     void testSpringCacheableMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springcache.bad"));
         assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
         assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springcache.bad.BadCache.findAuthorById(java.lang.Long) is called by com.ldiamond.archunittest.springcache.bad.BadCache.findAnotherAuthorById(java.lang.Long) in the same class com.ldiamond.archunittest.springcache.bad.BadCache"));
@@ -329,9 +262,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringTransactionalMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springtransactional.bad"));
         assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
         assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAuthor(java.lang.Long) is called by com.ldiamond.archunittest.springtransactional.bad.BadTransactional.saveAnotherAuthor(java.lang.Long) in the same class com.ldiamond.archunittest.springtransactional.bad.BadTransactional"));
@@ -343,9 +274,7 @@ class TestArchitectureUnitTest {
     }
 
     @Test void testAsyncMethodNotPublicFailsRuleset() { // negative test for METHODS_WITH_THE_ASYNC_ANNOTATION_MUST_BE_PUBLIC
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springasync.bad"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'methods that are annotated with @Async should be public, because Spring requires Async methods to be public' was violated (1 times):"));
         assertTrue(ae.toString().contains("Method <com.ldiamond.archunittest.springasync.bad.BadAsync.doSomethingAsync()> does not have modifier PUBLIC in (BadAsync.java:11)"));
     }
@@ -356,9 +285,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringProxiedMethodsCalledInsideSameClassFailsRuleset() { // negative test for SPRING_PROXIED_METHODS_SHOULD_NOT_BE_CALLED_INSIDE_SAME_CLASS, @Async
-        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.bad"));
         assertTrue(ae.toString().contains("should be called by any method in the same class, because Methods whose behaviour is applied by a Spring proxy"));
         assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall.sendEmail(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall.sendAllEmails(java.lang.Long) in the same class com.ldiamond.archunittest.springproxiedselfcall.bad.BadAsyncSelfCall"));
@@ -366,9 +293,7 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSpringProxiedRuleCoversOtherAnnotationsFailsRuleset() { // same rule, a different annotation (@CacheEvict)
-        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.badcacheevict");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.badcacheevict"));
         assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("Method com.ldiamond.archunittest.springproxiedselfcall.badcacheevict.BadCacheEvictSelfCall.evictAuthor(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.badcacheevict.BadCacheEvictSelfCall.replaceAuthor(java.lang.Long)"));
     }
@@ -380,18 +305,14 @@ class TestArchitectureUnitTest {
 
     @Test
     void testSelfInjectionDoesNotHideDirectThisCallFailsRuleset() { // a self-injected field must only exempt calls made through it
-        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.mixed");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.springproxiedselfcall.mixed"));
         assertTrue(ae.toString().contains("was violated (1 times):"));
         assertTrue(ae.toString().contains("MixedSelfInjection.sendEmail(java.lang.Long) is called by com.ldiamond.archunittest.springproxiedselfcall.mixed.MixedSelfInjection.viaThis(java.lang.Long)"));
         assertFalse(ae.toString().contains("MixedSelfInjection.viaProxy"));
     }
 
     @Test void testApacheCommonsLang3TupleConstructionFailsRuleset() { // negative test for DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES
-        AssertionError ae = assertThrowsExactly (AssertionError.class, () -> {
-            ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.commonslang3tuple.bad");
-        });
+        AssertionError ae = assertThrowsExactly(AssertionError.class, () -> ArchitectureUnitTest.testArchitecture("com.ldiamond.archunittest.commonslang3tuple.bad"));
         assertTrue(ae.toString().contains("Architecture Violation [Priority: MEDIUM] - Rule 'no classes should depend on classes that reside in a package 'org.apache.commons.lang3.tuple', because DO_NOT_CONSTRUCT_APACHE_COMMONS_LANG3_TUPLE_CLASSES These classes remove the context of what the actual object is and prevent creating custom methods specific to the business need for a real class - make a real class instead' was violated"));
     }
 
