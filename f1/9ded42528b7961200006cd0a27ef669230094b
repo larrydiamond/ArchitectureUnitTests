@@ -1,0 +1,20 @@
+.github/workflows/build.yml
+  s_a074331bfd2dab::t_e9964ea5b4aec0 22
+  s_a074331bfd2dab::t_42b6efa91472dc 13,17,24,43,45,52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f19ded42528b7961200006cd0a27ef669230094b",
+  "prompts": {},
+  "sessions": {
+    "s_a074331bfd2dab": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f8d5b80c-de76-493f-881b-649749479472",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Larry Diamond <ldiamond@ldiamond.com>"
+    }
+  }
+}
