@@ -85,6 +85,28 @@ tasks.named('jacocoTestReport') {
     }
 }
 
+// Coverage floors, a little below the current figures (line 99%, branch 93%) so a real drop fails the build.
+// Runs as part of `check` (and so `build`); on its own: ./gradlew jacocoTestCoverageVerification
+tasks.named('jacocoTestCoverageVerification') {
+    dependsOn test
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                minimum = 0.98
+            }
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.90
+            }
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn jacocoTestCoverageVerification
+}
+
 // These plugins keep a Project reference in their extensions, which the configuration cache can't store
 tasks.named { it.startsWith('rewrite') || it.startsWith('dependencyCheck') }.configureEach {
     notCompatibleWithConfigurationCache('the plugin stores a Project reference in its extension')
@@ -113,6 +135,10 @@ pitest {
     outputFormats = ['HTML', 'XML']
     timestampedReports = false
     exportLineCoverage = true
+    // Fail below these floors (percent). Currently: mutation score 88%, line coverage 98%, test strength 88%
+    coverageThreshold = 95
+    mutationThreshold = 85
+    testStrengthThreshold = 85
 }
 
 sonar {

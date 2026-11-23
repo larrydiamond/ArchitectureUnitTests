@@ -29,6 +29,10 @@ users reference to exclude rules), `ArchitectureUnitTest` and the rules tree cla
 
 - The library is built and tested with JDK 25 and still targets Java 17, now enforced with `--release 17`. CI also runs
   the tests on JDK 17 and 21.
+- CI runs PIT mutation testing (`./gradlew pitest`) on pushes to `main` and on pull requests and uploads the HTML
+  report as the `pitest-report` artifact. The run fails if the mutation score drops below 85%, PIT's line coverage
+  below 95% or the test strength below 85%.
+- `./gradlew check` (and so `build`) fails if JaCoCo test coverage drops below 98% of lines or 90% of branches.
 - The ArchUnit dependency is pinned to 1.5.1. Earlier POMs declared it as `RELEASE`, so consumers got whatever ArchUnit
   release was newest when they built.
 - Calls to a proxied method made through a self-injected reference (for example a `@Lazy` field of the class's own type)
