@@ -58,8 +58,8 @@ class TestArchitectureUnitTest {
 
     @Test
     void testPackageSucceedsRulesetWithExclusionForVectorAndHashtable() {
-        ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR, ArchitectureRule.USE_HASHMAP_INSTEAD_OF_HASHTABLE),
-        "com.ldiamond.archunittest.testpackage");
+        assertDoesNotThrow(() -> ArchitectureUnitTest.testArchitecture(Arrays.asList(ArchitectureRule.USE_ARRAYLIST_INSTEAD_OF_VECTOR, ArchitectureRule.USE_HASHMAP_INSTEAD_OF_HASHTABLE),
+                "com.ldiamond.archunittest.testpackage"));
     }
 
     @Test void testImplViolationFailsRuleset () { // Negative test for INTERFACES_SHOULD_NOT_END_IN_IMPL
